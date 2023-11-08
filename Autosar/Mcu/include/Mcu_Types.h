@@ -99,6 +99,31 @@ typedef struct
 } Mcu_ClockConfigType;
 
 /**
+* @brief          Initialization data for the MCU driver.
+* @details        A pointer to such a structure is provided to the Clock settings initialization routines for
+*                 configuration.
+* @implements     Mcu_ClockConfigType_struct
+*/
+typedef struct
+{
+    /**< @brief The ID for Clock configuration. */
+    VAR( Mcu_ClockType, MCU_VAR) Mcu_ClkConfigId;
+
+    /**< @brief SIM configuration. */
+    P2CONST( Mcu_SIM_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SIM_Config;
+
+    /**< @brief SCG configuration. */
+    P2CONST( Mcu_SCG_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SCG_Config;
+
+    /**< @brief PCC configuration. */
+    P2CONST( Mcu_PCC_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_PCC_Config;
+
+    /**< @brief Clock sources and PLLs under mcu control. */
+    VAR( uint8, MCU_VAR) u8ClockSourcesControl;
+
+} Mcu_ClockConfigType;
+
+/**
 * @brief            Definition of a MCU mode section in the configuration structure.
 * @details          Specifies the system behaviour during the selected target mode.
 *                   Data set and configured by Mcu_SetMode call.
