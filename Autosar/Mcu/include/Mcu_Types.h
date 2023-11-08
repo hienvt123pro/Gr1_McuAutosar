@@ -42,6 +42,11 @@ extern "C"{
 ==================================================================================================*/
 #include "Mcal.h"
 #include "Mcu_Cfg.h"
+#include "Mcu_PMC.h"
+#include "Mcu_SMC.h"
+#include "Mcu_SIM.h"
+#include "Mcu_PCC.h"
+#include "Mcu_SCG.h"
 
 /*==================================================================================================
                                            CONSTANTS
@@ -75,28 +80,18 @@ typedef enum
 ==================================================================================================*/
 
 /**
-* @brief
-* @details
-*
-* @note
+* @brief          Initialization registers for Mcu dependent properties.
+* @details        Pointer to structures for SMC and PMC modules.
+* @implements     Mcu_DepProsConfigType_struct
 *
 */
 typedef struct
 {
-
+    /**< @brief Configuration for SMC hardware IP. */
+    P2CONST(Mcu_SMC_ConfigType, MCU_VAR, MCU_APPL_CONST) SMC_pConfig;
+    /**< @brief Configuration for PMC hardware IP. */
+    P2CONST(Mcu_PMC_ConfigType, MCU_VAR, MCU_APPL_CONST) PMC_pConfig;
 } Mcu_DepProsConfigType;
-
-/**
-* @brief
-* @details
-*
-* @note
-*
-*/
-typedef struct
-{
-
-} Mcu_ClockConfigType;
 
 /**
 * @brief          Initialization data for the MCU driver.
@@ -127,6 +122,7 @@ typedef struct
 * @brief            Definition of a MCU mode section in the configuration structure.
 * @details          Specifies the system behaviour during the selected target mode.
 *                   Data set and configured by Mcu_SetMode call.
+* @implements       Mcu_ModeConfigType_struct
 */
 typedef struct
 {
@@ -137,11 +133,12 @@ typedef struct
 } Mcu_ModeConfigType;
 
 /**
-* @brief
-* @details
-*
-* @note
-*
+* @brief            Definition of a RAM section within the configuration structure.
+*                   The definitions for each RAM section within the structure Mcu_ConfigType shall contain:
+*                   - RAM section base address
+*                   - Section size
+*                   - Data pre-setting to be initialized
+* @implements       Mcu_RamConfigType_struct
 */
 typedef struct
 {
@@ -152,11 +149,11 @@ typedef struct
     VAR(Mcu_RamWriteSizeType, MCU_VAR) Mcu_RamWriteSize;   /**< @brief RAM section write size.              */
 }  Mcu_RamConfigType;
 
-typedef struct
-{
-
-}  Mcu_RamConfigType;
-
+/**
+* @brief            Initialization data for the MCU driver.
+* @details          Pointer to structure for RCM modules.
+* @implements       Mcu_ResetConfigType_struct
+*/
 typedef struct
 {
     /**< @brief RCM configuration. */

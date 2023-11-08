@@ -78,7 +78,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SOSC registers for configuring.
-*                 
+*
 * @implements     Mcu_SCG_ConfigType_struct
 */
 typedef struct
@@ -98,7 +98,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SIRC registers for configuring.
-*                 
+*
 * @implements     Mcu_PCC_ConfigType_struct
 */
 typedef struct
@@ -117,7 +117,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to FIRC registers for configuring.
-*                 
+*
 * @implements     Mcu_PCC_ConfigType_struct
 */
 typedef struct
@@ -136,7 +136,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SPLL registers for configuring
-*                 
+*
 * @implements     Mcu_PCC_ConfigType_struct
 */
 typedef struct
@@ -206,7 +206,7 @@ typedef struct
     CONST(Mcu_SCG_RegisterConfigType, MCU_CONST) (*pMcu_FIRC_RegisterConfig);
 
     /**< @brief The pointer to structure configuring SPLL registers. (SCG_SIRCCSR, SCG_SIRCDIV, SCG_SIRCCFG)*/
-     CONST(Mcu_SCG_RegisterConfigType, MCU_CONST) (*pMcu_SPLL_RegisterConfig);
+    CONST(Mcu_SCG_RegisterConfigType, MCU_CONST) (*pMcu_SPLL_RegisterConfig);
 
 } Mcu_SCG_ConfigType;
 

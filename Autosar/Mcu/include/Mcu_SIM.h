@@ -77,7 +77,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_CHIPCTL registers for configuring.
-*                
+*
 * @implements     Mcu_SIM_ChipSelectionConfigType_struct
 */
 typedef struct
@@ -90,7 +90,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_CLKDIV4 registers for configuring.
-*                
+*
 * @implements     Mcu_SIM_TraceClockConfigType_struct
 */
 typedef struct
@@ -103,7 +103,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_PLATCGC registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_ClockGatingConfigType_struct
 */
 typedef struct
@@ -116,7 +116,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_CHIPCTL registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_ChipControlConfigType_struct
 */
 typedef struct
@@ -129,7 +129,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_FTMOPT0 registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_FTMOPT0ConfigType_struct
 */
 typedef struct
@@ -142,7 +142,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_LPOCLKS registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_LPOCLKSConfigType_struct
 */
 typedef struct
@@ -155,7 +155,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_ADCOPT registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_ADCOPTConfigType_struct
 */
 typedef struct
@@ -168,7 +168,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_FTMOPT1 registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_FTMOPT1ConfigType_struct
 */
 typedef struct
@@ -181,7 +181,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_MISCTRL0 registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_MISCTRL0ConfigType_struct
 */
 typedef struct
@@ -194,7 +194,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_FCFG1 registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_Flash1ConfigType_struct
 */
 typedef struct
@@ -207,7 +207,7 @@ typedef struct
 /**
 * @brief          Initialization data for the SIM driver.
 * @details        A pointer to such a structure is provided to the routine to SIM_MISCTRL1 registers for configuring.
-*                 
+*
 * @implements     Mcu_SIM_MISCTRL1ConfigType_struct
 */
 typedef struct
@@ -239,7 +239,7 @@ typedef struct
 
 /**
 * @brief          Initialization data for the SIM driver.
-* @details        A pointer to such a structure is provided to the System Intergrate Module (SIM) which contains 
+* @details        A pointer to such a structure is provided to the System Intergrate Module (SIM) which contains
                   information for Flash, ADC and FTM general options.
 * @implements     Mcu_SIM_ConfigType_struct
 */

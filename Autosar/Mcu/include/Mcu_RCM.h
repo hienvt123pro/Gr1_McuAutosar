@@ -77,7 +77,7 @@ typedef struct
 /**
 * @brief          Initialization data for the RCM driver.
 * @details        A pointer to such a structure is provided to the routine to RCM_RPC registers for configuring.
-*                
+*
 * @implements     Mcu_RCM_ResetPinControlConfigType_struct
 */
 typedef struct
@@ -90,7 +90,7 @@ typedef struct
 /**
 * @brief          Initialization data for the RCM driver.
 * @details        A pointer to such a structure is provided to the routine to RCM_SRIE registers for configuring.
-*                
+*
 * @implements     Mcu_RCM_ResetInterruptEnableConfigType_struct
 */
 typedef struct
