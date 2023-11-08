@@ -50,7 +50,37 @@ extern "C"{
 /*==================================================================================================
                                        DEFINES AND MACROS
 ==================================================================================================*/
+
+/**
+* @brief            If this parameter is set to FALSE, the clock initialization has to be disabled from the MCU driver.
+*/
 #define MCU_INIT_CLOCK    (STD_ON)
+
+/**
+* @brief            Pre-processor switch for enabling the development error detection and reporting to the DET.
+*                   The detection of development errors is configurable (ON / OFF) at pre-compile time.
+*/
+#define MCU_DEV_ERROR_DETECT   (STD_ON)
+
+/**
+* @brief            If this parameter is set to TRUE, the System Integration Module (SIM) initialization has to be disabled from the MCU driver.
+*/
+#define MCU_DISABLE_SIM_INIT   (STD_OFF)
+
+/**
+* @brief            If this parameter is set to TRUE, the Reset Control Module (RMC) initialization has to be disabled from the MCU driver.
+*/
+#define MCU_DISABLE_RCM_INIT   (STD_OFF)
+
+/**
+* @brief            If this parameter is set to TRUE, the Power Management Controller (PMC) initialization has to be disabled from the MCU driver.
+*/
+#define MCU_DISABLE_PMC_INIT   (STD_OFF)
+
+/**
+* @brief            If this parameter is set to TRUE, the System Mode Controller (SMC) initialization has to be disabled from the MCU driver.
+*/
+#define MCU_DISABLE_SMC_INIT   (STD_OFF)
 
 /*==================================================================================================
                                              ENUMS

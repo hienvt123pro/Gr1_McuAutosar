@@ -60,7 +60,6 @@ extern "C"{
  3) internal and external interfaces from this unit
 ==================================================================================================*/
 #include "../../Base/Reg_eSys.h"
-#include "Mcu_PMC_IPVersion.h"
 
 /*==================================================================================================
                                SOURCE FILE VERSION INFORMATION
@@ -85,25 +84,6 @@ extern "C"{
         )
         #error "AutoSar Version Numbers of Reg_eSys_PMC.h and Reg_eSys.h are different"
     #endif
-#endif
-
-/* Check if source file and Mcu_PMC_IPVersion header file are from the same vendor */
-#if (REG_ESYS_PMC_VENDOR_ID != MCU_PMC_IPVERSION_VENDOR_ID)
-    #error "Reg_eSys_PMC.h and Mcu_PMC_IPVersion.h have different vendor ids"
-#endif
-/* Check if source file and Mcu_PMC_IPVersion header file are of the same Autosar version */
-#if ((REG_ESYS_PMC_AR_RELEASE_MAJOR_VERSION != MCU_PMC_IPVERSION_AR_RELEASE_MAJOR_VERSION) || \
-     (REG_ESYS_PMC_AR_RELEASE_MINOR_VERSION != MCU_PMC_IPVERSION_AR_RELEASE_MINOR_VERSION) || \
-     (REG_ESYS_PMC_AR_RELEASE_REVISION_VERSION != MCU_PMC_IPVERSION_AR_RELEASE_REVISION_VERSION) \
-    )
-    #error "AutoSar Version Numbers of Reg_eSys_PMC.h and Mcu_PMC_IPVersion.h are different"
-#endif
-/* Check if source file and Mcu_PMC_IPVersion header file are of the same Software version */
-#if ((REG_ESYS_PMC_SW_MAJOR_VERSION != MCU_PMC_IPVERSION_SW_MAJOR_VERSION) || \
-     (REG_ESYS_PMC_SW_MINOR_VERSION != MCU_PMC_IPVERSION_SW_MINOR_VERSION) || \
-     (REG_ESYS_PMC_SW_PATCH_VERSION != MCU_PMC_IPVERSION_SW_PATCH_VERSION) \
-    )
-    #error "Software Version Numbers of Reg_eSys_PMC.h and Mcu_PMC_IPVersion.h are different"
 #endif
 
 /*==================================================================================================

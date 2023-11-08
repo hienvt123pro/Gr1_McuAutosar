@@ -1,10 +1,10 @@
 /**
-*   @file    Mcu.c
-*   @implements Mcu.c_Artifact
+*   @file    Mcu_EXE.c
 *   @version 1.0.4
 *
-*   @brief   AUTOSAR Mcu - Implementation of external interface.
-*   @details High level validation of the data managed to/from high level.
+*   @brief   AUTOSAR Mcu - Middle layer implementation.
+*   @details Layer that implements the wrapper for routing data from/to external interface
+*            to IP layer.
 *
 *   @addtogroup MCU
 *   @{
@@ -28,33 +28,37 @@
 /*==================================================================================================
 ==================================================================================================*/
 
+
 #ifdef __cplusplus
-extern "C"{
+extern
+{
 #endif
 
 /*==================================================================================================
-*                                        INCLUDE FILES
-* 1) system and project includes
-* 2) needed interfaces from external units
-* 3) internal and external interfaces from this unit
+                                         INCLUDE FILES
 ==================================================================================================*/
-#include "Mcal.h"
-
-/**
-* @brief Mcu.c shall include Mcu.h
-*/
-#include "Mcu.h"
-
-/* Get the prototypes of IPW functions. */
+/* Header file with prototype functions defines in this layer. */
 #include "Mcu_EXE.h"
 
-#if (MCU_DEV_ERROR_DETECT == STD_ON)
-#include "Det.h"
-#endif /* (MCU_DEV_ERROR_DETECT == STD_ON) */
+/* Header files that are called from IPW layer. */
+#include "Mcu_PCC.h"
+#include "Mcu_PMC.h"
+#include "Mcu_RCM.h"
+#include "Mcu_SCG.h"
+#include "Mcu_SIM.h"
+#include "Mcu_SMC.h"
+
+#include "Reg_eSys_PCC.h"
+#include "Reg_eSys_SCG.h"
+#include "Reg_eSys_PMC.h"
+#include "Reg_eSys_SMC.h"
+#include "Reg_eSys_SIM.h"
+#include "Reg_eSys_RCM.h"
 
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
+
 
 /*==================================================================================================
 *                                       LOCAL MACROS
@@ -69,17 +73,6 @@ extern "C"{
 /*==================================================================================================
                                        LOCAL VARIABLES
 ==================================================================================================*/
-
-/**
-* @brief            Local copy of the pointer to the configuration data
-*/
-/**
-* @violates @ref Mcu_c_REF_6 Violates MISRA 2004 Required Rule 8.10, global declaration of function
-*/
-P2CONST( Mcu_ConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pConfigPtr = NULL_PTR;
-
-
-
 
 
 /*==================================================================================================
@@ -97,55 +90,77 @@ P2CONST( Mcu_ConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pConfigPtr = NULL_PTR;
 ==================================================================================================*/
 
 
-
-
-
-
-
 /*==================================================================================================
                                        LOCAL FUNCTIONS
 ==================================================================================================*/
 
 
-
-
-
-
-
-
-
 /*==================================================================================================
                                        GLOBAL FUNCTIONS
 ==================================================================================================*/
-
 /**
-* @brief            MCU driver initialization function.
-* @details          This routine initializes the MCU Driver.
-*                   The intention of this function is to make the configuration setting for power
-*                   down, clock and Ram sections visible within the MCU Driver.
+* @brief            This function initializes the MCU module.
+* @details          The function initializes the SIM, SMC, PMC modules.
+*                   Called by:
+*                       - Mcu_Init().
 *
-* @param[in]        pConfigPtr   Pointer to configuration structure.
+* @param[in]        Mcu_pDepProsConfigPtr   Pointer to Mcu Dependent Properties configuration structure.
 *
 * @return           void
 *
-* @api
-*
-* @implements       Mcu_Init_Activity
-*
 */
-FUNC(void, MCU_CODE) Mcu_Init( P2CONST( Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
+FUNC( void, MCU_CODE) Mcu_Exe_DepProsInit(P2CONST( Mcu_DepProsConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pDepProsConfigPtr)
 {
-	/* lom com*/
+#if (MCU_DISABLE_SIM_INIT == STD_OFF)
+    /* Init SIM settings. */
 
-	Mcu_pConfigPtr = pConfigPtr;
+#endif
 
+#if (MCU_DISABLE_PMC_INIT == STD_OFF)
+    /* Configure the Power Management Unit. */
 
-	Mcu_Exe_DepProsInit(Mcu_pConfigPtr->Mcu_pDepProsConfig);
-	Mcu_Exe_ResetConfigInit(Mcu_pConfigPtr->Mcu_pResetConfig);
+#endif
 
+#if (MCU_DISABLE_SMC_INIT == STD_OFF)
+	/* Configure the System Mode Controller. */
 
-	/* lom com*/
-
+#endif
 }
 
+/**
+* @brief            This function initializes the MCU module.
+* @details          The function initializes the RCM modules.
+*                   Called by:
+*                       - Mcu_Init().
+*
+* @param[in]        Mcu_pResetConfigPtr   Pointer to Mcu Reset configuration structure.
+*
+* @return           void
+*
+*/
+FUNC( void, MCU_CODE) Mcu_Exe_ResetConfigInit(P2CONST( Mcu_ResetConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pResetConfigPtr)
+{
+#if (MCU_DISABLE_RCM_INIT == STD_OFF)
+    /* Init RCM settings. */
 
+#endif
+}
+
+#if (MCU_INIT_CLOCK == STD_ON)
+/**
+* @brief            This function initializes the clock structure.
+* @details          This function intializes the clock structure by configuring the SIM, SCG, PCC modules.
+*                   Called by:
+*                       - Mcu_InitClock() from HLD.
+*
+* @param[in]        Mcu_pClockConfigPtr   Pointer to clock configuration structure
+*                   (member of 'Mcu_ConfigType' struct).
+*
+* @return           void
+*
+*/
+FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST( Mcu_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pClockConfigPtr)
+{
+
+}
+#endif /* (MCU_INIT_CLOCK == STD_ON) */

@@ -109,7 +109,6 @@ extern "C"{
 */
 #include "Std_Types.h"
 
-#include "Soc_Ips.h"
 
 /*==================================================================================================
 *                              SOURCE FILE VERSION INFORMATION
@@ -152,13 +151,6 @@ extern "C"{
     #endif
 #endif
 
-#ifndef DISABLE_MCAL_INTERMODULE_ASR_CHECK
-    /* Check if source file and Soc_Ips.h header file are of the same Autosar version */
-    #if ((MCAL_AR_RELEASE_MAJOR_VERSION != SOC_IPS_AR_RELEASE_MAJOR_VERSION) || \
-         (MCAL_AR_RELEASE_MINOR_VERSION != SOC_IPS_AR_RELEASE_MINOR_VERSION))
-        #error "AutoSar Version Numbers of Mcal.h and Soc_Ips.h are different"
-    #endif
-#endif
 /*==================================================================================================
 *                                         CONSTANTS
 ==================================================================================================*/

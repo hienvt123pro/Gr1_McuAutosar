@@ -47,6 +47,7 @@ extern "C"{
 #include "Mcu_SIM.h"
 #include "Mcu_PCC.h"
 #include "Mcu_SCG.h"
+#include "Mcu_RCM.h"
 
 /*==================================================================================================
                                            CONSTANTS
@@ -91,6 +92,8 @@ typedef struct
     P2CONST(Mcu_SMC_ConfigType, MCU_VAR, MCU_APPL_CONST) SMC_pConfig;
     /**< @brief Configuration for PMC hardware IP. */
     P2CONST(Mcu_PMC_ConfigType, MCU_VAR, MCU_APPL_CONST) PMC_pConfig;
+    /**< @brief Configuration for SIM hardware IP. */
+    P2CONST(Mcu_SIM_ConfigType, MCU_VAR, MCU_APPL_CONST) SIM_pConfig;
 } Mcu_DepProsConfigType;
 
 /**

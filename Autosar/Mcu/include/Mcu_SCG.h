@@ -116,25 +116,6 @@ typedef struct
 
 /**
 * @brief          Initialization data for the SCG driver.
-* @details        A pointer to such a structure is provided to the routine to FIRC registers for configuring.
-*
-* @implements     Mcu_PCC_ConfigType_struct
-*/
-typedef struct
-{
-    /**< @brief The address for SCG register. */
-    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_FIRCCSR_RegisterConfig;
-
-    /**< @brief data configuration for SCG register. */
-    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_FIRCDIV_RegisterConfig;
-
-    /**< @brief data configuration for SCG register. */
-    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_FIRCCFG_RegisterConfig;
-
-} Mcu_SCG_FIRC_RegisterConfigType;
-
-/**
-* @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SPLL registers for configuring
 *
 * @implements     Mcu_PCC_ConfigType_struct
@@ -152,24 +133,7 @@ typedef struct
 
 } Mcu_SCG_SPLL_RegisterConfigType;
 
-/**
-* @brief          Initialization data for the SCG driver.
-* @details        A pointer to such a structure is provided to the Clock settings initialization routines for
-*                 configuration.
-* @implements     Mcu_PCC_ConfigType_struct
-*/
-typedef struct
-{
-    /**< @brief The address for SIRCCSR register. */
-    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIRCCSR_RegisterConfig;
 
-    /**< @brief data configuration for SIRCDIV register. */
-    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIRCDIV_RegisterConfig;
-
-    /**< @brief data configuration for SIRCCFG register. */
-    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIRCCFG_RegisterConfig;
-
-} Mcu_SCG_SIRC_RegisterConfigType;
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the System Clock Generator (SCG) settings initialization routines for

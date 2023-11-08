@@ -67,12 +67,6 @@ extern "C"{
 */
 #include "Platform_Types.h"
 
-/** 
-* @file        Reg_eSys.h
-* @brief Include IP module versions
-*/
-#include "Soc_Ips.h"
-
 
 /*==================================================================================================
 *                               SOURCE FILE VERSION INFORMATION
@@ -95,21 +89,6 @@ extern "C"{
          (REG_ESYS_AR_RELEASE_MINOR_VERSION != PLATFORM_AR_RELEASE_MINOR_VERSION))
         #error "AutoSar Version Numbers of Reg_eSys.h and Platform_Types.h are different"
     #endif
-#endif
-
-/* Check if source file and Soc_Ips.h header file have same versions */
-#if (REG_ESYS_VENDOR_ID != SOC_IPS_VENDOR_ID)
-#error "Reg_eSys.h and Soc_Ips.h have different vendor IDs"
-#endif
-#if ((REG_ESYS_AR_RELEASE_MAJOR_VERSION != SOC_IPS_AR_RELEASE_MAJOR_VERSION) || \
-     (REG_ESYS_AR_RELEASE_MINOR_VERSION != SOC_IPS_AR_RELEASE_MINOR_VERSION) || \
-     (REG_ESYS_AR_RELEASE_REVISION_VERSION != SOC_IPS_AR_RELEASE_REVISION_VERSION))
-#error "AutoSar Version Numbers of Reg_eSys.h and Soc_Ips.h are different"
-#endif
-#if ((REG_ESYS_SW_MAJOR_VERSION != SOC_IPS_SW_MAJOR_VERSION) || \
-     (REG_ESYS_SW_MINOR_VERSION != SOC_IPS_SW_MINOR_VERSION) || \
-     (REG_ESYS_SW_PATCH_VERSION != SOC_IPS_SW_PATCH_VERSION))
-#error "Software Version Numbers of Reg_eSys.h and Soc_Ips.h are different"
 #endif
 
 /*==================================================================================================
