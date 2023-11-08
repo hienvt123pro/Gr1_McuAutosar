@@ -159,7 +159,8 @@ typedef struct
 
 typedef struct
 {
-
+    /**< @brief RCM configuration. */
+    P2CONST( Mcu_RCM_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) pMcu_RCM_Config;
 }  Mcu_ResetConfigType;
 /*==================================================================================================
                                  GLOBAL VARIABLE DECLARATIONS
