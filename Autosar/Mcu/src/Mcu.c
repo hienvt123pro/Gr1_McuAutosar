@@ -38,23 +38,20 @@ extern "C"{
 * 2) needed interfaces from external units
 * 3) internal and external interfaces from this unit
 ==================================================================================================*/
-#include "Mcal.h"
 
-/**
-* @brief Mcu.c shall include Mcu.h
-*/
 #include "Mcu.h"
 
-/* Get the prototypes of IPW functions. */
-#include "Mcu_EXE.h"
+/* Get the prototypes of Execute functions. */
+#include "Mcu_Exe.h"
 
 #if (MCU_DEV_ERROR_DETECT == STD_ON)
 #include "Det.h"
-#endif /* (MCU_DEV_ERROR_DETECT == STD_ON) */
+#endif
 
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
+
 
 /*==================================================================================================
 *                                       LOCAL MACROS
@@ -72,9 +69,6 @@ extern "C"{
 
 /**
 * @brief            Local copy of the pointer to the configuration data
-*/
-/**
-* @violates @ref Mcu_c_REF_6 Violates MISRA 2004 Required Rule 8.10, global declaration of function
 */
 P2CONST( Mcu_ConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pConfigPtr = NULL_PTR;
 
@@ -133,7 +127,7 @@ P2CONST( Mcu_ConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pConfigPtr = NULL_PTR;
 * @implements       Mcu_Init_Activity
 *
 */
-FUNC(void, MCU_CODE) Mcu_Init( P2CONST( Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
+FUNC(void, MCU_CODE) Mcu_Init( P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
 {
 	/* lom com*/
 

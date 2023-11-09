@@ -1,5 +1,5 @@
 /**
-*   @file    Mcu_PMC_Types.h
+*   @file    Mcu_PMC.h
 *   @version 1.0.4
 *
 *   @brief   AUTOSAR Mcu - Exported data outside of the Mcu from MC_PCU.
@@ -39,7 +39,8 @@ extern "C"{
                                          INCLUDE FILES
 ==================================================================================================*/
 #include "Mcu_Cfg.h"
-#include "Compiler.h"
+
+#include "Reg_eSys_PMC.h"
 
 /*==================================================================================================
                                            CONSTANTS
@@ -55,6 +56,19 @@ extern "C"{
                                              ENUMS
 ==================================================================================================*/
 
+/**
+* @brief            Power Modes encoding.
+* @details          Supported power modes for SMC hw IP.
+*/
+typedef enum
+{
+    MCU_RUN_MODE    = 0x00U,   /**< @brief Run Mode. */
+    MCU_HSRUN_MODE  = 0x01U,   /**< @brief High Speed Mode. */
+    MCU_VLPR_MODE   = 0x02U,   /**< @brief Very Low Power Run Mode. */
+    MCU_VLPS_MODE   = 0x03U,   /**< @brief Very Low Power Stop Mode. */
+    MCU_STOP1_MODE  = 0x04U,   /**< @brief Stop 1 Mode. */
+    MCU_STOP2_MODE  = 0x05U,   /**< @brief Stop 2 Mode. */
+} Mcu_PowerModeType;
 
 /*==================================================================================================
                                  STRUCTURES AND OTHER TYPEDEFS
@@ -67,14 +81,27 @@ extern "C"{
 *
 */
 
-typedef struct {
-
-    VAR  (uint8, MCU_VAR)  LVDSC1;  /*Low Voltage Detect Status and Control 1 Register (LVDSC1)*/
-    VAR  (uint8, MCU_VAR)  LVDSC2;  /*Low voltage Detect Status and Control 2 Register (LVDSC2)*/
-    VAR  (uint8, MCU_VAR)  REGSC;   /*Regulator Status and Control Register (REGSC)*/
-    VAR  (uint8, MCU_VAR)  LPOTRIM; /*Low Power Oscillator Trim Register (LPOTRIM)*/
-
+typedef struct
+{
+    VAR(uint8, MCU_VAR)  u8LVDSC1;  /*Low Voltage Detect Status and Control 1 Register (LVDSC1)*/
+    VAR(uint8, MCU_VAR)  u8LVDSC2;  /*Low voltage Detect Status and Control 2 Register (LVDSC2)*/
+    VAR(uint8, MCU_VAR)  u8REGSC;   /*Regulator Status and Control Register (REGSC)*/
+    VAR(uint8, MCU_VAR)  u8LPOTRIM; /*Low Power Oscillator Trim Register (LPOTRIM)*/
 } Mcu_PMC_ConfigType;
+
+/*==================================================================================================
+*                                GLOBAL VARIABLE DECLARATIONS
+==================================================================================================*/
+
+
+/*==================================================================================================
+*                                    FUNCTION PROTOTYPES
+==================================================================================================*/
+
+
+#if (defined(MCU_DISABLE_PMC_INIT) && (STD_OFF == MCU_DISABLE_PMC_INIT))
+FUNC(void, MCU_CODE) Mcu_PMC_Init(P2CONST(Mcu_PMC_ConfigType, AUTOMATIC, MCU_APPL_CONST) pPMCConfigPtr);
+#endif
 
 
 #ifdef __cplusplus
@@ -82,3 +109,5 @@ typedef struct {
 #endif
 
 #endif /* MCU_PMC_H */
+
+/** @} */

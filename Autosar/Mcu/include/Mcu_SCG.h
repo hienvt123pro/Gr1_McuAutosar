@@ -1,5 +1,5 @@
 /*
-*   @file    Mcu.h
+*   @file    Mcu_SCG.h
 *   @implements Mcu.h_Artifact
 *   @version 1.0.4
 *
@@ -38,7 +38,9 @@ extern "C"{
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
-#include "Mcal.h"
+#include "Mcu_Cfg.h"
+
+#include "Reg_eSys_SCG.h"
 
 /*==================================================================================================
                                            CONSTANTS
@@ -63,35 +65,30 @@ extern "C"{
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to configure register base
 *                 on pheripheral address and data configuration of register.
-* @implements     Mcu_SCG_ConfigType_struct
+* @implements     Mcu_SCG_RegisterConfigType_struct
 */
 typedef struct
 {
     /**< @brief The address for SCG register. */
-    VAR( uint32, MCU_VAR) u32PeripheralAdress;
-
+    VAR(uint32, MCU_VAR) u32PeripheralAdress;
     /**< @brief data configuration for SCG register. */
     VAR(uint32, MCU_VAR) u32PeripheralDataConfiguration;
-
 } Mcu_SCG_RegisterConfigType;
 
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SOSC registers for configuring.
 *
-* @implements     Mcu_SCG_ConfigType_struct
+* @implements     Mcu_SCG_SOSC_RegisterConfigType_struct
 */
 typedef struct
 {
     /**< @brief The address for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SOSCCSR_RegisterConfig;
-
     /**< @brief data configuration for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SOSCDIV_RegisterConfig;
-
     /**< @brief data configuration for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SOSCCFG_RegisterConfig;
-
 } Mcu_SCG_SOSC_RegisterConfigType;
 
 
@@ -99,40 +96,33 @@ typedef struct
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SIRC registers for configuring.
 *
-* @implements     Mcu_PCC_ConfigType_struct
+* @implements     Mcu_SCG_SIRC_RegisterConfigType_struct
 */
 typedef struct
 {
     /**< @brief The address for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIRCCSR_RegisterConfig;
-
     /**< @brief data configuration for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIRCDIV_RegisterConfig;
-
     /**< @brief data configuration for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIRCCFG_RegisterConfig;
-
 } Mcu_SCG_SIRC_RegisterConfigType;
 
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SPLL registers for configuring
 *
-* @implements     Mcu_PCC_ConfigType_struct
+* @implements     Mcu_SCG_SPLL_RegisterConfigType_struct
 */
 typedef struct
 {
     /**< @brief The address for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SPLLCSR_RegisterConfig;
-
     /**< @brief data configuration for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SPLLDIV_RegisterConfig;
-
     /**< @brief data configuration for SCG register. */
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SPLLCFG_RegisterConfig;
-
 } Mcu_SCG_SPLL_RegisterConfigType;
-
 
 /**
 * @brief          Initialization data for the SCG driver.
@@ -171,7 +161,6 @@ typedef struct
 
     /**< @brief The pointer to structure configuring SPLL registers. (SCG_SIRCCSR, SCG_SIRCDIV, SCG_SIRCCFG)*/
     CONST(Mcu_SCG_RegisterConfigType, MCU_CONST) (*pMcu_SPLL_RegisterConfig);
-
 } Mcu_SCG_ConfigType;
 
 /*==================================================================================================

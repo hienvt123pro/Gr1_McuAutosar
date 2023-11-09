@@ -1,5 +1,5 @@
 /*
-*   @file    Mcu.h
+*   @file    Mcu_RCM.h
 *   @implements Mcu.h_Artifact
 *   @version 1.0.4
 *
@@ -38,7 +38,9 @@ extern "C"{
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
-#include "Mcal.h"
+#include "Mcu_Cfg.h"
+
+#include "Reg_eSys_RCM.h"
 
 /*==================================================================================================
                                            CONSTANTS
@@ -67,11 +69,9 @@ extern "C"{
 typedef struct
 {
     /**< @brief The address for R register. */
-    VAR( uint32, MCU_VAR) u32PeripheralAdress;
-
+    VAR(uint32, MCU_VAR) u32PeripheralAdress;
     /**< @brief data configuration for R register. */
     VAR(uint32, MCU_VAR) u32PeripheralDataConfiguration;
-
 } Mcu_RCM_RegisterConfigType;
 
 /**
@@ -84,7 +84,6 @@ typedef struct
 {
     /**< @brief RCM_CHIPCTL register configuration. */
     P2CONST(Mcu_RCM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_RCM_ResetPinControlRegisterConfig;
-
 } Mcu_RCM_ResetPinControlConfigType;
 
 /**
@@ -97,26 +96,21 @@ typedef struct
 {
     /**< @brief RCM_CHIPCTL register configuration. */
     P2CONST(Mcu_RCM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_RCM_ResetInterruptEnableRegisterConfig;
-
 } Mcu_RCM_ResetInterruptEnableConfigType;
 
 /**
-* @brief          Initialization data for the R driver.
+* @brief          Initialization data for the RCM driver.
 * @details        A pointer to such a structure is provided to the Reset Control Module (RCM) which relating to reset
 *                 functions of the chip.
-* @implements     Mcu_RCM_ClockConfigType_struct
+* @implements     Mcu_RCM_ConfigType_struct
 */
 typedef struct
 {
-    /**< @brief R chip selection configuration. */
+    /**< @brief RCM chip selection configuration. */
     P2CONST(Mcu_RCM_ResetPinControlConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_RCM_ResetPinControlConfig;
-
-    /**< @brief R system clock divider register 4. */
+    /**< @brief RCM system clock divider register 4. */
     P2CONST(Mcu_RCM_ResetInterruptEnableConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_RCM_ResetInterruptEnableConfig;
-
-} Mcu_RCM_ClockConfigType;
-
-
+} Mcu_RCM_ConfigType;
 
 /*==================================================================================================
                                  GLOBAL VARIABLE DECLARATIONS
@@ -127,6 +121,7 @@ typedef struct
                                      FUNCTION PROTOTYPES
 ==================================================================================================*/
 
+FUNC(void, MCU_CODE) Mcu_RCM_Init(P2CONST(Mcu_RCM_ConfigType, AUTOMATIC, MCU_APPL_CONST) pRCMConfigPtr);
 
 
 #ifdef __cplusplus

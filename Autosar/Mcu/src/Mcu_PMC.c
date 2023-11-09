@@ -1,10 +1,9 @@
 /**
-*   @file    Mcu_Exe.c
+*   @file    Mcu_PMC.c
 *   @version 1.0.4
 *
-*   @brief   AUTOSAR Mcu - Middle layer implementation.
-*   @details Layer that implements the wrapper for routing data from/to external interface
-*            to IP layer.
+*   @brief   AUTOSAR Mcu - Power Management Controller module functions implementation.
+*   @details Specific functions for PMC configuration and control.
 *
 *   @addtogroup MCU
 *   @{
@@ -30,23 +29,16 @@
 
 
 #ifdef __cplusplus
-extern
+extern "C"
 {
 #endif
 
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
-/* Header file with prototype functions defines in this layer. */
-#include "Mcu_Exe.h"
-
-/* Header files that are called from IPW layer. */
-#include "Mcu_PCC.h"
 #include "Mcu_PMC.h"
-#include "Mcu_RCM.h"
-#include "Mcu_SCG.h"
-#include "Mcu_SIM.h"
-#include "Mcu_SMC.h"
+
+#include "StdRegMacros.h"
 
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
@@ -54,7 +46,7 @@ extern
 
 
 /*==================================================================================================
-*                                       LOCAL MACROS
+                                       LOCAL MACROS
 ==================================================================================================*/
 
 
@@ -66,7 +58,6 @@ extern
 /*==================================================================================================
                                        LOCAL VARIABLES
 ==================================================================================================*/
-
 
 /*==================================================================================================
                                        GLOBAL CONSTANTS
@@ -91,69 +82,33 @@ extern
 /*==================================================================================================
                                        GLOBAL FUNCTIONS
 ==================================================================================================*/
+
+#if (defined(MCU_DISABLE_PMC_INIT) && (STD_OFF == MCU_DISABLE_PMC_INIT))
 /**
-* @brief            This function initializes the MCU module.
-* @details          The function initializes the SIM, SMC, PMC modules.
+* @brief            This function configure the Power Management Controller
+* @details          The operating voltages are monitored by a set of on-chip supervisory circuits
+*                   to ensure that this device works within the correct voltage range.
 *                   Called by:
-*                       - Mcu_Init().
+*                       - Mcu_Exe_DepProsInit()
 *
-* @param[in]        Mcu_pDepProsConfigPtr   Pointer to Mcu Dependent Properties configuration structure.
+* @param[in]        pConfigPtr   Pointer to PMC configuration structure.
 *
 * @return           void
 *
 */
-FUNC( void, MCU_CODE) Mcu_Exe_DepProsInit(P2CONST( Mcu_DepProsConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pDepProsConfigPtr)
+FUNC(void, MCU_CODE) Mcu_PMC_Init(P2CONST(Mcu_PMC_ConfigType, AUTOMATIC, MCU_APPL_CONST) pPMCConfigPtr)
 {
-#if (MCU_DISABLE_SIM_INIT == STD_OFF)
-    /* Init SIM settings. */
-	Mcu_SIM_Init(Mcu_pDepProsConfigPtr->pMcu_SIM_Config);
-#endif
-
-#if (MCU_DISABLE_PMC_INIT == STD_OFF)
-    /* Configure the Power Management Unit. */
-	Mcu_PMC_Init(Mcu_pDepProsConfigPtr->pMcu_PMC_Config);
-#endif
-
-#if (MCU_DISABLE_SMC_INIT == STD_OFF)
-	/* Configure the System Mode Controller. */
-	Mcu_SMC_Init(Mcu_pDepProsConfigPtr->pMcu_SMC_Config);
-#endif
+	VAR(uint32, AUTOMATIC) u32Temp;
+	u32Temp = (uint32)pPMCConfigPtr->u8LVDSC1 | ((uint32)pPMCConfigPtr->u8LVDSC2 << 8) \
+			| ((uint32)pPMCConfigPtr->u8REGSC << 16) | ((uint32)pPMCConfigPtr->u8LPOTRIM << 24);
+	/* Configure LVDSC1, LVDSC2, REGSC, LPOTRIM registers */
+	REG_RMW32(PMC_BASEADDR, PMC_REG_RWBITS_MASK32, u32Temp);
 }
-
-/**
-* @brief            This function initializes the MCU module.
-* @details          The function initializes the RCM modules.
-*                   Called by:
-*                       - Mcu_Init().
-*
-* @param[in]        Mcu_pResetConfigPtr   Pointer to Mcu Reset configuration structure.
-*
-* @return           void
-*
-*/
-FUNC( void, MCU_CODE) Mcu_Exe_ResetConfigInit(P2CONST(Mcu_ResetConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pResetConfigPtr)
-{
-#if (MCU_DISABLE_RCM_INIT == STD_OFF)
-    /* Init RCM settings. */
-	Mcu_RCM_Init(Mcu_pResetConfigPtr->pMcu_RCM_Config);
 #endif
-}
 
-#if (MCU_INIT_CLOCK == STD_ON)
-/**
-* @brief            This function initializes the clock structure.
-* @details          This function intializes the clock structure by configuring the SIM, SCG, PCC modules.
-*                   Called by:
-*                       - Mcu_InitClock()
-*
-* @param[in]        Mcu_pClockConfigPtr   Pointer to clock configuration structure
-*                   (member of 'Mcu_ConfigType' struct).
-*
-* @return           void
-*
-*/
-FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pClockConfigPtr)
-{
 
+#ifdef __cplusplus
 }
-#endif /* (MCU_INIT_CLOCK == STD_ON) */
+#endif
+
+/** @} */

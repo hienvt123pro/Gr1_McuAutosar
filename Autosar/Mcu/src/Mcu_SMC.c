@@ -1,5 +1,5 @@
 /**
-*   @file    Mcu_Exe.c
+*   @file    Mcu_SMC.c
 *   @version 1.0.4
 *
 *   @brief   AUTOSAR Mcu - Middle layer implementation.
@@ -30,24 +30,15 @@
 
 
 #ifdef __cplusplus
-extern
-{
+extern "C"{
 #endif
 
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
-/* Header file with prototype functions defines in this layer. */
-#include "Mcu_Exe.h"
-
-/* Header files that are called from IPW layer. */
-#include "Mcu_PCC.h"
-#include "Mcu_PMC.h"
-#include "Mcu_RCM.h"
-#include "Mcu_SCG.h"
-#include "Mcu_SIM.h"
 #include "Mcu_SMC.h"
 
+#include "StdRegMacros.h"
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
@@ -91,69 +82,27 @@ extern
 /*==================================================================================================
                                        GLOBAL FUNCTIONS
 ==================================================================================================*/
+
+#if (defined(MCU_DISABLE_SMC_INIT) && (STD_OFF == MCU_DISABLE_SMC_INIT))
 /**
-* @brief            This function initializes the MCU module.
-* @details          The function initializes the SIM, SMC, PMC modules.
-*                   Called by:
-*                       - Mcu_Init().
+* @brief            This function will configure the allowed modes
+* @details          Called by Mcu_Exe_DepProsInit
 *
-* @param[in]        Mcu_pDepProsConfigPtr   Pointer to Mcu Dependent Properties configuration structure.
+* @param[in]        Mcu_SMC_Init   Pointer to SMC module configuration structure.
 *
 * @return           void
 *
 */
-FUNC( void, MCU_CODE) Mcu_Exe_DepProsInit(P2CONST( Mcu_DepProsConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pDepProsConfigPtr)
+FUNC( void, MCU_CODE) Mcu_SMC_Init(P2CONST(Mcu_SMC_ConfigType, AUTOMATIC, MCU_APPL_CONST) pSMCConfigPtr)
 {
-#if (MCU_DISABLE_SIM_INIT == STD_OFF)
-    /* Init SIM settings. */
-	Mcu_SIM_Init(Mcu_pDepProsConfigPtr->pMcu_SIM_Config);
-#endif
-
-#if (MCU_DISABLE_PMC_INIT == STD_OFF)
-    /* Configure the Power Management Unit. */
-	Mcu_PMC_Init(Mcu_pDepProsConfigPtr->pMcu_PMC_Config);
-#endif
-
-#if (MCU_DISABLE_SMC_INIT == STD_OFF)
-	/* Configure the System Mode Controller. */
-	Mcu_SMC_Init(Mcu_pDepProsConfigPtr->pMcu_SMC_Config);
-#endif
+    /*Assign value to VERID register*/
+    REG_WRITE32(SMC_PMPROT_ADDR32, (pSMCConfigPtr->u32SMC_PMPROT & SMC_PMPROT_RWBITS_MASK32));
 }
-
-/**
-* @brief            This function initializes the MCU module.
-* @details          The function initializes the RCM modules.
-*                   Called by:
-*                       - Mcu_Init().
-*
-* @param[in]        Mcu_pResetConfigPtr   Pointer to Mcu Reset configuration structure.
-*
-* @return           void
-*
-*/
-FUNC( void, MCU_CODE) Mcu_Exe_ResetConfigInit(P2CONST(Mcu_ResetConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pResetConfigPtr)
-{
-#if (MCU_DISABLE_RCM_INIT == STD_OFF)
-    /* Init RCM settings. */
-	Mcu_RCM_Init(Mcu_pResetConfigPtr->pMcu_RCM_Config);
 #endif
-}
 
-#if (MCU_INIT_CLOCK == STD_ON)
-/**
-* @brief            This function initializes the clock structure.
-* @details          This function intializes the clock structure by configuring the SIM, SCG, PCC modules.
-*                   Called by:
-*                       - Mcu_InitClock()
-*
-* @param[in]        Mcu_pClockConfigPtr   Pointer to clock configuration structure
-*                   (member of 'Mcu_ConfigType' struct).
-*
-* @return           void
-*
-*/
-FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pClockConfigPtr)
-{
-
+#ifdef __cplusplus
 }
-#endif /* (MCU_INIT_CLOCK == STD_ON) */
+#endif
+
+/** @} */
+

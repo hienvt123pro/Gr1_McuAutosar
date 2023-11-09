@@ -39,8 +39,9 @@ extern "C"{
                                          INCLUDE FILES
 ==================================================================================================*/
 #include "Mcal.h"
-#include "Mcu_Cfg.h"
+
 #include "Mcu_Types.h"
+#include "Mcu_Cfg.h"
 
 /*==================================================================================================
                                            CONSTANTS
@@ -60,6 +61,7 @@ extern "C"{
 /*==================================================================================================
                                  STRUCTURES AND OTHER TYPEDEFS
 ==================================================================================================*/
+
 /**
 * @brief          Initialization data for the MCU driver.
 * @details        A pointer to such a structure is provided to the MCU initialization routines for
@@ -69,33 +71,33 @@ extern "C"{
 typedef struct
 {
     /**< @brief Total number of RAM sections. */
-    VAR( Mcu_RamSectionType, MCU_VAR) Mcu_NumRamConfigs;
+    VAR(Mcu_RamSectionType, MCU_VAR) Mcu_NumRamConfigs;
     /**< @brief Total number of  MCU modes. */
-    VAR( Mcu_ModeType, MCU_VAR) Mcu_NumModeConfigs;
+    VAR(Mcu_ModeType, MCU_VAR) Mcu_NumModeConfigs;
 
 #if (MCU_INIT_CLOCK == STD_ON)
     /**< @brief Total number of MCU clock configurations. */
-    VAR( Mcu_ClockType, MCU_VAR) Mcu_NumClkConfigs;
+    VAR(Mcu_ClockType, MCU_VAR) Mcu_NumClkConfigs;
 #endif
 
 #ifndef MCU_MAX_NORAMCONFIGS
     /**< @brief RAM data configuration. */
-    CONST( Mcu_RamConfigType, MCU_CONST) (*Mcu_apRamConfig)[MCU_MAX_RAMCONFIGS];
+    CONST(Mcu_RamConfigType, MCU_CONST) (*Mcu_apRamConfig)[MCU_MAX_RAMCONFIGS];
 #endif
 
     /**< @brief Power Modes data configuration. */
-    CONST( Mcu_ModeConfigType, MCU_CONST) (*Mcu_apModeConfig)[MCU_MAX_MODECONFIGS];
+    CONST(Mcu_ModeConfigType, MCU_CONST) (*Mcu_apModeConfig)[MCU_MAX_MODECONFIGS];
 
 #if (MCU_INIT_CLOCK == STD_ON)
     /**< @brief Clock data configuration. */
-    CONST( Mcu_ClockConfigType, MCU_CONST) (*Mcu_apClockConfig)[MCU_MAX_CLKCONFIGS];
+    CONST(Mcu_ClockConfigType, MCU_) (*Mcu_apClockConfig)[MCU_MAX_CLKCONFIGS];
 #endif
 
     /**< @brief Mcu Dependent Properties configuration. */
-    P2CONST( Mcu_DepProsConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pDepProsConfig;
+    P2CONST(Mcu_DepProsConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pDepProsConfig;
 
     /**< @brief Mcu Reset configuration. */
-    P2CONST( Mcu_ResetConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pResetConfig;
+    P2CONST(Mcu_ResetConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pResetConfig;
 } Mcu_ConfigType;
 
 /*==================================================================================================

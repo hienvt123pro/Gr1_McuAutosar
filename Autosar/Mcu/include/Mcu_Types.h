@@ -41,6 +41,7 @@ extern "C"{
                                          INCLUDE FILES
 ==================================================================================================*/
 #include "Mcal.h"
+
 #include "Mcu_Cfg.h"
 #include "Mcu_PMC.h"
 #include "Mcu_SMC.h"
@@ -62,19 +63,7 @@ extern "C"{
 /*==================================================================================================
                                              ENUMS
 ==================================================================================================*/
-/**
-* @brief            Power Modes encoding.
-* @details          Supported power modes for SMC hw IP.
-*/
-typedef enum
-{
-    MCU_RUN_MODE    = 0x00U,   /**< @brief Run Mode. */
-    MCU_HSRUN_MODE  = 0x01U,   /**< @brief High Speed Mode. */
-    MCU_VLPR_MODE   = 0x02U,   /**< @brief Very Low Power Run Mode. */
-    MCU_VLPS_MODE   = 0x03U,   /**< @brief Very Low Power Stop Mode. */
-    MCU_STOP1_MODE  = 0x04U,   /**< @brief Stop 1 Mode. */
-    MCU_STOP2_MODE  = 0x05U,   /**< @brief Stop 2 Mode. */
-} Mcu_PowerModeType;
+
 
 /*==================================================================================================
                                  STRUCTURES AND OTHER TYPEDEFS
@@ -82,22 +71,34 @@ typedef enum
 
 /**
 * @brief          Initialization registers for Mcu dependent properties.
-* @details        Pointer to structures for SMC and PMC modules.
+* @details        Pointer to structures for SMC, PMC and SIM modules.
 * @implements     Mcu_DepProsConfigType_struct
 *
 */
 typedef struct
 {
     /**< @brief Configuration for SMC hardware IP. */
-    P2CONST(Mcu_SMC_ConfigType, MCU_VAR, MCU_APPL_CONST) SMC_pConfig;
+    P2CONST(Mcu_SMC_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SMC_Config;
     /**< @brief Configuration for PMC hardware IP. */
-    P2CONST(Mcu_PMC_ConfigType, MCU_VAR, MCU_APPL_CONST) PMC_pConfig;
+    P2CONST(Mcu_PMC_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_PMC_Config;
     /**< @brief Configuration for SIM hardware IP. */
-    P2CONST(Mcu_SIM_ConfigType, MCU_VAR, MCU_APPL_CONST) SIM_pConfig;
+    P2CONST(Mcu_SIM_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SIM_Config;
 } Mcu_DepProsConfigType;
 
 /**
-* @brief          Initialization data for the MCU driver.
+* @brief            Initialization data for the MCU reset driver.
+* @details          Pointer to structure for RCM modules.
+* @implements       Mcu_ResetConfigType_struct
+*/
+
+typedef struct
+{
+    /**< @brief RCM configuration. */
+    P2CONST(Mcu_RCM_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_RCM_Config;
+} Mcu_ResetConfigType;
+
+/**
+* @brief          Initialization data for the MCU clock driver.
 * @details        A pointer to such a structure is provided to the Clock settings initialization routines for
 *                 configuration.
 * @implements     Mcu_ClockConfigType_struct
@@ -105,20 +106,19 @@ typedef struct
 typedef struct
 {
     /**< @brief The ID for Clock configuration. */
-    VAR( Mcu_ClockType, MCU_VAR) Mcu_ClkConfigId;
+    VAR(Mcu_ClockType, MCU_VAR) u32Mcu_ClkConfigId;
 
     /**< @brief SIM configuration. */
-    P2CONST( Mcu_SIM_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SIM_Config;
+    P2CONST(Mcu_SIM_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SIM_Config;
 
     /**< @brief SCG configuration. */
-    P2CONST( Mcu_SCG_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SCG_Config;
+    P2CONST(Mcu_SCG_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SCG_Config;
 
     /**< @brief PCC configuration. */
-    P2CONST( Mcu_PCC_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_PCC_Config;
+    P2CONST(Mcu_PCC_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_PCC_Config;
 
     /**< @brief Clock sources and PLLs under mcu control. */
-    VAR( uint8, MCU_VAR) u8ClockSourcesControl;
-
+    VAR(uint8, MCU_VAR) u8ClockSourcesControl;
 } Mcu_ClockConfigType;
 
 /**
@@ -130,9 +130,9 @@ typedef struct
 typedef struct
 {
     /**< @brief The ID for Power Mode configuration. */
-    VAR( Mcu_ModeType, MCU_VAR) Mcu_ModeConfigId;
+    VAR(Mcu_ModeType, MCU_VAR) u32Mcu_ModeId;
    /**< @brief Power modes control configuration */
-    VAR (Mcu_PowerModeType, MCU_VAR)  u32PowerMode;
+    VAR(Mcu_PowerModeType, MCU_VAR) u32Mcu_PowerMode;
 } Mcu_ModeConfigType;
 
 /**
@@ -145,23 +145,18 @@ typedef struct
 */
 typedef struct
 {
-    VAR(Mcu_RamSectionType, MCU_VAR) Mcu_RamSectorId;      /**< @brief The ID for Ram Sector configuration. */
-    VAR(uint8, MCU_VAR) (*Mcu_pu8RamBaseAddr)[1U];         /**< @brief RAM section base address.            */
-    VAR(Mcu_RamSizeType, MCU_VAR) Mcu_RamSize;             /**< @brief RAM section size.                    */
-    VAR(uint64, MCU_VAR) Mcu_u64RamDefaultValue;           /**< @brief RAM default value for initialization.*/
-    VAR(Mcu_RamWriteSizeType, MCU_VAR) Mcu_RamWriteSize;   /**< @brief RAM section write size.              */
+	/**< @brief The ID for Ram Sector configuration. */
+    VAR(Mcu_RamSectionType, MCU_VAR) u32Mcu_RamSectorId;
+    /**< @brief RAM section base address.            */
+    VAR(uint8, MCU_VAR) (*pu8Mcu_RamBaseAddr)[1U];
+    /**< @brief RAM section size.                    */
+    VAR(Mcu_RamSizeType, MCU_VAR) u32Mcu_RamSize;
+    /**< @brief RAM default value for initialization.*/
+    VAR(uint64, MCU_VAR) u64Mcu_RamDefaultValue;
+    /**< @brief RAM section write size.              */
+    VAR(Mcu_RamWriteSizeType, MCU_VAR) u32Mcu_RamWriteSize;
 }  Mcu_RamConfigType;
 
-/**
-* @brief            Initialization data for the MCU driver.
-* @details          Pointer to structure for RCM modules.
-* @implements       Mcu_ResetConfigType_struct
-*/
-typedef struct
-{
-    /**< @brief RCM configuration. */
-    P2CONST( Mcu_RCM_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) pMcu_RCM_Config;
-}  Mcu_ResetConfigType;
 /*==================================================================================================
                                  GLOBAL VARIABLE DECLARATIONS
 ==================================================================================================*/

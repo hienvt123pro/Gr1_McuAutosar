@@ -1,6 +1,6 @@
 /*
-*   @file    Mcu.h
-*   @implements Mcu.h_Artifact
+*   @file    Mcu_PCC.h
+*   @implements Mcu_PCC.h_Artifact
 *   @version 1.0.4
 *
 *   @brief   AUTOSAR Mcu - Driver external interface.
@@ -38,7 +38,9 @@ extern "C"{
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
-#include "Mcal.h"
+#include "Mcu_Cfg.h"
+
+#include "Reg_eSys_PCC.h"
 
 /*==================================================================================================
                                            CONSTANTS
@@ -58,6 +60,7 @@ extern "C"{
 /*==================================================================================================
                                  STRUCTURES AND OTHER TYPEDEFS
 ==================================================================================================*/
+
 /**
 * @brief          Initialization data for the PCC driver.
 * @details        A pointer to such a structure is provided to the routine to configure register base
@@ -67,11 +70,9 @@ extern "C"{
 typedef struct
 {
     /**< @brief The address for PCC register. */
-    VAR( uint32, MCU_VAR) u32PeripheralAdress;
-
+    VAR(uint32, MCU_VAR) u32PeripheralAdress;
     /**< @brief data configuration for PCC register. */
     VAR(uint32, MCU_VAR) u32PeripheralDataConfiguration;
-
 } Mcu_PCC_RegisterConfigType;
 
 /**
@@ -83,11 +84,9 @@ typedef struct
 typedef struct
 {
     /**< @brief The ID for Clock configuration. */
-    VAR( uint32, MCU_VAR) Mcu_NoPeripheralClockSetting;
-
+    VAR(uint32, MCU_VAR) Mcu_NoPeripheralClockSetting;
     /**< @brief PCC register configuration. */
     CONST(Mcu_PCC_RegisterConfigType, MCU_CONST) *pMcu_PCC_RegisterConfig[];
-
 } Mcu_PCC_ConfigType;
 
 /*==================================================================================================
@@ -100,11 +99,10 @@ typedef struct
 ==================================================================================================*/
 
 
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* MCU_H */
+#endif /* MCU_PCC_H */
 
 /** @} */

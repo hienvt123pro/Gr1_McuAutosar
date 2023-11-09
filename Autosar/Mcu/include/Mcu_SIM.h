@@ -1,6 +1,6 @@
 /*
-*   @file    Mcu.h
-*   @implements Mcu.h_Artifact
+*   @file    Mcu_SIM.h
+*   @implements Mcu_SIM.h_Artifact
 *   @version 1.0.4
 *
 *   @brief   AUTOSAR Mcu - Driver external interface.
@@ -38,8 +38,9 @@ extern "C"{
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
-#include "Mcal.h"
+#include "Mcu_Cfg.h"
 
+#include "Reg_eSys_SIM.h"
 /*==================================================================================================
                                            CONSTANTS
 ==================================================================================================*/
@@ -67,11 +68,9 @@ extern "C"{
 typedef struct
 {
     /**< @brief The address for SIM register. */
-    VAR( uint32, MCU_VAR) u32PeripheralAdress;
-
+    VAR(uint32, MCU_VAR) u32PeripheralAdress;
     /**< @brief data configuration for SIM register. */
     VAR(uint32, MCU_VAR) u32PeripheralDataConfiguration;
-
 } Mcu_SIM_RegisterConfigType;
 
 /**
@@ -84,7 +83,6 @@ typedef struct
 {
     /**< @brief SIM_CHIPCTL register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_ChipSelectionRegisterConfig;
-
 } Mcu_SIM_ChipSelectionConfigType;
 
 /**
@@ -97,7 +95,6 @@ typedef struct
 {
     /**< @brief SIM_CLKDIV4 register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_TraceClockRegisterConfig;
-
 } Mcu_SIM_TraceClockConfigType;
 
 /**
@@ -110,7 +107,6 @@ typedef struct
 {
     /**< @brief SIM_PLATCGC register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_ClockGatingRegisterConfig;
-
 } Mcu_SIM_ClockGatingConfigType;
 
 /**
@@ -123,7 +119,6 @@ typedef struct
 {
     /**< @brief SIM_CHIPCTL register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_ChipControlRegisterConfig;
-
 } Mcu_SIM_ChipControlConfigType;
 
 /**
@@ -136,7 +131,6 @@ typedef struct
 {
     /**< @brief SIM_FTMOPT0 register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_FTMOPT0RegisterConfig;
-
 } Mcu_SIM_FTMOPT0ConfigType;
 
 /**
@@ -149,7 +143,6 @@ typedef struct
 {
     /**< @brief SIM_LPOCLKS register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_LPOCLKSRegisterConfig;
-
 } Mcu_SIM_LPOCLKSConfigType;
 
 /**
@@ -162,7 +155,6 @@ typedef struct
 {
     /**< @brief SIM_ADCOPT register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_ADCOPTRegisterConfig;
-
 } Mcu_SIM_ADCOPTConfigType;
 
 /**
@@ -175,7 +167,6 @@ typedef struct
 {
     /**< @brief SIM_FTMOPT1 register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_FTMOPT1RegisterConfig;
-
 } Mcu_SIM_FTMOPT1ConfigType;
 
 /**
@@ -188,7 +179,6 @@ typedef struct
 {
     /**< @brief SIM_MISCTRL0 register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_MISCTRL0RegisterConfig;
-
 } Mcu_SIM_MISCTRL0ConfigType;
 
 /**
@@ -201,7 +191,6 @@ typedef struct
 {
     /**< @brief SIM_FCFG1 register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_Flash1RegisterConfig;
-
 } Mcu_SIM_Flash1ConfigType;
 
 /**
@@ -214,7 +203,6 @@ typedef struct
 {
     /**< @brief SIM_MISCTRL1 register configuration. */
     P2CONST(Mcu_SIM_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_MISCTRL1RegisterConfig;
-
 } Mcu_SIM_MISCTRL1ConfigType;
 
 /**
@@ -225,16 +213,12 @@ typedef struct
 */
 typedef struct
 {
-
     /**< @brief SIM chip selection configuration. */
     P2CONST(Mcu_SIM_ChipSelectionConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_ChipSelectionConfig;
-
     /**< @brief SIM system clock divider register 4. */
     P2CONST(Mcu_SIM_TraceClockConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_TraceClockConfig;
-
     /**< @brief SIM platform clock gating control register. */
     P2CONST(Mcu_SIM_ClockGatingConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_ClockGatingConfig;
-
 } Mcu_SIM_ClockConfigType;
 
 /**
@@ -268,7 +252,6 @@ typedef struct
 
    /**< @brief SIM Miscellaneous Control configuration. */
     P2CONST(Mcu_SIM_MISCTRL1ConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_MiscellaneousConfiguration1;
-
 } Mcu_SIM_ConfigType;
 
 
@@ -281,7 +264,7 @@ typedef struct
                                      FUNCTION PROTOTYPES
 ==================================================================================================*/
 
-
+FUNC(void, MCU_CODE) Mcu_SIM_Init(P2CONST( Mcu_SIM_ConfigType, AUTOMATIC, MCU_APPL_CONST) pSIMConfigPtr);
 
 #ifdef __cplusplus
 }

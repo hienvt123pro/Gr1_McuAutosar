@@ -37,53 +37,11 @@ extern "C"{
 #endif
 
 
-/**
-* @page misra_violations MISRA-C:2004 violations
-*
-* @section Reg_eSys_RCM_h_REF_1
-* Violates MISRA 2004 Advisory Rule 19.7, Function-like macro defined
-* This violation is due to function like macros defined for register operations.
-* Function like macros are used to reduce code complexity.
-*
-* @section [global]
-* Violates MISRA 2004 Required Rule 5.1, Identifiers (internal and external) shall not rely
-* on the significance of more than 31 characters. The used compilers use more than 31 chars for
-* identifiers.
-*/
-
-
 /*==================================================================================================
                                          INCLUDE FILES
- 1) system and project includes
- 2) needed interfaces from external units
- 3) internal and external interfaces from this unit
 ==================================================================================================*/
 #include "Reg_eSys.h"
 
-/*==================================================================================================
-                               SOURCE FILE VERSION INFORMATION
-==================================================================================================*/
-
-#define REG_ESYS_RCM_VENDOR_ID                       43
-#define REG_ESYS_RCM_AR_RELEASE_MAJOR_VERSION        4
-#define REG_ESYS_RCM_AR_RELEASE_MINOR_VERSION        3
-#define REG_ESYS_RCM_AR_RELEASE_REVISION_VERSION     1
-#define REG_ESYS_RCM_SW_MAJOR_VERSION                1
-#define REG_ESYS_RCM_SW_MINOR_VERSION                0
-#define REG_ESYS_RCM_SW_PATCH_VERSION                4
-
-
-/*==================================================================================================
-                                      FILE VERSION CHECKS
-==================================================================================================*/
-/* Check if current file and Reg_eSys header file are of the same version */
-#ifndef DISABLE_MCAL_INTERMODULE_ASR_CHECK
-    #if ((REG_ESYS_RCM_AR_RELEASE_MAJOR_VERSION != REG_ESYS_AR_RELEASE_MAJOR_VERSION) || \
-         (REG_ESYS_RCM_AR_RELEASE_MINOR_VERSION != REG_ESYS_AR_RELEASE_MINOR_VERSION) \
-        )
-        #error "AutoSar Version Numbers of Reg_eSys_RCM.h and Reg_eSys.h are different"
-    #endif
-#endif
 
 /*==================================================================================================
 *                                          CONSTANTS

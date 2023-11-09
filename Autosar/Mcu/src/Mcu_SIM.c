@@ -1,10 +1,9 @@
 /**
-*   @file    Mcu_Exe.c
+*   @file    Mcu_SIM.c
 *   @version 1.0.4
 *
-*   @brief   AUTOSAR Mcu - Middle layer implementation.
-*   @details Layer that implements the wrapper for routing data from/to external interface
-*            to IP layer.
+*   @brief   AUTOSAR SIM - System Integration Module functions implementation.
+*   @details Specific functions for SIM configuration and control.
 *
 *   @addtogroup MCU
 *   @{
@@ -30,23 +29,16 @@
 
 
 #ifdef __cplusplus
-extern
+extern "C"
 {
 #endif
 
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
-/* Header file with prototype functions defines in this layer. */
-#include "Mcu_Exe.h"
-
-/* Header files that are called from IPW layer. */
-#include "Mcu_PCC.h"
-#include "Mcu_PMC.h"
-#include "Mcu_RCM.h"
-#include "Mcu_SCG.h"
 #include "Mcu_SIM.h"
-#include "Mcu_SMC.h"
+
+#include "StdRegMacros.h"
 
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
@@ -54,7 +46,7 @@ extern
 
 
 /*==================================================================================================
-*                                       LOCAL MACROS
+                                       LOCAL MACROS
 ==================================================================================================*/
 
 
@@ -66,7 +58,6 @@ extern
 /*==================================================================================================
                                        LOCAL VARIABLES
 ==================================================================================================*/
-
 
 /*==================================================================================================
                                        GLOBAL CONSTANTS
@@ -91,69 +82,56 @@ extern
 /*==================================================================================================
                                        GLOBAL FUNCTIONS
 ==================================================================================================*/
+
 /**
-* @brief            This function initializes the MCU module.
-* @details          The function initializes the SIM, SMC, PMC modules.
-*                   Called by:
-*                       - Mcu_Init().
+* @brief            MCU driver initialization function.
+* @details          This routine initializes the SIM module that provides system controll
+*                   and chip configuration register.
 *
-* @param[in]        Mcu_pDepProsConfigPtr   Pointer to Mcu Dependent Properties configuration structure.
+*
+* @param[in]        pSIMConfigPtr   Pointer to configuration structure.
 *
 * @return           void
 *
-*/
-FUNC( void, MCU_CODE) Mcu_Exe_DepProsInit(P2CONST( Mcu_DepProsConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pDepProsConfigPtr)
-{
-#if (MCU_DISABLE_SIM_INIT == STD_OFF)
-    /* Init SIM settings. */
-	Mcu_SIM_Init(Mcu_pDepProsConfigPtr->pMcu_SIM_Config);
-#endif
-
-#if (MCU_DISABLE_PMC_INIT == STD_OFF)
-    /* Configure the Power Management Unit. */
-	Mcu_PMC_Init(Mcu_pDepProsConfigPtr->pMcu_PMC_Config);
-#endif
-
-#if (MCU_DISABLE_SMC_INIT == STD_OFF)
-	/* Configure the System Mode Controller. */
-	Mcu_SMC_Init(Mcu_pDepProsConfigPtr->pMcu_SMC_Config);
-#endif
-}
-
-/**
-* @brief            This function initializes the MCU module.
-* @details          The function initializes the RCM modules.
-*                   Called by:
-*                       - Mcu_Init().
+* @api
 *
-* @param[in]        Mcu_pResetConfigPtr   Pointer to Mcu Reset configuration structure.
-*
-* @return           void
+* @implements       Mcu_Init_Activity
 *
 */
-FUNC( void, MCU_CODE) Mcu_Exe_ResetConfigInit(P2CONST(Mcu_ResetConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pResetConfigPtr)
+FUNC(void, MCU_CODE) Mcu_SIM_Init(P2CONST( Mcu_SIM_ConfigType, AUTOMATIC, MCU_APPL_CONST) pSIMConfigPtr)
 {
-#if (MCU_DISABLE_RCM_INIT == STD_OFF)
-    /* Init RCM settings. */
-	Mcu_RCM_Init(Mcu_pResetConfigPtr->pMcu_RCM_Config);
+	/* Configure SIM_CHIPCTL register with mask for general settings (ADC_INTERLEAVE_EN, PDB_BB_SEL)*/
+    /* Use REG_RMW32 because SIM_CHIPCTL register has something which are configured in other functions*/
+    REG_RMW32(pSIMConfigPtr->pMcu_SIM_ChipControlConfiguration->pMcu_SIM_ChipControlRegisterConfig->u32PeripheralAdress, SIM_CHIPCTL_INIT_MASK32, \
+             pSIMConfigPtr->pMcu_SIM_ChipControlConfiguration->pMcu_SIM_ChipControlRegisterConfig->u32PeripheralDataConfiguration);
+
+    /* Configure SIM_LPOCLKS register */
+    REG_WRITE32(pSIMConfigPtr->pMcu_SIM_LPOClockConfiguration->pMcu_SIM_LPOCLKSRegisterConfig->u32PeripheralAdress,
+                SIM_LPOCLKS_RWBITS_MASK32 & pSIMConfigPtr->pMcu_SIM_LPOClockConfiguration->pMcu_SIM_LPOCLKSRegisterConfig->u32PeripheralDataConfiguration);
+
+    /* Configure SIM_ADCOPT register */
+    REG_WRITE32(pSIMConfigPtr->pMcu_SIM_AdcOptionsConfiguration->pMcu_SIM_ADCOPTRegisterConfig->u32PeripheralAdress,
+                SIM_ADCOPT_RWBITS_MASK32 & pSIMConfigPtr->pMcu_SIM_AdcOptionsConfiguration->pMcu_SIM_ADCOPTRegisterConfig->u32PeripheralDataConfiguration);
+
+    /* Configure SIM_FTMOPT0 register */
+    REG_WRITE32(pSIMConfigPtr->pMcu_SIM_FTMOPT0Configuration->pMcu_SIM_FTMOPT0RegisterConfig->u32PeripheralAdress,
+                SIM_FTMOPT0_RWBITS_MASK32 & pSIMConfigPtr->pMcu_SIM_FTMOPT0Configuration->pMcu_SIM_FTMOPT0RegisterConfig->u32PeripheralDataConfiguration);
+
+    /* Configure SIM_FTMOPT1 register */
+    REG_WRITE32(pSIMConfigPtr->pMcu_SIM_FTMOPT1Configuration->pMcu_SIM_FTMOPT1RegisterConfig->u32PeripheralAdress,
+                SIM_FTMOPT1_RWBITS_MASK32 & pSIMConfigPtr->pMcu_SIM_FTMOPT1Configuration->pMcu_SIM_FTMOPT1RegisterConfig->u32PeripheralDataConfiguration);
+
+    /* Configure SIM_MISCTRL0 register */
+    REG_WRITE32(pSIMConfigPtr->pMcu_SIM_MiscellaneousConfiguration0->pMcu_SIM_MISCTRL0RegisterConfig->u32PeripheralAdress,
+                SIM_MISCTRL0_RWBITS_MASK32 & pSIMConfigPtr->pMcu_SIM_MiscellaneousConfiguration0->pMcu_SIM_MISCTRL0RegisterConfig->u32PeripheralDataConfiguration);
+
+    /* Configure SIM_MISCTRL1 register */
+    REG_WRITE32(pSIMConfigPtr->pMcu_SIM_MiscellaneousConfiguration0->pMcu_SIM_MISCTRL0RegisterConfig->u32PeripheralAdress,
+                SIM_MISCTRL1_RWBITS_MASK32 & pSIMConfigPtr->pMcu_SIM_MiscellaneousConfiguration1->pMcu_SIM_MISCTRL1RegisterConfig->u32PeripheralDataConfiguration);
+}
+
+#ifdef __cplusplus
+}
 #endif
-}
 
-#if (MCU_INIT_CLOCK == STD_ON)
-/**
-* @brief            This function initializes the clock structure.
-* @details          This function intializes the clock structure by configuring the SIM, SCG, PCC modules.
-*                   Called by:
-*                       - Mcu_InitClock()
-*
-* @param[in]        Mcu_pClockConfigPtr   Pointer to clock configuration structure
-*                   (member of 'Mcu_ConfigType' struct).
-*
-* @return           void
-*
-*/
-FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pClockConfigPtr)
-{
-
-}
-#endif /* (MCU_INIT_CLOCK == STD_ON) */
+/** @} */

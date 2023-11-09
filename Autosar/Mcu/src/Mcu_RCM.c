@@ -1,10 +1,9 @@
 /**
-*   @file    Mcu_Exe.c
+*   @file    Mcu_RCM.c
 *   @version 1.0.4
 *
-*   @brief   AUTOSAR Mcu - Middle layer implementation.
-*   @details Layer that implements the wrapper for routing data from/to external interface
-*            to IP layer.
+*   @brief   AUTOSAR Mcu - Reset Control module functions implementation.
+*   @details Specific functions for RCM configuration and control.
 *
 *   @addtogroup MCU
 *   @{
@@ -30,23 +29,16 @@
 
 
 #ifdef __cplusplus
-extern
+extern "C"
 {
 #endif
 
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
-/* Header file with prototype functions defines in this layer. */
-#include "Mcu_Exe.h"
-
-/* Header files that are called from IPW layer. */
-#include "Mcu_PCC.h"
-#include "Mcu_PMC.h"
 #include "Mcu_RCM.h"
-#include "Mcu_SCG.h"
-#include "Mcu_SIM.h"
-#include "Mcu_SMC.h"
+
+#include "StdRegMacros.h"
 
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
@@ -54,7 +46,7 @@ extern
 
 
 /*==================================================================================================
-*                                       LOCAL MACROS
+                                       LOCAL MACROS
 ==================================================================================================*/
 
 
@@ -66,7 +58,6 @@ extern
 /*==================================================================================================
                                        LOCAL VARIABLES
 ==================================================================================================*/
-
 
 /*==================================================================================================
                                        GLOBAL CONSTANTS
@@ -91,69 +82,39 @@ extern
 /*==================================================================================================
                                        GLOBAL FUNCTIONS
 ==================================================================================================*/
+
+#if (defined(MCU_DISABLE_RCM_INIT) && (STD_OFF == MCU_DISABLE_RCM_INIT))
 /**
-* @brief            This function initializes the MCU module.
-* @details          The function initializes the SIM, SMC, PMC modules.
+* @brief            This function initializes the Reset parameters.
+* @details          Conigures the threshold reset value.
 *                   Called by:
-*                       - Mcu_Init().
+*                       - Mcu_Exe_ResetConfigInit()
 *
-* @param[in]        Mcu_pDepProsConfigPtr   Pointer to Mcu Dependent Properties configuration structure.
+* @param[in]        pRCMConfigPtr   Pointer to the RCM configuration structure.
 *
 * @return           void
 *
 */
-FUNC( void, MCU_CODE) Mcu_Exe_DepProsInit(P2CONST( Mcu_DepProsConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pDepProsConfigPtr)
+FUNC(void, MCU_CODE) Mcu_RCM_Init(P2CONST(Mcu_RCM_ConfigType, AUTOMATIC, MCU_APPL_CONST) pRCMConfigPtr)
 {
-#if (MCU_DISABLE_SIM_INIT == STD_OFF)
-    /* Init SIM settings. */
-	Mcu_SIM_Init(Mcu_pDepProsConfigPtr->pMcu_SIM_Config);
-#endif
+	VAR(uint32, AUTOMATIC) u32RPC_Address;
+	VAR(uint32, AUTOMATIC) u32RPC_Config;
 
-#if (MCU_DISABLE_PMC_INIT == STD_OFF)
-    /* Configure the Power Management Unit. */
-	Mcu_PMC_Init(Mcu_pDepProsConfigPtr->pMcu_PMC_Config);
-#endif
+	/* Config RCM_RPC register with RSTFLTSEL, RSTFLTSS, RSTFLTSRW bit fields. */
+	u32RPC_Address = pRCMConfigPtr->pMcu_RCM_ResetPinControlConfig->pMcu_RCM_ResetPinControlRegisterConfig->u32PeripheralAdress;
+	u32RPC_Config = pRCMConfigPtr->pMcu_RCM_ResetPinControlConfig->pMcu_RCM_ResetPinControlRegisterConfig->u32PeripheralDataConfiguration;
+	REG_WRITE32(u32RPC_Address, (uint32)(u32RPC_Config & RCM_RPC_RWBITS_MASK32));
 
-#if (MCU_DISABLE_SMC_INIT == STD_OFF)
-	/* Configure the System Mode Controller. */
-	Mcu_SMC_Init(Mcu_pDepProsConfigPtr->pMcu_SMC_Config);
-#endif
+	/* Config RCM_SRIE register with SACKERR, MDM_AP, SW, LOCKUP, JTAG, GIE, PIN, WDOG, CMU_LOC, LOL, LOC, DELAY bit fields. */
+	u32RPC_Address = pRCMConfigPtr->pMcu_RCM_ResetInterruptEnableConfig->pMcu_RCM_ResetInterruptEnableRegisterConfig->u32PeripheralAdress;
+	u32RPC_Config = pRCMConfigPtr->pMcu_RCM_ResetInterruptEnableConfig->pMcu_RCM_ResetInterruptEnableRegisterConfig->u32PeripheralDataConfiguration;
+	REG_WRITE32(u32RPC_Address, (uint32)(u32RPC_Config & RCM_SRIE_RWBITS_MASK32));
 }
-
-/**
-* @brief            This function initializes the MCU module.
-* @details          The function initializes the RCM modules.
-*                   Called by:
-*                       - Mcu_Init().
-*
-* @param[in]        Mcu_pResetConfigPtr   Pointer to Mcu Reset configuration structure.
-*
-* @return           void
-*
-*/
-FUNC( void, MCU_CODE) Mcu_Exe_ResetConfigInit(P2CONST(Mcu_ResetConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pResetConfigPtr)
-{
-#if (MCU_DISABLE_RCM_INIT == STD_OFF)
-    /* Init RCM settings. */
-	Mcu_RCM_Init(Mcu_pResetConfigPtr->pMcu_RCM_Config);
 #endif
-}
 
-#if (MCU_INIT_CLOCK == STD_ON)
-/**
-* @brief            This function initializes the clock structure.
-* @details          This function intializes the clock structure by configuring the SIM, SCG, PCC modules.
-*                   Called by:
-*                       - Mcu_InitClock()
-*
-* @param[in]        Mcu_pClockConfigPtr   Pointer to clock configuration structure
-*                   (member of 'Mcu_ConfigType' struct).
-*
-* @return           void
-*
-*/
-FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pClockConfigPtr)
-{
 
+#ifdef __cplusplus
 }
-#endif /* (MCU_INIT_CLOCK == STD_ON) */
+#endif
+
+/** @} */

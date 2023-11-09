@@ -40,6 +40,8 @@ extern "C"{
 /*==================================================================================================
                                          INCLUDE FILES
 ==================================================================================================*/
+#include "Mcal.h"
+
 #include "Std_Types.h"
 
 /*==================================================================================================
@@ -82,6 +84,21 @@ extern "C"{
 */
 #define MCU_DISABLE_SMC_INIT   (STD_OFF)
 
+/**
+* @brief            Maximum number of MCU Clock configurations.
+*/
+#define MCU_MAX_CLKCONFIGS    ((uint32)1U)
+
+/**
+* @brief            Maximum number of MCU Mode configurations.
+*/
+#define MCU_MAX_MODECONFIGS   ((uint32)1U)
+
+/**
+* @brief            Maximum number of MCU Ram configurations.
+*/
+#define MCU_MAX_RAMCONFIGS    ((uint32)0U)
+
 /*==================================================================================================
                                              ENUMS
 ==================================================================================================*/
@@ -120,6 +137,7 @@ typedef uint32 Mcu_RamSizeType;
 *
 */
 typedef uint32 Mcu_RamWriteSizeType;
+
 
 #if (MCU_INIT_CLOCK == STD_ON)
 /**
