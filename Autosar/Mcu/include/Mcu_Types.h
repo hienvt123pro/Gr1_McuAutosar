@@ -109,7 +109,7 @@ typedef struct
     VAR(Mcu_ClockType, MCU_VAR) u32Mcu_ClkConfigId;
 
     /**< @brief SIM configuration. */
-    P2CONST(Mcu_SIM_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SIM_Config;
+    P2CONST(Mcu_SIM_ClockConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SIM_ClockConfig;
 
     /**< @brief SCG configuration. */
     P2CONST(Mcu_SCG_ConfigType, MCU_VAR, MCU_APPL_CONST) pMcu_SCG_Config;

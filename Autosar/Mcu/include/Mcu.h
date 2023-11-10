@@ -90,7 +90,7 @@ typedef struct
 
 #if (MCU_INIT_CLOCK == STD_ON)
     /**< @brief Clock data configuration. */
-    CONST(Mcu_ClockConfigType, MCU_) (*Mcu_apClockConfig)[MCU_MAX_CLKCONFIGS];
+    CONST(Mcu_ClockConfigType, MCU_CONST) (*Mcu_apClockConfig)[MCU_MAX_CLKCONFIGS];
 #endif
 
     /**< @brief Mcu Dependent Properties configuration. */
@@ -110,16 +110,16 @@ typedef struct
 ==================================================================================================*/
 #define MCU_START_SEC_CODE
 
-FUNC (void, MCU_CODE) Mcu_Init( P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
-FUNC (Std_ReturnType, MCU_CODE) Mcu_InitRamSection( VAR(Mcu_RamSectionType, AUTOMATIC) RamSection);
+FUNC(void, MCU_CODE) Mcu_Init( P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
+FUNC(Std_ReturnType, MCU_CODE) Mcu_InitRamSection(VAR(Mcu_RamSectionType, AUTOMATIC) RamSection);
 
 #if (MCU_INIT_CLOCK == STD_ON)
-FUNC (Std_ReturnType, MCU_CODE) Mcu_InitClock( VAR(Mcu_ClockType, AUTOMATIC) ClockSetting);
+FUNC(Std_ReturnType, MCU_CODE) Mcu_InitClock(VAR(Mcu_ClockType, AUTOMATIC) ClockSetting);
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
 
 #if (MCU_INIT_CLOCK == STD_ON)
 #if (MCU_NO_PLL == STD_OFF)
-FUNC( Std_ReturnType, MCU_CODE) Mcu_DistributePllClock( VAR( void, AUTOMATIC));
+FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(VAR(void, AUTOMATIC));
 #endif /* (MCU_NO_PLL == STD_OFF) */
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
 

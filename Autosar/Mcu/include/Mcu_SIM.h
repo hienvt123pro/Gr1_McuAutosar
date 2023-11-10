@@ -264,7 +264,9 @@ typedef struct
                                      FUNCTION PROTOTYPES
 ==================================================================================================*/
 
-FUNC(void, MCU_CODE) Mcu_SIM_Init(P2CONST( Mcu_SIM_ConfigType, AUTOMATIC, MCU_APPL_CONST) pSIMConfigPtr);
+FUNC(void, MCU_CODE) Mcu_SIM_Init(P2CONST(Mcu_SIM_ConfigType, AUTOMATIC, MCU_APPL_CONST) pSIMConfigPtr);
+
+FUNC(void, MCU_CODE) Mcu_SIM_ClockInit(P2CONST(Mcu_SIM_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
 
 #ifdef __cplusplus
 }

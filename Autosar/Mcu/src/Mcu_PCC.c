@@ -1,10 +1,9 @@
-/*
-*   @file    Mcu_PCC.h
-*   @implements Mcu_PCC.h_Artifact
+/**
+*   @file    Mcu_PCC.c
 *   @version 1.0.4
 *
-*   @brief   AUTOSAR Mcu - Driver external interface.
-*   @details Contains all the public functions and data types that are used by the higher layer.
+*   @brief   AUTOSAR Mcu - Peripheral Clock Control functions implementation.
+*   @details Specific functions for PCC configuration and control.
 *
 *   @addtogroup MCU
 *   @{
@@ -28,83 +27,63 @@
 /*==================================================================================================
 ==================================================================================================*/
 
-#ifndef MCU_PCC_H
-#define MCU_PCC_H
 
 #ifdef __cplusplus
-extern "C"{
+extern "C"
+{
 #endif
 
+
 /*==================================================================================================
-                                         INCLUDE FILES
+*                                        INCLUDE FILES
 ==================================================================================================*/
-#include "Mcu_Cfg.h"
+#include "Mcu_PCC.h"
 
-#include "Reg_eSys_PCC.h"
-
-/*==================================================================================================
-                                           CONSTANTS
-==================================================================================================*/
-
+#include "StdRegMacros.h"
 
 /*==================================================================================================
-                                       DEFINES AND MACROS
+                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
 
 
 /*==================================================================================================
-                                             ENUMS
+                                       LOCAL CONSTANTS
 ==================================================================================================*/
 
 
 /*==================================================================================================
-                                 STRUCTURES AND OTHER TYPEDEFS
-==================================================================================================*/
-
-/**
-* @brief          Initialization data for the PCC driver.
-* @details        A pointer to such a structure is provided to the routine to configure register base
-*                 on pheripheral address and data configuration of register.
-* @implements     Mcu_PCC_RegisterConfigType_struct
-*/
-typedef struct
-{
-    /**< @brief The address for PCC register. */
-    VAR(uint32, MCU_VAR) u32PeripheralAdress;
-    /**< @brief data configuration for PCC register. */
-    VAR(uint32, MCU_VAR) u32PeripheralDataConfiguration;
-} Mcu_PCC_RegisterConfigType;
-
-/**
-* @brief          Initialization data for the PCC driver.
-* @details        A pointer to such a structure is provided to the Peripheral Clock Controller (PCC) settings initialization routines for
-*                 configuration.
-* @implements     Mcu_PCC_ConfigType_struct
-*/
-typedef struct
-{
-    /**< @brief The ID for Clock configuration. */
-    VAR(uint32, MCU_VAR) Mcu_NoPeripheralClockSetting;
-    /**< @brief PCC register configuration. */
-    CONST(Mcu_PCC_RegisterConfigType, MCU_CONST) *pMcu_PCC_RegisterConfig[];
-} Mcu_PCC_ConfigType;
-
-/*==================================================================================================
-                                 GLOBAL VARIABLE DECLARATIONS
+                                       LOCAL VARIABLES
 ==================================================================================================*/
 
 
 /*==================================================================================================
-                                     FUNCTION PROTOTYPES
+                                       GLOBAL CONSTANTS
 ==================================================================================================*/
 
-FUNC(void, MCU_CODE) Mcu_PCC_Init(P2CONST(Mcu_PCC_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
+
+/*==================================================================================================
+                                       GLOBAL VARIABLES
+==================================================================================================*/
+
+
+/*==================================================================================================
+                                   LOCAL FUNCTION PROTOTYPES
+==================================================================================================*/
+
+
+/*==================================================================================================
+                                       LOCAL FUNCTIONS
+==================================================================================================*/
+
+
+/*==================================================================================================
+                                       GLOBAL FUNCTIONS
+==================================================================================================*/
+
 
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* MCU_PCC_H */
 
 /** @} */

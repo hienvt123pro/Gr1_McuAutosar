@@ -54,6 +54,12 @@ extern "C"{
 ==================================================================================================*/
 
 /**
+@{
+* @brief            Service Ids for MCU APIs.
+*/
+#define MCU_INIT_ID          ((uint8)0x00U)
+#define MCU_INITCLOCK_ID     ((uint8)0x02U)
+/**
 * @brief            If this parameter is set to FALSE, the clock initialization has to be disabled from the MCU driver.
 */
 #define MCU_INIT_CLOCK    (STD_ON)
@@ -97,7 +103,7 @@ extern "C"{
 /**
 * @brief            Maximum number of MCU Ram configurations.
 */
-#define MCU_MAX_RAMCONFIGS    ((uint32)0U)
+#define MCU_MAX_RAMCONFIGS    ((uint32)1U)
 
 /*==================================================================================================
                                              ENUMS

@@ -75,6 +75,7 @@ typedef struct
     VAR(uint32, MCU_VAR) u32PeripheralDataConfiguration;
 } Mcu_SCG_RegisterConfigType;
 
+
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SOSC registers for configuring.
@@ -108,6 +109,24 @@ typedef struct
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIRCCFG_RegisterConfig;
 } Mcu_SCG_SIRC_RegisterConfigType;
 
+
+/**
+* @brief          Initialization data for the SCG driver.
+* @details        A pointer to such a structure is provided to the routine to FIRC registers for configuring.
+*
+* @implements     Mcu_SCG_FIRC_RegisterConfigType_struct
+*/
+typedef struct
+{
+    /**< @brief The address for SCG register. */
+    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_FIRCCSR_RegisterConfig;
+    /**< @brief data configuration for SCG register. */
+    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_FIRCDIV_RegisterConfig;
+    /**< @brief data configuration for SCG register. */
+    P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_FIRCCFG_RegisterConfig;
+} Mcu_SCG_FIRC_RegisterConfigType;
+
+
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the routine to SPLL registers for configuring
@@ -124,6 +143,7 @@ typedef struct
     P2CONST(Mcu_SCG_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SPLLCFG_RegisterConfig;
 } Mcu_SCG_SPLL_RegisterConfigType;
 
+
 /**
 * @brief          Initialization data for the SCG driver.
 * @details        A pointer to such a structure is provided to the System Clock Generator (SCG) settings initialization routines for
@@ -135,32 +155,32 @@ typedef struct
     /**< @brief The variable for RUN mode configuration. (SCG_RCCR register) */
     /**< @brief Contain the selection of system clock source. */
     /**< @brief Contain the value of Core clock divide ratio, Bus clock divide ratio, Slow clock divide ratio. */
-    VAR( uint32, MCU_VAR) Mcu_RUNModeConfig;
+    VAR(uint32, MCU_VAR) Mcu_RUNModeConfig;
 
     /**< @brief The variable for HSRUN mode configuration. (SCG_HCCR register)*/
     /**< @brief Contain the selection of system clock source. */
     /**< @brief Contain the value of Core clock divide ratio, Bus clock divide ratio, Slow clock divide ratio. */
-    VAR( uint32, MCU_VAR) Mcu_HSRUNModeConfig;
+    VAR(uint32, MCU_VAR) Mcu_HSRUNModeConfig;
 
     /**< @brief The variable for VLPR mode configuration. (SCG_VCCR register)*/
     /**< @brief Contain the selection of system clock source. */
     /**< @brief Contain the value of Core clock divide ratio, Bus clock divide ratio, Slow clock divide ratio. */
-    VAR( uint32, MCU_VAR) Mcu_VLPRModeConfig;
+    VAR(uint32, MCU_VAR) Mcu_VLPRModeConfig;
 
     /**< @brief The variable for clock out configuration. (SCG_CLKOUTCNFG)*/
-    VAR( uint32, MCU_VAR) Mcu_ClockOutSelection;
+    VAR(uint32, MCU_VAR) Mcu_ClockOutSelection;
 
     /**< @brief The pointer to structure configuring SOSC registers. (SCG_SOSCCSR, SCG_SOSCDIV, SCG_SOSCCFG)*/
-    CONST(Mcu_SCG_RegisterConfigType, MCU_CONST) (*pMcu_SOSC_RegisterConfig);
+    CONST(Mcu_SCG_SOSC_RegisterConfigType, MCU_CONST) (*pMcu_SOSC_RegisterConfig);
 
     /**< @brief The pointer to structure configuring SIRC registers. (SCG_SIRCCSR, SCG_SIRCDIV, SCG_SIRCCFG)*/
-     CONST(Mcu_SCG_RegisterConfigType, MCU_CONST) (*pMcu_SIRC_RegisterConfig);
+     CONST(Mcu_SCG_SIRC_RegisterConfigType, MCU_CONST) (*pMcu_SIRC_RegisterConfig);
 
     /**< @brief The pointer to structure configuring FIRC registers. (SCG_SOSCCSR, SCG_SOSCDIV, SCG_SOSCCFG)*/
-    CONST(Mcu_SCG_RegisterConfigType, MCU_CONST) (*pMcu_FIRC_RegisterConfig);
+    CONST(Mcu_SCG_FIRC_RegisterConfigType, MCU_CONST) (*pMcu_FIRC_RegisterConfig);
 
     /**< @brief The pointer to structure configuring SPLL registers. (SCG_SIRCCSR, SCG_SIRCDIV, SCG_SIRCCFG)*/
-    CONST(Mcu_SCG_RegisterConfigType, MCU_CONST) (*pMcu_SPLL_RegisterConfig);
+    CONST(Mcu_SCG_SPLL_RegisterConfigType, MCU_CONST) (*pMcu_SPLL_RegisterConfig);
 } Mcu_SCG_ConfigType;
 
 /*==================================================================================================
@@ -172,7 +192,11 @@ typedef struct
                                      FUNCTION PROTOTYPES
 ==================================================================================================*/
 
-
+FUNC(void, MCU_CODE) Mcu_SCG_SOSCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
+FUNC(void, MCU_CODE) Mcu_SCG_SPLLInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
+FUNC(void, MCU_CODE) Mcu_SCG_SIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
+FUNC(void, MCU_CODE) Mcu_SCG_FIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
+FUNC(void, MCU_CODE) Mcu_SCG_SrcClock(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr, VAR(uint8, MCU_VAR) u8ClockSourcesControl);
 
 #ifdef __cplusplus
 }

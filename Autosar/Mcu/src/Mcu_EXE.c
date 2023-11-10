@@ -67,6 +67,7 @@ extern
                                        LOCAL VARIABLES
 ==================================================================================================*/
 
+static P2CONST(Mcu_ClockConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pClockConfig = NULL_PTR;
 
 /*==================================================================================================
                                        GLOBAL CONSTANTS
@@ -154,6 +155,28 @@ FUNC( void, MCU_CODE) Mcu_Exe_ResetConfigInit(P2CONST(Mcu_ResetConfigType, AUTOM
 */
 FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pClockConfigPtr)
 {
+	Mcu_pClockConfig = Mcu_pClockConfigPtr;
 
+	/* Initialize SOSC clock */
+	Mcu_SCG_SOSCInit(Mcu_pClockConfig->pMcu_SCG_Config);
+
+	/* Initialize SPLL clock */
+	Mcu_SCG_SPLLInit(Mcu_pClockConfig->pMcu_SCG_Config);
+
+	/* Configure System Clock */
+	/* su dung member nay de chon source clock u8ClockSourcesControl */
+	Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))Mcu_pClockConfig->u8ClockSourcesControl);
+
+	/* Initialize SIRC clock */
+	Mcu_SCG_SIRCInit(Mcu_pClockConfig->pMcu_SCG_Config);
+
+	/* Initialize FIRC clock */
+	Mcu_SCG_FIRCInit(Mcu_pClockConfig->pMcu_SCG_Config);
+
+	/* Initialize SIM clock  */
+	Mcu_SIM_ClockInit(Mcu_pClockConfig->pMcu_SIM_ClockConfig);
+
+	/* Initialize PCC clock */
+	Mcu_PCC_Init(Mcu_pClockConfig->pMcu_PCC_Config);
 }
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
