@@ -57,8 +57,11 @@ extern "C"{
 @{
 * @brief            Service Ids for MCU APIs.
 */
-#define MCU_INIT_ID          ((uint8)0x00U)
-#define MCU_INITCLOCK_ID     ((uint8)0x02U)
+#define MCU_INIT_ID                     ((uint8)0x00U)
+#define MCU_INITRAMSECTION_ID           ((uint8)0x01U)
+#define MCU_INITCLOCK_ID                ((uint8)0x02U)
+#define MCU_DISTRIBUTEPLLCLOCK_ID       ((uint8)0x03U)
+#define MCU_GETPLLSTATUS_ID             ((uint8)0x04U)
 /**
 * @brief            If this parameter is set to FALSE, the clock initialization has to be disabled from the MCU driver.
 */
@@ -105,10 +108,36 @@ extern "C"{
 */
 #define MCU_MAX_RAMCONFIGS    ((uint32)1U)
 
+/**
+* @brief            This parameter shall be set True, if the H/W does not have a PLL or the PLL circuitry is enabled after the power on without S/W intervention.
+*/
+#define MCU_NO_PLL   (STD_OFF)
+
+/**
+* @brief            Clock Source for MCU
+*/
+#define MCU_SOSC_CLK_SRC  (0x01U)
+#define MCU_SIRC_CLK_SRC  (0x02U)
+#define MCU_FIRC_CLK_SRC  (0x03U)
+#define MCU_SPLL_CLK_SRC  (0x06U)
 /*==================================================================================================
                                              ENUMS
 ==================================================================================================*/
 
+/**
+* @brief            Type of the return value of the function Mcu_GetPllStatus.
+* @details          The type of Mcu_PllStatusType is an enumeration with the following values:
+*                       MCU_PLL_LOCKED, MCU_PLL_UNLOCKED, MCU_PLL_STATUS_UNDEFINED.
+*
+* @implements     Mcu_PllStatusType_enumeration
+*
+*/
+typedef enum
+{
+    MCU_PLL_LOCKED = 0x33U,   /**< @brief PLL is locked. */
+    MCU_PLL_UNLOCKED = 0xCCU,   /**< @brief PLL is unlocked. */
+    MCU_PLL_STATUS_UNDEFINED = 0x5AU   /**< @brief PLL Status is unknown. */
+} Mcu_PllStatusType;
 
 /*==================================================================================================
                                  STRUCTURES AND OTHER TYPEDEFS

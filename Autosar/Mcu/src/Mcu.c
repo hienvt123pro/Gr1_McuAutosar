@@ -41,10 +41,6 @@ extern "C"{
 /* Get the prototypes of Execute functions. */
 #include "Mcu_Exe.h"
 
-#if (MCU_DEV_ERROR_DETECT == STD_ON)
-#include "Det.h"
-#endif
-
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
@@ -83,6 +79,7 @@ P2CONST(Mcu_ConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pConfigPtr = NULL_PTR;
 */
 static VAR(Mcu_StatusType, MCU_VAR)  gu8Mcu_Status = MCU_UNINIT;
 
+
 /*==================================================================================================
                                        GLOBAL CONSTANTS
 ==================================================================================================*/
@@ -104,6 +101,14 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckNullPtr(P2CONST( Mcu_ConfigType, 
 static FUNC(void, MCU_CODE) Mcu_CheckExit(VAR(Std_ReturnType, AUTOMATIC) retStatus, VAR(uint8, AUTOMATIC) u8McuServiceID);
 
 static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitClock(VAR(Mcu_ClockType, AUTOMATIC) ClockSetting);
+
+#if (MCU_INIT_CLOCK == STD_ON)
+#if (MCU_NO_PLL == STD_OFF)
+static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckDistributePllClock(VAR( void, AUTOMATIC));
+#endif /* (MCU_NO_PLL == STD_OFF) */
+#endif /*(MCU_INIT_CLOCK == STD_ON)*/
+
+static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitRamSection(VAR( Mcu_RamSectionType, AUTOMATIC) RamSection);
 
 /*==================================================================================================
                                        LOCAL FUNCTIONS
@@ -183,13 +188,66 @@ static FUNC(void, MCU_CODE) Mcu_CheckExit(VAR(Std_ReturnType, AUTOMATIC) u8retSt
 */
 static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitClock(VAR(Mcu_ClockType, AUTOMATIC) ClockSetting)
 {
-	VAR(Std_ReturnType, AUTOMATIC) u8Status = (Std_ReturnType)E_NOT_OK;
-    if (ClockSetting == (Mcu_pConfigPtr->Mcu_NumClkConfigs))
+	VAR(Std_ReturnType, AUTOMATIC) u8Status = (Std_ReturnType)E_OK;
+    if (ClockSetting >= (Mcu_pConfigPtr->Mcu_NumClkConfigs))
     {
-    	u8Status = (Std_ReturnType)E_OK;
+    	u8Status = (Std_ReturnType)E_NOT_OK;
     }
 
     return (Std_ReturnType)u8Status;
+}
+
+#if (MCU_INIT_CLOCK == STD_ON)
+#if (MCU_NO_PLL == STD_OFF)
+/**
+* @brief Mcu_CheckDistributePllClock - checks for Mcu_DistributePllClock
+* @implements Mcu_CheckDistributePllClock_Activity
+*/
+static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckDistributePllClock( VAR( void, AUTOMATIC))
+{
+   VAR(Std_ReturnType, AUTOMATIC) u8Status = (Std_ReturnType)E_OK;
+    if (MCU_PLL_LOCKED != (Mcu_PllStatusType)Mcu_Exe_GetPllStatus())
+    {
+        u8Status = (Std_ReturnType)E_NOT_OK;
+    }
+
+    return (Std_ReturnType) u8Status;
+}
+#endif /* (MCU_NO_PLL == STD_OFF) */
+#endif /*(MCU_INIT_CLOCK == STD_ON)*/
+
+/**
+* @brief Mcu_CheckInitRamSection - checks for Mcu_InitRamSection
+* @implements Mcu_CheckInitRamSection_Activity
+*/
+static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitRamSection(VAR(Mcu_RamSectionType, AUTOMATIC) RamSection)
+{
+	/*Check status variable*/
+	VAR(Std_ReturnType, AUTOMATIC) u8Status = (Std_ReturnType)E_OK;
+
+	/*Check number of Ram Sections*/
+	if (RamSection >= (Mcu_pConfigPtr->Mcu_NumRamConfigs))
+    {
+        u8Status = (Std_ReturnType)E_NOT_OK;
+	}
+	else {
+		/* Check if Ram memory configuration is valid. */
+        if ( NULL_PTR == Mcu_pConfigPtr->Mcu_apRamConfig)
+        {
+            u8Status = (Std_ReturnType)E_NOT_OK;
+		}
+		/* Check if Ram write size is valid. */
+        else if (
+                    ( ((*Mcu_pConfigPtr->Mcu_apRamConfig)[RamSection]).u32Mcu_RamWriteSize != (Mcu_RamWriteSizeType)1U ) &&
+                    ( ((*Mcu_pConfigPtr->Mcu_apRamConfig)[RamSection]).u32Mcu_RamWriteSize != (Mcu_RamWriteSizeType)2U ) &&
+                    ( ((*Mcu_pConfigPtr->Mcu_apRamConfig)[RamSection]).u32Mcu_RamWriteSize != (Mcu_RamWriteSizeType)4U ) &&
+                    ( ((*Mcu_pConfigPtr->Mcu_apRamConfig)[RamSection]).u32Mcu_RamWriteSize != (Mcu_RamWriteSizeType)8U )
+                )
+        {
+            u8Status = (Std_ReturnType)E_NOT_OK;
+        }
+	}
+	return (Std_ReturnType) u8Status;
 }
 
 /*==================================================================================================
@@ -282,3 +340,204 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_InitClock(VAR(Mcu_ClockType, AUTOMATIC) Clock
 	return (Std_ReturnType)ClockStatus;
 }
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
+
+/**
+* @brief            This service initializes the RAM section wise.
+* @details          This service initializes the RAM section wise.
+*
+* @param[in]        RamSection			unsigned 32 bit variable
+*
+* @return           Std_ReturnType		CheckRamStatus
+*
+*/
+FUNC(Std_ReturnType, MCU_CODE) Mcu_InitRamSection(VAR(Mcu_RamSectionType, AUTOMATIC) RamSection)
+{
+	/*Init check ram status*/
+	VAR(Std_ReturnType, AUTOMATIC) CheckRamStatus = (Std_ReturnType)E_NOT_OK;
+
+	/***************************************************SECTION 1**************************************************/
+
+	/* Variable for index of RAM sections. */
+	/* a.k.a Mcu_RamIndexType*/
+    VAR(uint32, AUTOMATIC) RamIndex;
+    /* Limitation of Ram Index variable. */
+    VAR(Mcu_RamSizeType, AUTOMATIC) RamIndexLimit;
+    /* Pointer to RAM configuration: base address, size, default value, write size. */
+    P2CONST(Mcu_RamConfigType, AUTOMATIC, MCU_APPL_CONST) pRamConfigPtr;
+
+	/* Check status of Ram Section if it is called */
+    /*MCU_INITRAMSECTION_ID : stored in Mcu_Cfg.h*/
+	if ((Std_ReturnType)E_OK == (Std_ReturnType)Mcu_CheckEntry(MCU_INITRAMSECTION_ID)) {
+
+		if ((Std_ReturnType)E_OK == (Std_ReturnType)Mcu_CheckInitRamSection(RamSection)) {
+
+	/***************************************************SECTION 2**************************************************/
+			CheckRamStatus = (Std_ReturnType)E_OK;
+
+			/* Get Ram settings from the configuration structure. */
+			pRamConfigPtr = &(*Mcu_pConfigPtr->Mcu_apRamConfig)[RamSection];
+
+			/*Get number of Ram Index*/
+			RamIndexLimit = (Mcu_RamSizeType)( (pRamConfigPtr->u32Mcu_RamSize) / (pRamConfigPtr->u32Mcu_RamWriteSize) );
+
+			for (RamIndex = (uint32) 0UL; ((RamIndex < RamIndexLimit) && ((Std_ReturnType)E_OK == CheckRamStatus)); RamIndex++)
+				{
+					switch (pRamConfigPtr->u32Mcu_RamSize)
+					{
+						case (Mcu_RamWriteSizeType)1U:
+							/*Assign default value: 1 byte*/
+							( *((uint8 (*)[1U]) (pRamConfigPtr->pu8Mcu_RamBaseAddr)) )[RamIndex]  = (uint8) pRamConfigPtr->u64Mcu_RamDefaultValue;
+							break;
+
+						case (Mcu_RamWriteSizeType)2U:
+							/*Assign default value: 2 byte*/
+							( *((uint16 (*)[1U]) (pRamConfigPtr->pu8Mcu_RamBaseAddr)) )[RamIndex] = (uint16) pRamConfigPtr->u64Mcu_RamDefaultValue;
+							break;
+
+						case (Mcu_RamWriteSizeType)4U:
+							/*Assign default value: 4 byte*/
+							( *((uint32 (*)[1U]) (pRamConfigPtr->pu8Mcu_RamBaseAddr)) )[RamIndex] = (uint32) pRamConfigPtr->u64Mcu_RamDefaultValue;
+							break;
+
+						case (Mcu_RamWriteSizeType)8U:
+							/*Assign default value: 8 byte*/
+							( *((uint64 (*)[1U]) (pRamConfigPtr->pu8Mcu_RamBaseAddr)) )[RamIndex] = (uint64) pRamConfigPtr->u64Mcu_RamDefaultValue;
+							break;
+
+						default:
+							CheckRamStatus = (Std_ReturnType)E_NOT_OK;
+							break;
+					}
+				}
+
+	/***************************************************SECTION 3**************************************************/
+			if ((Std_ReturnType)E_OK == CheckRamStatus)
+			{
+				/* Check if RAM was initialized correctly. */
+				for (RamIndex = (uint32 )0UL; ((RamIndex < RamIndexLimit) && ((Std_ReturnType)E_OK == CheckRamStatus)); RamIndex++)
+				{
+					switch (pRamConfigPtr->u32Mcu_RamSize)
+					{
+						case (Mcu_RamWriteSizeType)1U:
+							/*Check Ram Status for value of 1 byte*/
+							if ( (uint8) pRamConfigPtr->u64Mcu_RamDefaultValue  != ( *((uint8 (*)[1U]) (pRamConfigPtr->pu8Mcu_RamBaseAddr)) )[RamIndex] )
+							{
+								CheckRamStatus = (Std_ReturnType)E_NOT_OK;
+							}
+							break;
+
+						case (Mcu_RamWriteSizeType)2U:
+							/*Check Ram Status for value of 2 byte*/
+							if ( (uint16) pRamConfigPtr->u64Mcu_RamDefaultValue != ( *((uint16 (*)[1U]) (pRamConfigPtr->pu8Mcu_RamBaseAddr)) )[RamIndex] )
+							{
+								CheckRamStatus = (Std_ReturnType)E_NOT_OK;
+							}
+							break;
+
+						case (Mcu_RamWriteSizeType)4U:
+							/*Check Ram Status for value of 4 byte*/
+							if ( (uint32) pRamConfigPtr->u64Mcu_RamDefaultValue != ( *((uint32 (*)[1U]) (pRamConfigPtr->pu8Mcu_RamBaseAddr)) )[RamIndex] )
+							{
+								CheckRamStatus = (Std_ReturnType)E_NOT_OK;
+							}
+							break;
+
+						case (Mcu_RamWriteSizeType)8U:
+							/*Check Ram Status for value of 8 byte*/
+							if ( (uint64) pRamConfigPtr->u64Mcu_RamDefaultValue != ( *((uint64 (*)[1U]) (pRamConfigPtr->pu8Mcu_RamBaseAddr)) )[RamIndex] )
+							{
+								CheckRamStatus = (Std_ReturnType)E_NOT_OK;
+							}
+							break;
+
+						default:
+							CheckRamStatus = (Std_ReturnType)E_NOT_OK;
+							break;
+					}
+				}
+			}
+		}
+	}
+	return (Std_ReturnType)CheckRamStatus;
+}
+
+
+#if (MCU_INIT_CLOCK == STD_ON)
+#if (MCU_NO_PLL == STD_OFF)
+/**
+* @brief            This function activates the PLL clock to the MCU clock distribution.
+* @details          Function completes the PLL configuration and then activates the PLL clock to
+*                       MCU. If the MCU_NO_PLL is TRUE the Mcu_DistributePllClock has to be
+*                       disabled.
+*                   The function will not distribute the PLL clock if the driver state does not
+*                       allow it, or the PLL is not stable.
+*
+* @return           Std_ReturnType
+* @retval           E_OK        Command has been accepted.
+* @retval           E_NOT_OK    Command has not been accepted.
+*
+* @api
+*
+* @implements Mcu_DistributePllClock_Activity
+*
+*/
+FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(VAR(void, AUTOMATIC))
+{
+	VAR(Std_ReturnType, AUTOMATIC) PllStatus = (Std_ReturnType)E_NOT_OK;
+
+	if((Std_ReturnType)E_OK == (Std_ReturnType)Mcu_CheckEntry(MCU_DISTRIBUTEPLLCLOCK_ID))
+	{
+        if((Std_ReturnType)E_OK == (Std_ReturnType)Mcu_CheckDistributePllClock())
+        {
+            /* Set the PLL as System Clock if it is locked and enabled by the current mode.
+            If the PLL0 is already selected as system clock, then this function will return without
+            doing anything. */
+            Mcu_Exe_DistributePllClock();
+            PllStatus = (Std_ReturnType)E_OK;
+        }
+		Mcu_CheckExit((Std_ReturnType)E_OK, MCU_DISTRIBUTEPLLCLOCK_ID);
+	}
+	return (Std_ReturnType)PllStatus;
+}
+#endif /* (MCU_NO_PLL == STD_OFF) */
+#endif /* (MCU_INIT_CLOCK == STD_ON) */
+
+
+/**
+* @brief            This function returns the lock status of the PLL.
+* @details          The user takes care that the PLL is locked by executing Mcu_GetPllStatus.
+*                       If the MCU_NO_PLL is TRUE the MCU_GetPllStatus has to return
+*                       MCU_PLL_STATUS_UNDEFINED.
+*                   It will also return MCU_PLL_STATUS_UNDEFINED if the driver state was invalid
+*
+* @return           Provides the lock status of the PLL.
+* @retval           MCU_PLL_STATUS_UNDEFINED    PLL Status is unknown.
+* @retval           MCU_PLL_LOCKED              PLL is locked.
+* @retval           MCU_PLL_UNLOCKED            PLL is unlocked.
+*
+* @api
+*
+* @implements Mcu_GetPllStatus_Activity
+*
+*/
+FUNC(Mcu_PllStatusType, MCU_CODE) Mcu_GetPllStatus(VAR(void, AUTOMATIC))
+{
+	VAR(Mcu_PllStatusType, AUTOMATIC) ePllStatus = MCU_PLL_STATUS_UNDEFINED;
+	if((Std_ReturnType)E_OK == (Std_ReturnType)Mcu_CheckEntry(MCU_GETPLLSTATUS_ID))
+	{
+		#if (MCU_NO_PLL == STD_OFF)
+			/* if the PLL is not used in the configuration return MCU_PLL_STATUS_UNDEFINED */
+			/* Get status of the PLL (if enabled in current mode).
+			   At this point the return value can be only MCU_PLL_LOCKED or MCU_PLL_UNLOCKED. */
+			ePllStatus = Mcu_Exe_GetPllStatus();
+		#endif /* (MCU_NO_PLL == STD_OFF) */
+		Mcu_CheckExit((Std_ReturnType)E_OK ,MCU_GETPLLSTATUS_ID);
+	}
+	return (Mcu_PllStatusType)ePllStatus;
+}
+
+#ifdef __cplusplus
+}
+#endif
+
+/** @} */

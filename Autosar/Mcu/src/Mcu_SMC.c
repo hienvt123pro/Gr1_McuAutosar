@@ -95,7 +95,6 @@ extern "C"{
 */
 FUNC( void, MCU_CODE) Mcu_SMC_Init(P2CONST(Mcu_SMC_ConfigType, AUTOMATIC, MCU_APPL_CONST) pSMCConfigPtr)
 {
-    /*Assign value to VERID register*/
     REG_WRITE32(SMC_PMPROT_ADDR32, (pSMCConfigPtr->u32SMC_PMPROT & SMC_PMPROT_RWBITS_MASK32));
 }
 #endif

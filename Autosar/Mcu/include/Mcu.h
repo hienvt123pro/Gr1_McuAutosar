@@ -123,6 +123,7 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(VAR(void, AUTOMATIC));
 #endif /* (MCU_NO_PLL == STD_OFF) */
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
 
+FUNC(Mcu_PllStatusType, MCU_CODE) Mcu_GetPllStatus( VAR( void, AUTOMATIC));
 
 #define MCU_STOP_SEC_CODE
 

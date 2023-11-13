@@ -130,6 +130,47 @@ FUNC(void, MCU_CODE) Mcu_SIM_Init(P2CONST( Mcu_SIM_ConfigType, AUTOMATIC, MCU_AP
                 SIM_MISCTRL1_RWBITS_MASK32 & pSIMConfigPtr->pMcu_SIM_MiscellaneousConfiguration1->pMcu_SIM_MISCTRL1RegisterConfig->u32PeripheralDataConfiguration);
 }
 
+/**
+* @brief            MCU driver initialization function.
+* @details          This routine initializes the SIM module that provides clock configuration
+*
+* @param[in]        pSIMClockConfigPtr   Pointer to SIM clock configuration structure.
+*
+* @return           void
+*
+* @api
+*
+* @implements       Mcu_SIM_ClockInit_Activity
+*
+*/
+FUNC(void, MCU_CODE) Mcu_SIM_ClockInit(P2CONST( Mcu_SIM_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) pSIMClockConfigPtr)
+{
+    /* Configure SIM_PLATCGC register */
+    /* Masking with 0x0000001F (bit 0->4)*/
+    REG_WRITE32(pSIMClockConfigPtr->pMcu_SIM_ClockGatingConfig->pMcu_SIM_ClockGatingRegisterConfig->u32PeripheralAdress,
+                (SIM_PLATGC_RWBITS_MASK32 & (uint32)pSIMClockConfigPtr->pMcu_SIM_ClockGatingConfig->pMcu_SIM_ClockGatingRegisterConfig->u32PeripheralDataConfiguration));
+
+    /* SIM_CHIPCTL_CLKOUT should be cleared before configuring */
+    /* Disable SIM_CHIPCTL_CLKOUT by masking with ~(0x0x00000800U) (bit 11)*/
+    REG_RMW32(pSIMClockConfigPtr->pMcu_SIM_ChipSelectionConfig->pMcu_SIM_ChipSelectionRegisterConfig->u32PeripheralAdress,
+                SIM_CHIPCTL_CLKOUTEN_MASK32, SIM_CHIPCTL_CLKOUT_DISABLE_U32);
+
+    /* Configure SIM_CHIPCTL clock settings (TRACECLK_SEL, CLKOUTEN, CLKOUTDIV, CLKOUT_SEL) */
+    /* Masking with 0x00000FF0 (bit 4->11) */
+    REG_RMW32(pSIMClockConfigPtr->pMcu_SIM_ChipSelectionConfig->pMcu_SIM_ChipSelectionRegisterConfig->u32PeripheralAdress, SIM_CHIPCTL_CLOCK_MASK32,
+                ((uint32)pSIMClockConfigPtr->pMcu_SIM_ChipSelectionConfig->pMcu_SIM_ChipSelectionRegisterConfig->u32PeripheralDataConfiguration & (~SIM_CHIPCTL_CLKOUTEN_MASK32)));
+
+    /*Enable SIM_CHIPCTL_CLKOUT */
+    /* Masking with (0x0x00000800U) (bit 11) to enable clock out */
+    REG_WRITE32(pSIMClockConfigPtr->pMcu_SIM_ChipSelectionConfig->pMcu_SIM_ChipSelectionRegisterConfig->u32PeripheralAdress,
+                ((uint32)pSIMClockConfigPtr->pMcu_SIM_ChipSelectionConfig->pMcu_SIM_ChipSelectionRegisterConfig->u32PeripheralDataConfiguration & SIM_CHIPCTL_CLKOUTEN_MASK32 ));
+
+    /*Configure Trace Clock settings */
+    /*Masking with 0x1000000F (bit 0->3, bit 28)*/
+    REG_WRITE32(pSIMClockConfigPtr->pMcu_SIM_TraceClockConfig->pMcu_SIM_TraceClockRegisterConfig->u32PeripheralAdress,
+                ((uint32)pSIMClockConfigPtr->pMcu_SIM_TraceClockConfig->pMcu_SIM_TraceClockRegisterConfig->u32PeripheralDataConfiguration & SIM_CLKDIV4_RWBITS_MASK32));
+}
+
 #ifdef __cplusplus
 }
 #endif

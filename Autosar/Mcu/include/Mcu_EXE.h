@@ -71,13 +71,22 @@ extern "C"{
                                      FUNCTION PROTOTYPES
 ==================================================================================================*/
 
-FUNC( void, MCU_CODE) Mcu_Exe_DepProsInit(P2CONST( Mcu_DepProsConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pDepProsConfigPtr);
-FUNC( void, MCU_CODE) Mcu_Exe_ResetConfigInit(P2CONST( Mcu_ResetConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pResetConfigPtr);
+FUNC( void, MCU_CODE) Mcu_Exe_DepProsInit(P2CONST(Mcu_DepProsConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pDepProsConfigPtr);
+FUNC( void, MCU_CODE) Mcu_Exe_ResetConfigInit(P2CONST(Mcu_ResetConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pResetConfigPtr);
 
 #if (MCU_INIT_CLOCK == STD_ON)
-FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST( Mcu_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pClockConfigPtr);
+FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) Mcu_pClockConfigPtr);
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
 
+#if (MCU_INIT_CLOCK == STD_ON)
+#if (MCU_NO_PLL == STD_OFF)
+FUNC( void, MCU_CODE) Mcu_Exe_DistributePllClock(VAR(void, AUTOMATIC));
+#endif /* (MCU_NO_PLL == STD_OFF) */
+#endif /* (MCU_INIT_CLOCK == STD_ON) */
+
+#if (MCU_NO_PLL == STD_OFF)
+FUNC( Mcu_PllStatusType, MCU_CODE) Mcu_Exe_GetPllStatus(VAR( void, AUTOMATIC));
+#endif /* (MCU_NO_PLL == STD_OFF) */
 
 #ifdef __cplusplus
 }

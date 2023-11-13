@@ -197,7 +197,7 @@ FUNC(void, MCU_CODE) Mcu_SCG_SPLLInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 FUNC(void, MCU_CODE) Mcu_SCG_SIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
 FUNC(void, MCU_CODE) Mcu_SCG_FIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
 FUNC(void, MCU_CODE) Mcu_SCG_SrcClock(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr, VAR(uint8, MCU_VAR) u8ClockSourcesControl);
-
+FUNC(Mcu_PllStatusType, MCU_CODE) Mcu_SCG_GetPLLStatus(VAR(void, AUTOMATIC));
 #ifdef __cplusplus
 }
 #endif

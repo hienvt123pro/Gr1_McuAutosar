@@ -80,7 +80,51 @@ extern "C"
                                        GLOBAL FUNCTIONS
 ==================================================================================================*/
 
+/**
+* @brief            This function will configure clock for the peripherals.
+* @details          This function will configure clock for the peripherals.
+*                   Called by:
+*                       - Mcu_Exe_InitClock()
+*
+* @param[in]        pConfigPtr   Pointer to PCC configuration structure
+*                   (member of 'Mcu_ConfigType' struct).
+*
+* @return           void
+*
+*/
+FUNC(void, MCU_CODE) Mcu_PCC_Init(P2CONST(Mcu_PCC_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
+{
 
+    VAR(uint32, AUTOMATIC) u32Counter;
+    VAR(uint32, AUTOMATIC) u8PeripheralIsPresent;
+
+    for ( u32Counter = (uint32)0u; u32Counter < (uint32)(pConfigPtr->Mcu_NoPeripheralClockSetting); u32Counter++)
+    {
+        /*Read the number of periphals are present*/
+        u8PeripheralIsPresent = REG_READ32((*pConfigPtr->pMcu_PCC_RegisterConfig)[u32Counter].u32PeripheralAdress) & \
+        PCC_PR_MASK32;
+
+        if (PCC_PERIPHERAL_IS_PRESENT_U32 == u8PeripheralIsPresent)
+        {
+            if(PCC_PCS_UNAVAILABLE_U32 != ((*pConfigPtr->pMcu_PCC_RegisterConfig)[u32Counter].u32PeripheralDataConfiguration \
+             & PCC_PCS_UNAVAILABLE_U32))
+            {
+                /* Disable Peripheral clock first to config */
+                REG_BIT_CLEAR32((*pConfigPtr->pMcu_PCC_RegisterConfig)[u32Counter].u32PeripheralAdress,PCC_CGC_MASK32);
+
+                /* Configure all parameters */
+                REG_WRITE32((*pConfigPtr->pMcu_PCC_RegisterConfig)[u32Counter].u32PeripheralAdress, \
+                (*pConfigPtr->pMcu_PCC_RegisterConfig)[u32Counter].u32PeripheralDataConfiguration);
+            }
+            else
+            {
+                /*Configure all parameters */
+                REG_WRITE32((*pConfigPtr->pMcu_PCC_RegisterConfig)[u32Counter].u32PeripheralAdress, \
+                (*pConfigPtr->pMcu_PCC_RegisterConfig)[u32Counter].u32PeripheralDataConfiguration);
+            }
+        }
+    }
+}
 
 #ifdef __cplusplus
 }

@@ -57,6 +57,8 @@ extern
 *                                       LOCAL MACROS
 ==================================================================================================*/
 
+#define MCU_SPLL_SOURCE_CLOCK      (0x01U)
+#define MCU_NO_SPLL_SOURCE_CLOCK   (0x00U)
 
 /*==================================================================================================
                                        LOCAL CONSTANTS
@@ -68,6 +70,8 @@ extern
 ==================================================================================================*/
 
 static P2CONST(Mcu_ClockConfigType, MCU_VAR, MCU_APPL_CONST) Mcu_pClockConfig = NULL_PTR;
+
+static VAR(uint8, AUTOMATIC) u8SpllSourceClock = 0x00U;
 
 /*==================================================================================================
                                        GLOBAL CONSTANTS
@@ -163,15 +167,25 @@ FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, 
 	/* Initialize SPLL clock */
 	Mcu_SCG_SPLLInit(Mcu_pClockConfig->pMcu_SCG_Config);
 
-	/* Configure System Clock */
-	/* su dung member nay de chon source clock u8ClockSourcesControl */
-	Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))Mcu_pClockConfig->u8ClockSourcesControl);
-
 	/* Initialize SIRC clock */
 	Mcu_SCG_SIRCInit(Mcu_pClockConfig->pMcu_SCG_Config);
 
 	/* Initialize FIRC clock */
 	Mcu_SCG_FIRCInit(Mcu_pClockConfig->pMcu_SCG_Config);
+
+	/* Check SPLL Source Clock */
+	if (Mcu_pClockConfig->u8ClockSourcesControl == MCU_SPLL_CLK_SRC)
+	{
+		u8SpllSourceClock = MCU_SPLL_SOURCE_CLOCK;
+		/* Remove the current clock source before configure PLL as source clock  */
+		Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))MCU_SIRC_CLK_SRC);
+	}
+	else
+	{
+		u8SpllSourceClock = MCU_NO_SPLL_SOURCE_CLOCK;
+		/* Configure System Clock */
+		Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))Mcu_pClockConfig->u8ClockSourcesControl);
+	}
 
 	/* Initialize SIM clock  */
 	Mcu_SIM_ClockInit(Mcu_pClockConfig->pMcu_SIM_ClockConfig);
@@ -180,3 +194,73 @@ FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, 
 	Mcu_PCC_Init(Mcu_pClockConfig->pMcu_PCC_Config);
 }
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
+
+
+#if (MCU_INIT_CLOCK == STD_ON)
+#if (MCU_NO_PLL == STD_OFF)
+/**
+* @brief              This function activates the main PLL as the system clock source.
+* @details            This function sets the PLL as the system clock and also enables monitoring.
+*                     Called by:
+*                       - Mcu_DistributePllClock()
+*
+* @return           void
+*
+*/
+FUNC( void, MCU_CODE) Mcu_Exe_DistributePllClock(VAR(void, AUTOMATIC))
+{
+    /* Check if SPLL is configured as source clock, which is called by Mcu_InitClock() */
+	if (u8SpllSourceClock == MCU_SPLL_SOURCE_CLOCK)
+	{
+		/* Configure System Clock as PLL clock */
+		Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))MCU_SPLL_CLK_SRC);
+	}
+	else
+	{
+		/* Error: Mcu_InitClock() was not called before */
+	}
+}
+#endif /* (MCU_NO_PLL == STD_OFF) */
+#endif /* (MCU_INIT_CLOCK == STD_ON) */
+
+
+#if (MCU_NO_PLL == STD_OFF)
+/**
+* @brief            This function returns the lock status of the PLL.
+* @details          The user takes care that the PLL is locked by executing Mcu_GetPllStatus.
+*                   If the MCU_NO_PLL is TRUE the MCU_GetPllStatus has to return
+*                   MCU_PLL_STATUS_UNDEFINED.
+*                   Called by:
+*                       - Mcu_GetPllStatus()
+*
+* @return           Provides the lock status of the PLL.
+* @retval           MCU_PLL_STATUS_UNDEFINED   PLL Status is unknown.
+* @retval           MCU_PLL_LOCKED             PLL is locked.
+* @retval           MCU_PLL_UNLOCKED           PLL is unlocked.
+*
+*/
+FUNC(Mcu_PllStatusType, MCU_CODE) Mcu_Exe_GetPllStatus(VAR(void, AUTOMATIC))
+{
+	/* Pll status variable */
+	VAR(Mcu_PllStatusType, AUTOMATIC) ePllStatus = MCU_PLL_STATUS_UNDEFINED;
+
+    /* Get the status from each peripheral */
+    if (Mcu_SCG_GetPLLStatus() == MCU_PLL_LOCKED)
+    {
+        ePllStatus = MCU_PLL_LOCKED;
+    }
+    else
+    {
+        ePllStatus = MCU_PLL_UNLOCKED;
+    }
+
+	return (Mcu_PllStatusType)ePllStatus;
+}
+#endif /* (MCU_NO_PLL == STD_OFF) */
+
+
+#ifdef __cplusplus
+}
+#endif
+
+/** @} */
