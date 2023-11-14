@@ -153,8 +153,6 @@ FUNC(void, MCU_CODE) Mcu_SCG_SPLLInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 	/* Enable SPLL */
 	REG_BIT_SET32(u32Address, SCG_SPLLCSR_SPLLEN_MASK32);
 
-	/* Wait for SPLL valid */
-	while(REG_READ32(u32Address) & SCG_SPLLCSR_SPLLVLD_MASK32);
 }
 
 /**
@@ -168,25 +166,28 @@ FUNC(void, MCU_CODE) Mcu_SCG_SPLLInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 */
 FUNC(void, MCU_CODE) Mcu_SCG_SIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
 {
-	/* Disable SIRC so the rest of the register can be configured. */
-	REG_BIT_CLEAR32(SCG_SIRCCSR_ADDR32, SCG_SIRCCSR_SIRCEN_MASK32);
-
-	/* Config SCG_SIRCDIV register with SIRCDIV1, SIRCDIV2 bit fields. */
-	REG_WRITE32(pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCDIV_RegisterConfig->u32PeripheralAdress, \
-			pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCDIV_RegisterConfig->u32PeripheralDataConfiguration);
-
-	/* Config SCG_SIRCCFG register with RANGE bit fields. */
-	REG_WRITE32(pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCFG_RegisterConfig->u32PeripheralAdress, \
-			pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCFG_RegisterConfig->u32PeripheralDataConfiguration);
-
-	/* Config SCG_SIRCCSG register with LK, SIRCLPEN, SIRCSTEN, SIRCEN bit fields. */
-	REG_WRITE32(pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCSR_RegisterConfig->u32PeripheralAdress, \
-			pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCSR_RegisterConfig->u32PeripheralDataConfiguration);
-
-	/* Check whether the mode SIRC is enable or not. */
-	if ((REG_READ32(SCG_SIRCCSR_ADDR32) & SCG_SIRCCSR_SIRCEN_MASK32) == SCG_SIRCCSR_SIRCEN_MASK32)
+	if (pConfigPtr->pMcu_SIRC_RegisterConfig != NULL_PTR)
 	{
-		while((REG_READ32(SCG_SIRCCSR_ADDR32) & SCG_SIRCCSR_SIRCVLD_MASK32) != SCG_SIRCCSR_SIRCVLD_MASK32);
+		/* Disable SIRC so the rest of the register can be configured. */
+		REG_BIT_CLEAR32(SCG_SIRCCSR_ADDR32, SCG_SIRCCSR_SIRCEN_MASK32);
+
+		/* Config SCG_SIRCDIV register with SIRCDIV1, SIRCDIV2 bit fields. */
+		REG_WRITE32(pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCDIV_RegisterConfig->u32PeripheralAdress, \
+				pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCDIV_RegisterConfig->u32PeripheralDataConfiguration);
+
+		/* Config SCG_SIRCCFG register with RANGE bit fields. */
+		REG_WRITE32(pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCFG_RegisterConfig->u32PeripheralAdress, \
+				pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCFG_RegisterConfig->u32PeripheralDataConfiguration);
+
+		/* Config SCG_SIRCCSG register with LK, SIRCLPEN, SIRCSTEN, SIRCEN bit fields. */
+		REG_WRITE32(pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCSR_RegisterConfig->u32PeripheralAdress, \
+				pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCSR_RegisterConfig->u32PeripheralDataConfiguration);
+
+		/* Check whether the mode SIRC is enable or not. */
+		if ((REG_READ32(SCG_SIRCCSR_ADDR32) & SCG_SIRCCSR_SIRCEN_MASK32) == SCG_SIRCCSR_SIRCEN_MASK32)
+		{
+			while((REG_READ32(SCG_SIRCCSR_ADDR32) & SCG_SIRCCSR_SIRCVLD_MASK32) != SCG_SIRCCSR_SIRCVLD_MASK32);
+		}
 	}
 }
 
@@ -201,25 +202,28 @@ FUNC(void, MCU_CODE) Mcu_SCG_SIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 */
 FUNC(void, MCU_CODE) Mcu_SCG_FIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
 {
-	/* Disable FIRC so the rest of the register can be configured. */
-	REG_BIT_CLEAR32(SCG_FIRCCSR_ADDR32, SCG_FIRCCSR_FIRCEN_MASK32);
-
-	/* Config SCG_FIRCDIV register with FIRCDIV1, FIRCDIV2 bit fields. */
-	REG_WRITE32(pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCDIV_RegisterConfig->u32PeripheralAdress, \
-			pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCDIV_RegisterConfig->u32PeripheralDataConfiguration);
-
-	/* Config SCG_FIRCCFG register with RANGE bit fields. */
-	REG_WRITE32(pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCCFG_RegisterConfig->u32PeripheralAdress, \
-			pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCCFG_RegisterConfig->u32PeripheralDataConfiguration);
-
-	/* Config SCG_FIRCCSG register with LK, FIRCLPEN, FIRCSTEN, FIRCEN bit fields. */
-	REG_WRITE32(pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCCSR_RegisterConfig->u32PeripheralAdress, \
-			pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCCSR_RegisterConfig->u32PeripheralDataConfiguration);
-
-	/* Check whether the mode FIRC is enable or not. */
-	if ((REG_READ32(SCG_FIRCCSR_ADDR32) & SCG_FIRCCSR_FIRCEN_MASK32) == SCG_FIRCCSR_FIRCEN_MASK32)
+	if (pConfigPtr->pMcu_FIRC_RegisterConfig != NULL_PTR)
 	{
-		while((REG_READ32(SCG_FIRCCSR_ADDR32) & SCG_FIRCCSR_FIRCVLD_MASK32) != SCG_FIRCCSR_FIRCVLD_MASK32);
+		/* Disable FIRC so the rest of the register can be configured. */
+		REG_BIT_CLEAR32(SCG_FIRCCSR_ADDR32, SCG_FIRCCSR_FIRCEN_MASK32);
+
+		/* Config SCG_FIRCDIV register with FIRCDIV1, FIRCDIV2 bit fields. */
+		REG_WRITE32(pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCDIV_RegisterConfig->u32PeripheralAdress, \
+				pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCDIV_RegisterConfig->u32PeripheralDataConfiguration);
+
+		/* Config SCG_FIRCCFG register with RANGE bit fields. */
+		REG_WRITE32(pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCCFG_RegisterConfig->u32PeripheralAdress, \
+				pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCCFG_RegisterConfig->u32PeripheralDataConfiguration);
+
+		/* Config SCG_FIRCCSG register with LK, FIRCLPEN, FIRCSTEN, FIRCEN bit fields. */
+		REG_WRITE32(pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCCSR_RegisterConfig->u32PeripheralAdress, \
+				pConfigPtr->pMcu_FIRC_RegisterConfig->pMcu_FIRCCSR_RegisterConfig->u32PeripheralDataConfiguration);
+
+		/* Check whether the mode FIRC is enable or not. */
+		if ((REG_READ32(SCG_FIRCCSR_ADDR32) & SCG_FIRCCSR_FIRCEN_MASK32) == SCG_FIRCCSR_FIRCEN_MASK32)
+		{
+			while((REG_READ32(SCG_FIRCCSR_ADDR32) & SCG_FIRCCSR_FIRCVLD_MASK32) != SCG_FIRCCSR_FIRCVLD_MASK32);
+		}
 	}
 }
 
@@ -244,7 +248,7 @@ FUNC(void, MCU_CODE) Mcu_SCG_SrcClock(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
     /***************************************************SECTION 1**************************************************/
 
     /*Config clock source for System Clock at Normal Running Mode*/
-    REG_WRITE32(SCG_RCCR_ADDR32, u8ClockSourcesControl);
+    REG_WRITE32(SCG_RCCR_ADDR32, u8ClockSourcesControl << MCU_CLK_SRC_BIT_SHIFT);
 
     /*May not need*/
     u32RegValue = REG_READ32(SCG_RCCR_ADDR32) & SCG_RCCR_SCS_MASK32;

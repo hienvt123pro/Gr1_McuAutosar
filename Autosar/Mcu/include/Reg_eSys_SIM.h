@@ -136,6 +136,14 @@ extern "C"{
 #define SIM_CHIPCTL_ADC_SUPPLY_VDD_FLASH_3V_U32 ((uint32)0x00040000U)
 #define SIM_CHIPCTL_ADC_SUPPLY_VDD_LV_U32       ((uint32)0x00050000U)
 
+
+/**
+* @brief            Pre-processor switch to enable/disable the field TRACECLK_SEL of register SIM_CHIPCTL
+*
+*/
+#define SIM_CHIPCTL_TRACECLK_SUPPORT
+
+
 #ifdef SIM_CHIPCTL_TRACECLK_SUPPORT
     #define SIM_CHIPCTL_TRACECLK_CORE_CLK_U32       ((uint32)0x00000000U)
     #define SIM_CHIPCTL_TRACECLK_RES_U32            (SIM_CHIPCTL_TRACECLK_SEL_MASK32)

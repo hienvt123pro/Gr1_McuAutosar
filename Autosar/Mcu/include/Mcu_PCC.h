@@ -83,10 +83,10 @@ typedef struct
 */
 typedef struct
 {
-    /**< @brief The ID for Clock configuration. */
+    /**< @brief Number of PCC configuration. */
     VAR(uint32, MCU_VAR) Mcu_NoPeripheralClockSetting;
     /**< @brief PCC register configuration. */
-    CONST(Mcu_PCC_RegisterConfigType, MCU_CONST) *pMcu_PCC_RegisterConfig[];
+    CONST(Mcu_PCC_RegisterConfigType, MCU_CONST) (*pMcu_PCC_RegisterConfig)[MCU_NUMBER_OF_PCC_REGISTERS_U32];
 } Mcu_PCC_ConfigType;
 
 /*==================================================================================================

@@ -244,9 +244,6 @@ typedef struct
    /**< @brief FTMOPT1 configuration. */
     P2CONST(Mcu_SIM_FTMOPT1ConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_FTMOPT1Configuration;
 
-   /**< @brief Flash configuration. */;
-    P2CONST(Mcu_SIM_Flash1ConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_FlashConfiguaration1;
-
    /**< @brief SIM Miscellaneous Control configuration. */
     P2CONST(Mcu_SIM_MISCTRL0ConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIM_MiscellaneousConfiguration0;
 

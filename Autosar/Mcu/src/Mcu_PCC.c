@@ -98,7 +98,7 @@ FUNC(void, MCU_CODE) Mcu_PCC_Init(P2CONST(Mcu_PCC_ConfigType, AUTOMATIC, MCU_APP
     VAR(uint32, AUTOMATIC) u32Counter;
     VAR(uint32, AUTOMATIC) u8PeripheralIsPresent;
 
-    for ( u32Counter = (uint32)0u; u32Counter < (uint32)(pConfigPtr->Mcu_NoPeripheralClockSetting); u32Counter++)
+    for (u32Counter = (uint32)0u; u32Counter < (uint32)(pConfigPtr->Mcu_NoPeripheralClockSetting); u32Counter++)
     {
         /*Read the number of periphals are present*/
         u8PeripheralIsPresent = REG_READ32((*pConfigPtr->pMcu_PCC_RegisterConfig)[u32Counter].u32PeripheralAdress) & \

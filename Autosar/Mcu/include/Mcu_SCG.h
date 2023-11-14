@@ -171,16 +171,16 @@ typedef struct
     VAR(uint32, MCU_VAR) Mcu_ClockOutSelection;
 
     /**< @brief The pointer to structure configuring SOSC registers. (SCG_SOSCCSR, SCG_SOSCDIV, SCG_SOSCCFG)*/
-    CONST(Mcu_SCG_SOSC_RegisterConfigType, MCU_CONST) (*pMcu_SOSC_RegisterConfig);
+    P2CONST(Mcu_SCG_SOSC_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SOSC_RegisterConfig;
 
     /**< @brief The pointer to structure configuring SIRC registers. (SCG_SIRCCSR, SCG_SIRCDIV, SCG_SIRCCFG)*/
-     CONST(Mcu_SCG_SIRC_RegisterConfigType, MCU_CONST) (*pMcu_SIRC_RegisterConfig);
+    P2CONST(Mcu_SCG_SIRC_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SIRC_RegisterConfig;
 
     /**< @brief The pointer to structure configuring FIRC registers. (SCG_SOSCCSR, SCG_SOSCDIV, SCG_SOSCCFG)*/
-    CONST(Mcu_SCG_FIRC_RegisterConfigType, MCU_CONST) (*pMcu_FIRC_RegisterConfig);
+    P2CONST(Mcu_SCG_FIRC_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_FIRC_RegisterConfig;
 
     /**< @brief The pointer to structure configuring SPLL registers. (SCG_SIRCCSR, SCG_SIRCDIV, SCG_SIRCCFG)*/
-    CONST(Mcu_SCG_SPLL_RegisterConfigType, MCU_CONST) (*pMcu_SPLL_RegisterConfig);
+    P2CONST(Mcu_SCG_SPLL_RegisterConfigType, MCU_CONST, MCU_APPL_CONST) pMcu_SPLL_RegisterConfig;
 } Mcu_SCG_ConfigType;
 
 /*==================================================================================================

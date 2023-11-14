@@ -269,7 +269,7 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitRamSection(VAR(Mcu_RamSection
 * @implements       Mcu_Init_Activity
 *
 */
-FUNC(void, MCU_CODE) Mcu_Init( P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
+FUNC(void, MCU_CODE) Mcu_Init(P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
 {
     VAR(Std_ReturnType, AUTOMATIC) u8checkStatus;
 

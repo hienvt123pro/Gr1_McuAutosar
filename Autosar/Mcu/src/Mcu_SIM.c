@@ -143,7 +143,7 @@ FUNC(void, MCU_CODE) Mcu_SIM_Init(P2CONST( Mcu_SIM_ConfigType, AUTOMATIC, MCU_AP
 * @implements       Mcu_SIM_ClockInit_Activity
 *
 */
-FUNC(void, MCU_CODE) Mcu_SIM_ClockInit(P2CONST( Mcu_SIM_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) pSIMClockConfigPtr)
+FUNC(void, MCU_CODE) Mcu_SIM_ClockInit(P2CONST(Mcu_SIM_ClockConfigType, AUTOMATIC, MCU_APPL_CONST) pSIMClockConfigPtr)
 {
     /* Configure SIM_PLATCGC register */
     /* Masking with 0x0000001F (bit 0->4)*/
@@ -162,7 +162,7 @@ FUNC(void, MCU_CODE) Mcu_SIM_ClockInit(P2CONST( Mcu_SIM_ClockConfigType, AUTOMAT
 
     /*Enable SIM_CHIPCTL_CLKOUT */
     /* Masking with (0x0x00000800U) (bit 11) to enable clock out */
-    REG_WRITE32(pSIMClockConfigPtr->pMcu_SIM_ChipSelectionConfig->pMcu_SIM_ChipSelectionRegisterConfig->u32PeripheralAdress,
+    REG_RMW32(pSIMClockConfigPtr->pMcu_SIM_ChipSelectionConfig->pMcu_SIM_ChipSelectionRegisterConfig->u32PeripheralAdress, SIM_CHIPCTL_CLKOUTEN_MASK32, \
                 ((uint32)pSIMClockConfigPtr->pMcu_SIM_ChipSelectionConfig->pMcu_SIM_ChipSelectionRegisterConfig->u32PeripheralDataConfiguration & SIM_CHIPCTL_CLKOUTEN_MASK32 ));
 
     /*Configure Trace Clock settings */

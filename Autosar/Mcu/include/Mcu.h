@@ -80,10 +80,8 @@ typedef struct
     VAR(Mcu_ClockType, MCU_VAR) Mcu_NumClkConfigs;
 #endif
 
-#ifndef MCU_MAX_NORAMCONFIGS
     /**< @brief RAM data configuration. */
     CONST(Mcu_RamConfigType, MCU_CONST) (*Mcu_apRamConfig)[MCU_MAX_RAMCONFIGS];
-#endif
 
     /**< @brief Power Modes data configuration. */
     CONST(Mcu_ModeConfigType, MCU_CONST) (*Mcu_apModeConfig)[MCU_MAX_MODECONFIGS];
@@ -104,13 +102,13 @@ typedef struct
                                  GLOBAL VARIABLE DECLARATIONS
 ==================================================================================================*/
 
+MCU_CONF_PB
 
 /*==================================================================================================
                                      FUNCTION PROTOTYPES
 ==================================================================================================*/
-#define MCU_START_SEC_CODE
 
-FUNC(void, MCU_CODE) Mcu_Init( P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
+FUNC(void, MCU_CODE) Mcu_Init(P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
 FUNC(Std_ReturnType, MCU_CODE) Mcu_InitRamSection(VAR(Mcu_RamSectionType, AUTOMATIC) RamSection);
 
 #if (MCU_INIT_CLOCK == STD_ON)
@@ -123,9 +121,8 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(VAR(void, AUTOMATIC));
 #endif /* (MCU_NO_PLL == STD_OFF) */
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
 
-FUNC(Mcu_PllStatusType, MCU_CODE) Mcu_GetPllStatus( VAR( void, AUTOMATIC));
+FUNC(Mcu_PllStatusType, MCU_CODE) Mcu_GetPllStatus(VAR( void, AUTOMATIC));
 
-#define MCU_STOP_SEC_CODE
 
 #ifdef __cplusplus
 }

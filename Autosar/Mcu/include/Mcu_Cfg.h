@@ -47,6 +47,11 @@ extern "C"{
 /*==================================================================================================
                                            CONSTANTS
 ==================================================================================================*/
+/**
+* @brief            Create defines with the IDs assigned to Mcu Clock configurations.
+*                   These IDs will be transmitted as input parameters for Mcu_InitClock() API.
+*/
+#define McuClockSettingConfig_0   ((Mcu_ClockType)0U)
 
 
 /*==================================================================================================
@@ -106,7 +111,7 @@ extern "C"{
 /**
 * @brief            Maximum number of MCU Ram configurations.
 */
-#define MCU_MAX_RAMCONFIGS    ((uint32)1U)
+#define MCU_MAX_RAMCONFIGS    ((uint32)2U)
 
 /**
 * @brief            This parameter shall be set True, if the H/W does not have a PLL or the PLL circuitry is enabled after the power on without S/W intervention.
@@ -116,6 +121,7 @@ extern "C"{
 /**
 * @brief            Clock Source for MCU
 */
+#define MCU_CLK_SRC_BIT_SHIFT  24
 #define MCU_SOSC_CLK_SRC  (0x01U)
 #define MCU_SIRC_CLK_SRC  (0x02U)
 #define MCU_FIRC_CLK_SRC  (0x03U)
@@ -138,6 +144,13 @@ typedef enum
     MCU_PLL_UNLOCKED = 0xCCU,   /**< @brief PLL is unlocked. */
     MCU_PLL_STATUS_UNDEFINED = 0x5AU   /**< @brief PLL Status is unknown. */
 } Mcu_PllStatusType;
+
+
+/**
+* @brief            Pre-Compile structure from Mcu_Cfg.c file.
+*/
+#define MCU_CONF_PB \
+ extern CONST(Mcu_ConfigType, MCU_CONST) Mcu_Config;
 
 /*==================================================================================================
                                  STRUCTURES AND OTHER TYPEDEFS
@@ -183,6 +196,13 @@ typedef uint32 Mcu_RamWriteSizeType;
 */
 typedef uint32 Mcu_ClockType;
 #endif
+
+/**
+* @brief Defines the maximum value of the registers - these values is hardware/platform dependent.
+*/
+/* This define specifies the number of PCC registers */
+#define MCU_NUMBER_OF_PCC_REGISTERS_U32         ((uint32)32U)
+
 
 /*==================================================================================================
                                  GLOBAL VARIABLE DECLARATIONS

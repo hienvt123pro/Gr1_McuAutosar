@@ -173,6 +173,12 @@ FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, 
 	/* Initialize FIRC clock */
 	Mcu_SCG_FIRCInit(Mcu_pClockConfig->pMcu_SCG_Config);
 
+	/* Initialize SIM clock  */
+	Mcu_SIM_ClockInit(Mcu_pClockConfig->pMcu_SIM_ClockConfig);
+
+	/* Initialize PCC clock */
+	Mcu_PCC_Init(Mcu_pClockConfig->pMcu_PCC_Config);
+
 	/* Check SPLL Source Clock */
 	if (Mcu_pClockConfig->u8ClockSourcesControl == MCU_SPLL_CLK_SRC)
 	{
@@ -187,11 +193,6 @@ FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, 
 		Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))Mcu_pClockConfig->u8ClockSourcesControl);
 	}
 
-	/* Initialize SIM clock  */
-	Mcu_SIM_ClockInit(Mcu_pClockConfig->pMcu_SIM_ClockConfig);
-
-	/* Initialize PCC clock */
-	Mcu_PCC_Init(Mcu_pClockConfig->pMcu_PCC_Config);
 }
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
 
