@@ -101,6 +101,12 @@ FUNC(void, MCU_CODE) Mcu_SCG_SOSCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 
 	if (pConfigPtr->pMcu_SOSC_RegisterConfig != NULL_PTR)
 	{
+		/* Disable SOSC clock monitor */
+		/* Disable System OSC Clock Error (SOSC_SOSCR_SOSCERR), System OSC Clock Monitor Reset (SOSC_SOSCR_SOSCMRE) and System OSC Clock Monitor (SOSC_SOSCR_SOSCCM) */
+		u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCSR_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = (REG_READ32(SCG_SOSCCSR_ADDR32) | SCG_SOSCCSR_SOSCERR_MASK32) & ~(SCG_SOSCCSR_SOSCCMRE_MASK32 | SCG_SOSCCSR_SOSCCM_MASK32);
+		REG_RMW32(SCG_SOSCCSR_ADDR32, SCG_SOSCCSR_SOSCERR_MASK32|SCG_SOSCCSR_SOSCCMRE_MASK32|SCG_SOSCCSR_SOSCCM_MASK32, u32ConfigData);
+
 		/* Configure SOSCDIV register with SOSCDIV1 & SOSCDIV2 bit fields */
 		u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCDIV_RegisterConfig->u32PeripheralAdress;
 		u32ConfigData = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCDIV_RegisterConfig->u32PeripheralDataConfiguration;
@@ -249,14 +255,14 @@ FUNC(void, MCU_CODE) Mcu_SCG_FIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 * @return           void
 *
 */
-FUNC(void, MCU_CODE) Mcu_SCG_SrcClock(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr, VAR(uint8, MCU_VAR) u8ClockSourcesControl)
+FUNC(void, MCU_CODE) Mcu_SCG_SrcClock(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
 {
     VAR(uint32, AUTOMATIC) u32TimeOut = 0U;
     VAR(uint32, AUTOMATIC) u32RegValue = 0U;
 
     /*---------------------------Config Normal Running Mode----------------------------------------*/
 
-    REG_WRITE32(SCG_RCCR_ADDR32, u8ClockSourcesControl << MCU_CLK_SRC_BIT_SHIFT);
+    REG_WRITE32(SCG_RCCR_ADDR32, pConfigPtr->Mcu_RUNModeConfig);
     u32RegValue = REG_READ32(SCG_RCCR_ADDR32) & SCG_RCCR_SCS_MASK32;
 
     /*Timeout representing the number of loops for preventing to lock inside am infinite while/for.*/
@@ -292,6 +298,47 @@ FUNC(void, MCU_CODE) Mcu_SCG_SrcClock(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 
     /*Clock out Selection*/
     REG_WRITE32(SCG_CLKOUTCNFG_ADDR32, pConfigPtr->Mcu_ClockOutSelection);
+}
+
+/**
+* @brief            This function will switch system clock to trusted clock (SIRC)
+* @details          This function will switch system clock to trusted clock (SIRC)
+*                   Called by:
+*                       - Mcu_Exe_DistributePllClock()
+*
+* @param[in]        TrustedClock   Variable which indicating trusted clock
+
+*
+* @return           void
+*
+*/
+FUNC(void, MCU_CODE) Mcu_SCG_SwitchToTrustedClock(VAR(uint32, MCU_VAR) TrustedClock)
+{
+	VAR(uint32, AUTOMATIC) u32TimeOut = 0U;
+	VAR(uint32, AUTOMATIC) u32RegValue = 0U;
+
+	/*---------------------------Config Normal Running Mode----------------------------------------*/
+
+	REG_WRITE32(SCG_RCCR_ADDR32, TrustedClock);
+	u32RegValue = REG_READ32(SCG_RCCR_ADDR32) & SCG_RCCR_SCS_MASK32;
+
+	/*Timeout representing the number of loops for preventing to lock inside am infinite while/for.*/
+	u32TimeOut = MCU_TIMEOUT_LOOPS;
+	do
+	{
+		u32TimeOut--;
+		u32RegValue = REG_READ32(SCG_RCCR_ADDR32) & SCG_RCCR_SCS_MASK32;
+	}
+	while (((TrustedClock & SCG_RCCR_SCS_MASK32) != u32RegValue) && ((uint32)0x00U < u32TimeOut));
+
+	if (u32TimeOut == (uint32)0U)
+	{
+		/* Raise Error */
+	}
+
+	/* Wait for clock stable */
+	u32TimeOut = MCU_TIMEOUT_LOOPS;
+	while(u32TimeOut--);
 }
 
 
