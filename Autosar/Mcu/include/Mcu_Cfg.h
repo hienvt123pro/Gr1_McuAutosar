@@ -53,10 +53,46 @@ extern "C"{
 */
 #define McuClockSettingConfig_0   ((Mcu_ClockType)0U)
 
+/**
+* @brief            Create defines with the IDs assigned to Mcu RAM configurations.
+*                   These IDs will be transmitted as input parameters for Mcu_InitRamSection() API.
+*/
+#define McuRamSection_0   ((Mcu_RamSectionType)0U)
+
+/**
+* @brief            Create defines with the IDs assigned to Mcu RAM configurations.
+*                   These IDs will be transmitted as input parameters for Mcu_InitRamSection() API.
+*/
+#define McuRamSection_1   ((Mcu_RamSectionType)1U)
 
 /*==================================================================================================
                                        DEFINES AND MACROS
 ==================================================================================================*/
+
+#define MCU_MODULE_ID        101
+
+/**
+* @brief      Specifies the InstanceId of this module instance.
+*/
+#define MCU_INSTANCE_ID                 ((uint8)0x0U)
+
+/**
+@{
+* @brief            Default error values are of type uint8.
+*                   The following errors and exceptions shall be detectable by the MCU module depending on its
+*                   build version (default/production mode).
+*
+*/
+#define MCU_E_PARAM_CONFIG              ((uint8)0x0AU)
+#define MCU_E_PARAM_CLOCK               ((uint8)0x0BU)
+#define MCU_E_PARAM_MODE                ((uint8)0x0CU)
+#define MCU_E_PARAM_RAMSECTION          ((uint8)0x0DU)
+#define MCU_E_PLL_NOT_LOCKED            ((uint8)0x0EU)
+#define MCU_E_UNINIT                    ((uint8)0x0FU)
+#define MCU_E_PARAM_POINTER             ((uint8)0x10U)
+#define MCU_E_INIT_FAILED               ((uint8)0x11U)
+#define MCU_E_ALLREADY_INITIALIZED      ((uint8)0x13U)
+#define MCU_E_CMU_INDEX_OUT_OF_RANGE    ((uint8)0x22U)
 
 /**
 @{

@@ -1247,7 +1247,7 @@ static CONST(Mcu_ResetConfigType, MCU_CONST) Mcu_ResetConfigPB0 =
 CONST(Mcu_ConfigType, MCU_CONST) Mcu_Config =
 {
 	/* Number of RAM Sections configurations. */
-	(Mcu_RamSectionType)1U,
+	(Mcu_RamSectionType)2U,
 
     /* Number of Power Modes configurations. */
     (Mcu_ModeType)1U,

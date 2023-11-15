@@ -183,8 +183,6 @@ FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, 
 	if (Mcu_pClockConfig->u8ClockSourcesControl == MCU_SPLL_CLK_SRC)
 	{
 		u8SpllSourceClock = MCU_SPLL_SOURCE_CLOCK;
-		/* Remove the current clock source before configure PLL as source clock  */
-		Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))MCU_SIRC_CLK_SRC);
 	}
 	else
 	{
@@ -210,9 +208,17 @@ FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, 
 */
 FUNC( void, MCU_CODE) Mcu_Exe_DistributePllClock(VAR(void, AUTOMATIC))
 {
+	VAR(uint32, AUTOMATIC) u32TimeOut = 5000U;
+
     /* Check if SPLL is configured as source clock, which is called by Mcu_InitClock() */
 	if (u8SpllSourceClock == MCU_SPLL_SOURCE_CLOCK)
 	{
+		/* Remove the current clock source before configure PLL as source clock  */
+		Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))MCU_SIRC_CLK_SRC);
+
+		/* Wait for clock stable */
+		while(u32TimeOut--);
+
 		/* Configure System Clock as PLL clock */
 		Mcu_SCG_SrcClock(Mcu_pClockConfig->pMcu_SCG_Config, (VAR(uint8, MCU_VAR))MCU_SPLL_CLK_SRC);
 	}

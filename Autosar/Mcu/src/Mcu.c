@@ -41,6 +41,10 @@ extern "C"{
 /* Get the prototypes of Execute functions. */
 #include "Mcu_Exe.h"
 
+#if (MCU_DEV_ERROR_DETECT == STD_ON)
+#include "Det.h"
+#endif /* (MCU_DEV_ERROR_DETECT == STD_ON) */
+
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
@@ -96,7 +100,7 @@ static VAR(Mcu_StatusType, MCU_VAR)  gu8Mcu_Status = MCU_UNINIT;
 
 static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckEntry(VAR( uint8, AUTOMATIC) u8McuServiceID);
 
-static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckNullPtr(P2CONST( Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
+static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckNull(P2CONST( Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr);
 
 static FUNC(void, MCU_CODE) Mcu_CheckExit(VAR(Std_ReturnType, AUTOMATIC) retStatus, VAR(uint8, AUTOMATIC) u8McuServiceID);
 
@@ -129,6 +133,7 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckEntry(VAR(uint8, AUTOMATIC) u8Mcu
 		if (MCU_UNINIT != gu8Mcu_Status)
 		{
 			u8Status = (Std_ReturnType)E_NOT_OK;
+			(void) Det_ReportError((uint16)MCU_MODULE_ID, MCU_INSTANCE_ID, (uint8)u8McuServiceID, MCU_E_ALLREADY_INITIALIZED);
 		}
 	}
 	else
@@ -137,6 +142,7 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckEntry(VAR(uint8, AUTOMATIC) u8Mcu
 		if (MCU_UNINIT == gu8Mcu_Status)
 		{
 			u8Status = (Std_ReturnType)E_NOT_OK;
+		    (void) Det_ReportError((uint16)MCU_MODULE_ID, MCU_INSTANCE_ID, (uint8)u8McuServiceID, MCU_E_UNINIT);
 		}
 	}
     return (Std_ReturnType) u8Status;
@@ -146,7 +152,7 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckEntry(VAR(uint8, AUTOMATIC) u8Mcu
 * @brief Mcu_CheckPostBuild - check if configuration pointer is initialized with value
 * @implements Mcu_CheckPostBuild_Activity
 */
-static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckNullPtr(P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
+static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckNull(P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
 {
     VAR(Std_ReturnType, AUTOMATIC) u8Status = (Std_ReturnType)E_OK;
     /* Check if pConfigPtr is null or not */
@@ -154,6 +160,10 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckNullPtr(P2CONST(Mcu_ConfigType, A
     {
         /* If pConfigPtr is null then Mcu_init is failed to init */
     	u8Status = (Std_ReturnType)E_NOT_OK;
+#if (MCU_DEV_ERROR_DETECT == STD_ON)
+        (void) Det_ReportError ( (uint16)MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INIT_ID, MCU_E_INIT_FAILED);
+#endif /* (MCU_DEV_ERROR_DETECT == STD_ON) */
+
     }
     return (Std_ReturnType) u8Status;
 }
@@ -192,6 +202,9 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitClock(VAR(Mcu_ClockType, AUTO
     if (ClockSetting >= (Mcu_pConfigPtr->Mcu_NumClkConfigs))
     {
     	u8Status = (Std_ReturnType)E_NOT_OK;
+#if (MCU_DEV_ERROR_DETECT == STD_ON)
+        (void) Det_ReportError((uint16)MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INITCLOCK_ID, MCU_E_PARAM_CLOCK);
+#endif /* (MCU_DEV_ERROR_DETECT == STD_ON) */
     }
 
     return (Std_ReturnType)u8Status;
@@ -209,6 +222,9 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckDistributePllClock( VAR( void, AU
     if (MCU_PLL_LOCKED != (Mcu_PllStatusType)Mcu_Exe_GetPllStatus())
     {
         u8Status = (Std_ReturnType)E_NOT_OK;
+#if (MCU_DEV_ERROR_DETECT == STD_ON)
+        (void) Det_ReportError((uint16)MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_DISTRIBUTEPLLCLOCK_ID, MCU_E_PLL_NOT_LOCKED);
+#endif /* (MCU_DEV_ERROR_DETECT == STD_ON) */
     }
 
     return (Std_ReturnType) u8Status;
@@ -235,6 +251,9 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitRamSection(VAR(Mcu_RamSection
         if ( NULL_PTR == Mcu_pConfigPtr->Mcu_apRamConfig)
         {
             u8Status = (Std_ReturnType)E_NOT_OK;
+#if (MCU_DEV_ERROR_DETECT == STD_ON)
+            (void) Det_ReportError((uint16)MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INITRAMSECTION_ID, MCU_E_PARAM_RAMSECTION);
+#endif /* (MCU_DEV_ERROR_DETECT == STD_ON) */
 		}
 		/* Check if Ram write size is valid. */
         else if (
@@ -245,6 +264,7 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitRamSection(VAR(Mcu_RamSection
                 )
         {
             u8Status = (Std_ReturnType)E_NOT_OK;
+            (void) Det_ReportError((uint16)MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INITRAMSECTION_ID, MCU_E_PARAM_RAMSECTION);
         }
 	}
 	return (Std_ReturnType) u8Status;
@@ -284,7 +304,7 @@ FUNC(void, MCU_CODE) Mcu_Init(P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_APPL_CONST)
 		/* Post-Build is used the input parameter 'pConfigPtr' is mandatory to be different than NULL_PTR.
 		 * Check the configuration. in case of error, do nothing. the Check function will report errors.
 		 */
-		u8checkStatus = Mcu_CheckNullPtr(Mcu_pConfigPtr);
+		u8checkStatus = Mcu_CheckNull(Mcu_pConfigPtr);
 		if((Std_ReturnType)E_OK == u8checkStatus)
 		{
 			Mcu_Exe_DepProsInit(Mcu_pConfigPtr->Mcu_pDepProsConfig);
@@ -382,7 +402,7 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_InitRamSection(VAR(Mcu_RamSectionType, AUTOMA
 
 			for (RamIndex = (uint32) 0UL; ((RamIndex < RamIndexLimit) && ((Std_ReturnType)E_OK == CheckRamStatus)); RamIndex++)
 				{
-					switch (pRamConfigPtr->u32Mcu_RamSize)
+					switch (pRamConfigPtr->u32Mcu_RamWriteSize)
 					{
 						case (Mcu_RamWriteSizeType)1U:
 							/*Assign default value: 1 byte*/

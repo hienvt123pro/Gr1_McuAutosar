@@ -95,26 +95,29 @@ FUNC(void, MCU_CODE) Mcu_SCG_SOSCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
     VAR(uint32, AUTOMATIC) u32ConfigData = 0U;
     VAR(uint32, AUTOMATIC) u32Address = 0U;
 
-    /* Configure SOSCDIV register with SOSCDIV1 & SOSCDIV2 bit fields */
-    u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCDIV_RegisterConfig->u32PeripheralAdress;
-    u32ConfigData = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCDIV_RegisterConfig->u32PeripheralDataConfiguration;
-    REG_WRITE32(u32Address, u32ConfigData);
+	if (pConfigPtr->pMcu_SOSC_RegisterConfig != NULL_PTR)
+	{
+		/* Configure SOSCDIV register with SOSCDIV1 & SOSCDIV2 bit fields */
+		u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCDIV_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCDIV_RegisterConfig->u32PeripheralDataConfiguration;
+		REG_WRITE32(u32Address, u32ConfigData);
 
-    /* Configure SOSCCFG register with RANGE, HGO, EREFS bit fields */
-    u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCFG_RegisterConfig->u32PeripheralAdress;
-    u32ConfigData = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCFG_RegisterConfig->u32PeripheralDataConfiguration;
-    REG_WRITE32(u32Address, u32ConfigData);
+		/* Configure SOSCCFG register with RANGE, HGO, EREFS bit fields */
+		u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCFG_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCFG_RegisterConfig->u32PeripheralDataConfiguration;
+		REG_WRITE32(u32Address, u32ConfigData);
 
-    /* Ensure SOSCSR is unlock */
-    u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCSR_RegisterConfig->u32PeripheralAdress;
-    u32ConfigData = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCSR_RegisterConfig->u32PeripheralDataConfiguration;
-    while (REG_READ32(u32Address) & SCG_SOSCCSR_LK_MASK32);
+		/* Ensure SOSCSR is unlock */
+		u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCSR_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCSR_RegisterConfig->u32PeripheralDataConfiguration;
+		while (REG_READ32(u32Address) & SCG_SOSCCSR_LK_MASK32);
 
-    /* Configure SOSCSR register and ensure SOSCSR is unlock */
-    REG_WRITE32(u32Address, u32ConfigData);
+		/* Configure SOSCSR register and ensure SOSCSR is unlock */
+		REG_WRITE32(u32Address, u32ConfigData);
 
-    /* Wait for SOSC Clock to be valid */
-    while (!(REG_READ32(u32Address) & SCG_SOSCCSR_SOSCVLD_MASK32));
+		/* Wait for SOSC Clock to be valid */
+		while (!(REG_READ32(u32Address) & SCG_SOSCCSR_SOSCVLD_MASK32));
+	}
 }
 
 /**
@@ -131,28 +134,30 @@ FUNC(void, MCU_CODE) Mcu_SCG_SPLLInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
     VAR(uint32, AUTOMATIC) u32ConfigData = 0U;
     VAR(uint32, AUTOMATIC) u32Address = 0U;
 
-    /* Ensure SPLLCSR register is unlock */
-    u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralAdress;
-    while (REG_READ32(u32Address) & SCG_SPLLCSR_LK_MASK32);
+	if (pConfigPtr->pMcu_SPLL_RegisterConfig != NULL_PTR)
+	{
+		/* Ensure SPLLCSR register is unlock */
+		u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralAdress;
+		while (REG_READ32(u32Address) & SCG_SPLLCSR_LK_MASK32);
 
-    /* Configure SPLLDIV register */
-    u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLDIV_RegisterConfig->u32PeripheralAdress;
-    u32ConfigData = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLDIV_RegisterConfig->u32PeripheralDataConfiguration;
-    REG_WRITE32(u32Address, u32ConfigData);
+		/* Configure SPLLDIV register */
+		u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLDIV_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLDIV_RegisterConfig->u32PeripheralDataConfiguration;
+		REG_WRITE32(u32Address, u32ConfigData);
 
-    /* Configure SPLLCFG register */
-    u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCFG_RegisterConfig->u32PeripheralAdress;
-    u32ConfigData = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCFG_RegisterConfig->u32PeripheralDataConfiguration;
-    REG_WRITE32(u32Address, u32ConfigData);
+		/* Configure SPLLCFG register */
+		u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCFG_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCFG_RegisterConfig->u32PeripheralDataConfiguration;
+		REG_WRITE32(u32Address, u32ConfigData);
 
-	/* Configure SPLLCSG register */
-	u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralAdress;
-	u32ConfigData = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralDataConfiguration;
-	REG_WRITE32(u32Address, u32ConfigData);
+		/* Configure SPLLCSG register */
+		u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralDataConfiguration;
+		REG_WRITE32(u32Address, u32ConfigData);
 
-	/* Enable SPLL */
-	REG_BIT_SET32(u32Address, SCG_SPLLCSR_SPLLEN_MASK32);
-
+		/* Enable SPLL */
+		REG_BIT_SET32(u32Address, SCG_SPLLCSR_SPLLEN_MASK32);
+	}
 }
 
 /**
