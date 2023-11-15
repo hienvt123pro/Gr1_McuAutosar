@@ -42,6 +42,10 @@ extern "C"
 
 #include "StdRegMacros.h"
 
+#if (MCU_DEV_ERROR_DETECT == STD_ON)
+#include "Det.h"
+#endif /* (MCU_DEV_ERROR_DETECT == STD_ON) */
+
 /*==================================================================================================
                           LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
@@ -250,43 +254,41 @@ FUNC(void, MCU_CODE) Mcu_SCG_SrcClock(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
     VAR(uint32, AUTOMATIC) u32TimeOut = 0U;
     VAR(uint32, AUTOMATIC) u32RegValue = 0U;
 
-    /***************************************************SECTION 1**************************************************/
+    /*---------------------------Config Normal Running Mode----------------------------------------*/
 
-    /*Config clock source for System Clock at Normal Running Mode*/
     REG_WRITE32(SCG_RCCR_ADDR32, u8ClockSourcesControl << MCU_CLK_SRC_BIT_SHIFT);
-
-    /*May not need*/
     u32RegValue = REG_READ32(SCG_RCCR_ADDR32) & SCG_RCCR_SCS_MASK32;
 
-    /***************************************************SECTION 2**************************************************/
-
     /*Timeout representing the number of loops for preventing to lock inside am infinite while/for.*/
-    u32TimeOut = 50000u /*MCU_TIMEOUT_LOOPS*/;    /*This variable is stored in Mcu_Cfg.h*/
+    u32TimeOut = MCU_TIMEOUT_LOOPS;
     do
     {
         u32TimeOut--;
-
         u32RegValue = REG_READ32(SCG_RCCR_ADDR32) & SCG_RCCR_SCS_MASK32;
     }
     while (((pConfigPtr->Mcu_RUNModeConfig & SCG_RCCR_SCS_MASK32) != u32RegValue) && ((uint32)0x00U < u32TimeOut));
 
-    /***************************************************SECTION 3**************************************************/
+    if (u32TimeOut == (uint32)0U)
+    {
+    	/* Raise Error */
+    }
 
-    /*Config Very Low Power Mode*/
+    /*---------------------------Config Very Low Power Mode-----------------------------------------*/
     REG_WRITE32(SCG_VCCR_ADDR32, pConfigPtr->Mcu_VLPRModeConfig);
 
     /* Wait for switching system clock source done. */
-    u32TimeOut = 50000u /*MCU_TIMEOUT_LOOPS*/;    /*This variable is stored in Mcu_Cfg.h*/
+    u32TimeOut = MCU_TIMEOUT_LOOPS;
     do
     {
         u32TimeOut--;
-        /** @violates @ref Mcu_SCG_c_REF_4 Conversion from int to pointer */
-        /** @violates @ref Mcu_SCG_c_REF_5 The cast is used to access memory mapped registers.*/
         u32RegValue = REG_READ32(SCG_VCCR_ADDR32) & SCG_VCCR_SCS_MASK32;
     }
     while (((pConfigPtr->Mcu_VLPRModeConfig & SCG_VCCR_SCS_MASK32) != u32RegValue) && ((uint32)0x00U < u32TimeOut));
 
-    /***************************************************SECTION 4**************************************************/
+    if (u32TimeOut == (uint32)0U)
+    {
+    	/* Raise Error */
+    }
 
     /*Clock out Selection*/
     REG_WRITE32(SCG_CLKOUTCNFG_ADDR32, pConfigPtr->Mcu_ClockOutSelection);

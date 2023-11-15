@@ -162,6 +162,12 @@ extern "C"{
 #define MCU_SIRC_CLK_SRC  (0x02U)
 #define MCU_FIRC_CLK_SRC  (0x03U)
 #define MCU_SPLL_CLK_SRC  (0x06U)
+
+/**
+* @brief            Time out for config clock
+*/
+#define MCU_TIMEOUT_LOOPS     5000u
+
 /*==================================================================================================
                                              ENUMS
 ==================================================================================================*/
@@ -181,13 +187,6 @@ typedef enum
     MCU_PLL_STATUS_UNDEFINED = 0x5AU   /**< @brief PLL Status is unknown. */
 } Mcu_PllStatusType;
 
-
-/**
-* @brief            Pre-Compile structure from Mcu_Cfg.c file.
-*/
-#define MCU_CONF_PB \
- extern CONST(Mcu_ConfigType, MCU_CONST) Mcu_Config;
-
 /*==================================================================================================
                                  STRUCTURES AND OTHER TYPEDEFS
 ==================================================================================================*/
@@ -200,6 +199,12 @@ typedef enum
 *
 */
 typedef uint32 Mcu_ModeType;
+
+/**
+* @brief            The Mcu_RamIndexType specifies the RAM index size.
+*                   The type shall be uint8, uint16 or uint32, based on best performance.
+*/
+typedef uint32 Mcu_RamIndexType;
 
 /**
 * @brief            The Mcu_RamSectionType specifies the identification (ID) for a RAM section, configured via the configuration structure.

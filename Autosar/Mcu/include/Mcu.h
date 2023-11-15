@@ -102,7 +102,10 @@ typedef struct
                                  GLOBAL VARIABLE DECLARATIONS
 ==================================================================================================*/
 
-MCU_CONF_PB
+/**
+* @brief            Mcu_Config packet to config the MCU
+*/
+extern CONST(Mcu_ConfigType, MCU_CONST) Mcu_Config;
 
 /*==================================================================================================
                                      FUNCTION PROTOTYPES

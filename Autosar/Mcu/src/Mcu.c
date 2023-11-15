@@ -375,32 +375,29 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_InitRamSection(VAR(Mcu_RamSectionType, AUTOMA
 	/*Init check ram status*/
 	VAR(Std_ReturnType, AUTOMATIC) CheckRamStatus = (Std_ReturnType)E_NOT_OK;
 
-	/***************************************************SECTION 1**************************************************/
-
 	/* Variable for index of RAM sections. */
-	/* a.k.a Mcu_RamIndexType*/
-    VAR(uint32, AUTOMATIC) RamIndex;
+    VAR(Mcu_RamIndexType, AUTOMATIC) RamIndex;
+
     /* Limitation of Ram Index variable. */
     VAR(Mcu_RamSizeType, AUTOMATIC) RamIndexLimit;
+
     /* Pointer to RAM configuration: base address, size, default value, write size. */
     P2CONST(Mcu_RamConfigType, AUTOMATIC, MCU_APPL_CONST) pRamConfigPtr;
 
 	/* Check status of Ram Section if it is called */
-    /*MCU_INITRAMSECTION_ID : stored in Mcu_Cfg.h*/
 	if ((Std_ReturnType)E_OK == (Std_ReturnType)Mcu_CheckEntry(MCU_INITRAMSECTION_ID)) {
 
 		if ((Std_ReturnType)E_OK == (Std_ReturnType)Mcu_CheckInitRamSection(RamSection)) {
 
-	/***************************************************SECTION 2**************************************************/
 			CheckRamStatus = (Std_ReturnType)E_OK;
 
 			/* Get Ram settings from the configuration structure. */
 			pRamConfigPtr = &(*Mcu_pConfigPtr->Mcu_apRamConfig)[RamSection];
 
-			/*Get number of Ram Index*/
-			RamIndexLimit = (Mcu_RamSizeType)( (pRamConfigPtr->u32Mcu_RamSize) / (pRamConfigPtr->u32Mcu_RamWriteSize) );
+			/* Get number of Ram Index */
+			RamIndexLimit = (Mcu_RamSizeType)((pRamConfigPtr->u32Mcu_RamSize)/(pRamConfigPtr->u32Mcu_RamWriteSize));
 
-			for (RamIndex = (uint32) 0UL; ((RamIndex < RamIndexLimit) && ((Std_ReturnType)E_OK == CheckRamStatus)); RamIndex++)
+			for (RamIndex = (uint32)0UL; ((RamIndex < RamIndexLimit) && ((Std_ReturnType)E_OK == CheckRamStatus)); RamIndex++)
 				{
 					switch (pRamConfigPtr->u32Mcu_RamWriteSize)
 					{
@@ -430,7 +427,6 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_InitRamSection(VAR(Mcu_RamSectionType, AUTOMA
 					}
 				}
 
-	/***************************************************SECTION 3**************************************************/
 			if ((Std_ReturnType)E_OK == CheckRamStatus)
 			{
 				/* Check if RAM was initialized correctly. */

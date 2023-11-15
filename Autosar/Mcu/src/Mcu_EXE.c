@@ -208,7 +208,7 @@ FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, 
 */
 FUNC( void, MCU_CODE) Mcu_Exe_DistributePllClock(VAR(void, AUTOMATIC))
 {
-	VAR(uint32, AUTOMATIC) u32TimeOut = 5000U;
+	VAR(uint32, AUTOMATIC) u32TimeOut = MCU_TIMEOUT_LOOPS;
 
     /* Check if SPLL is configured as source clock, which is called by Mcu_InitClock() */
 	if (u8SpllSourceClock == MCU_SPLL_SOURCE_CLOCK)
