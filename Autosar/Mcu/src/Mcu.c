@@ -216,7 +216,7 @@ static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckInitClock(VAR(Mcu_ClockType, AUTO
 * @brief Mcu_CheckDistributePllClock - checks for Mcu_DistributePllClock
 * @implements Mcu_CheckDistributePllClock_Activity
 */
-static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckDistributePllClock( VAR( void, AUTOMATIC))
+static FUNC(Std_ReturnType, MCU_CODE) Mcu_CheckDistributePllClock(VAR(void, AUTOMATIC))
 {
    VAR(Std_ReturnType, AUTOMATIC) u8Status = (Std_ReturnType)E_OK;
     if (MCU_PLL_LOCKED != (Mcu_PllStatusType)Mcu_Exe_GetPllStatus())
@@ -505,9 +505,7 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(VAR(void, AUTOMATIC))
 	{
         if((Std_ReturnType)E_OK == (Std_ReturnType)Mcu_CheckDistributePllClock())
         {
-            /* Set the PLL as System Clock if it is locked and enabled by the current mode.
-            If the PLL0 is already selected as system clock, then this function will return without
-            doing anything. */
+            /* Set the PLL as System Clock if it is locked and enabled by the current mode. */
             Mcu_Exe_DistributePllClock();
             PllStatus = (Std_ReturnType)E_OK;
         }

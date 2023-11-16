@@ -161,6 +161,9 @@ FUNC( void, MCU_CODE) Mcu_Exe_InitClock(P2CONST(Mcu_ClockConfigType, AUTOMATIC, 
 {
 	Mcu_pClockConfig = Mcu_pClockConfigPtr;
 
+	/* Switch to trusted clock (SIRC)*/
+	Mcu_SCG_SwitchToTrustedClock((uint32)SCG_SCS_SIRC_U32);
+
 	/* Initialize SOSC clock */
 	Mcu_SCG_SOSCInit(Mcu_pClockConfig->pMcu_SCG_Config);
 
