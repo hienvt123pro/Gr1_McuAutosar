@@ -98,14 +98,22 @@ FUNC(void, MCU_CODE) Mcu_SCG_SOSCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 {
     VAR(uint32, AUTOMATIC) u32ConfigData = 0U;
     VAR(uint32, AUTOMATIC) u32Address = 0U;
+	VAR(uint32, AUTOMATIC) u32TimeOut = 0U;
+	VAR(uint32, AUTOMATIC) u32RegValue = 0U;
 
 	if (pConfigPtr->pMcu_SOSC_RegisterConfig != NULL_PTR)
 	{
-		/* Disable SOSC clock monitor */
-		/* Disable System OSC Clock Error (SOSC_SOSCR_SOSCERR), System OSC Clock Monitor Reset (SOSC_SOSCR_SOSCMRE) and System OSC Clock Monitor (SOSC_SOSCR_SOSCCM) */
-		u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCCSR_RegisterConfig->u32PeripheralAdress;
-		u32ConfigData = (REG_READ32(SCG_SOSCCSR_ADDR32) | SCG_SOSCCSR_SOSCERR_MASK32) & ~(SCG_SOSCCSR_SOSCCMRE_MASK32 | SCG_SOSCCSR_SOSCCM_MASK32);
-		REG_RMW32(SCG_SOSCCSR_ADDR32, SCG_SOSCCSR_SOSCERR_MASK32|SCG_SOSCCSR_SOSCCMRE_MASK32|SCG_SOSCCSR_SOSCCM_MASK32, u32ConfigData);
+		/* Prepare SPLL before configuring SOSC */
+		/* Disable SPLL clock monitor */
+		/* Disable System OSC Clock Error (SPLL_SPLLCSR_SPLLERR), System OSC Clock Monitor Reset (SPLL_SPLLCSR_SPLLMRE) and System OSC Clock Monitor (SPLL_SPLLCSR_SPLLCM) */
+		u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = (REG_READ32(u32Address) | SCG_SPLLCSR_SPLLERR_MASK32) & ~(SCG_SPLLCSR_SPLLCMRE_MASK32 | SCG_SPLLCSR_SPLLCM_MASK32);
+		REG_RMW32(u32Address, SCG_SPLLCSR_SPLLERR_MASK32|SCG_SPLLCSR_SPLLCMRE_MASK32|SCG_SPLLCSR_SPLLCM_MASK32, u32ConfigData);
+
+		/* Disable SPLL*/
+		u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralAdress;
+		u32ConfigData = SCG_SPLLCSR_SPLL_DISABLE_U32;
+		REG_RMW32(u32Address,SCG_SPLLCSR_SPLLEN_MASK32, u32ConfigData); 
 
 		/* Configure SOSCDIV register with SOSCDIV1 & SOSCDIV2 bit fields */
 		u32Address = pConfigPtr->pMcu_SOSC_RegisterConfig->pMcu_SOSCDIV_RegisterConfig->u32PeripheralAdress;
@@ -126,10 +134,24 @@ FUNC(void, MCU_CODE) Mcu_SCG_SOSCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 		REG_WRITE32(u32Address, u32ConfigData);
 
 		/* Wait for SOSC Clock to be valid */
-		while (!(REG_READ32(u32Address) & SCG_SOSCCSR_SOSCVLD_MASK32));
+		 u32TimeOut = MCU_TIMEOUT_LOOPS;
+
+		if ((REG_READ32(SCG_SOSCCSR_ADDR32) & SCG_SOSCCSR_SOSCEN_MASK32) == SCG_SOSCCSR_SOSCEN_MASK32)
+    	{	
+			do
+			{
+				u32TimeOut--;
+				u32RegValue = REG_READ32(SCG_SOSCCSR_ADDR32) & SCG_SOSCCSR_SOSCVLD_MASK32;
+			}
+			while (( SCG_SOSCCSR_SOSCVLD_MASK32 != u32RegValue) && ((uint32)0x00U < u32TimeOut));
+
+			if (u32TimeOut == (uint32)0U)
+			{
+				/* Raise Error */
+			}
+		}
 	}
 }
-
 /**
 * @brief            This function will configure the SPLL clock
 * @details          Called by Mcu_SCG_SPLLInit
@@ -146,7 +168,6 @@ FUNC(void, MCU_CODE) Mcu_SCG_SPLLInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 
 	if (pConfigPtr->pMcu_SPLL_RegisterConfig != NULL_PTR)
 	{
-		/* Ensure SPLLCSR register is unlock */
 		u32Address = pConfigPtr->pMcu_SPLL_RegisterConfig->pMcu_SPLLCSR_RegisterConfig->u32PeripheralAdress;
 		while (REG_READ32(u32Address) & SCG_SPLLCSR_LK_MASK32);
 
@@ -181,6 +202,9 @@ FUNC(void, MCU_CODE) Mcu_SCG_SPLLInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 */
 FUNC(void, MCU_CODE) Mcu_SCG_SIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
 {
+	VAR(uint32, AUTOMATIC) u32TimeOut = 0U;
+	VAR(uint32, AUTOMATIC) u32RegValue = 0U;
+
 	if (pConfigPtr->pMcu_SIRC_RegisterConfig != NULL_PTR)
 	{
 		/* Disable SIRC so the rest of the register can be configured. */
@@ -199,9 +223,20 @@ FUNC(void, MCU_CODE) Mcu_SCG_SIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 				pConfigPtr->pMcu_SIRC_RegisterConfig->pMcu_SIRCCSR_RegisterConfig->u32PeripheralDataConfiguration);
 
 		/* Check whether the mode SIRC is enable or not. */
-		if ((REG_READ32(SCG_SIRCCSR_ADDR32) & SCG_SIRCCSR_SIRCEN_MASK32) == SCG_SIRCCSR_SIRCEN_MASK32)
-		{
-			while((REG_READ32(SCG_SIRCCSR_ADDR32) & SCG_SIRCCSR_SIRCVLD_MASK32) != SCG_SIRCCSR_SIRCVLD_MASK32);
+		 u32TimeOut = MCU_TIMEOUT_LOOPS;
+		 if ((REG_READ32(SCG_FIRCCSR_ADDR32) & SCG_FIRCCSR_FIRCEN_MASK32) == SCG_FIRCCSR_FIRCEN_MASK32)
+    	{
+			do
+			{
+				u32TimeOut--;
+				u32RegValue = REG_READ32(SCG_FIRCCSR_ADDR32) & SCG_FIRCCSR_FIRCVLD_MASK32;
+			}
+			while ((SCG_FIRCCSR_FIRCVLD_MASK32 != u32RegValue) && ((uint32)0x00U < u32TimeOut));
+
+			if (u32TimeOut == (uint32)0U)
+			{
+				/* Raise Error */
+			}
 		}
 	}
 }
@@ -217,6 +252,9 @@ FUNC(void, MCU_CODE) Mcu_SCG_SIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU
 */
 FUNC(void, MCU_CODE) Mcu_SCG_FIRCInit(P2CONST(Mcu_SCG_ConfigType, AUTOMATIC, MCU_APPL_CONST) pConfigPtr)
 {
+	VAR(uint32, AUTOMATIC) u32TimeOut = 0U;
+	VAR(uint32, AUTOMATIC) u32RegValue = 0U;
+	
 	if (pConfigPtr->pMcu_FIRC_RegisterConfig != NULL_PTR)
 	{
 		/* Disable FIRC so the rest of the register can be configured. */
