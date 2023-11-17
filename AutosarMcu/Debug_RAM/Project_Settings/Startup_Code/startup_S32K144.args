@@ -1,0 +1,8 @@
+-c
+-I"D:/workspaceS32DS.ARM.2.2/AutosarMcu/include"
+-x assembler-with-cpp
+-g3
+-mcpu=cortex-m4
+-mthumb
+-specs=nosys.specs
+--sysroot="D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib"
