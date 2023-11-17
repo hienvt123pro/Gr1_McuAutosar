@@ -93,6 +93,8 @@ Det_TransientApiId  0x8               ./Autosar/Det/src/Det.o
 Det_numEventErrors  0x4               ./Autosar/Det/src/Det.o
 Det_numRuntimeEventErrors
                     0x4               ./Autosar/Det/src/Det.o
+EcuMLastWakeupEvent
+                    0x4               ./Autosar/Gpt/src/EcuM.o
 Det_ApiId           0x8               ./Autosar/Det/src/Det.o
 Det_numTransientEventErrors
                     0x4               ./Autosar/Det/src/Det.o
@@ -139,6 +141,48 @@ Discarded input sections
                 0x00000000       0xdc ./Autosar/Det/src/Det.o
  .text.Det_Start
                 0x00000000        0xc ./Autosar/Det/src/Det.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/EcuM.o
+ .text          0x00000000        0x0 ./Autosar/Gpt/src/EcuM.o
+ .data          0x00000000        0x0 ./Autosar/Gpt/src/EcuM.o
+ .bss           0x00000000        0x0 ./Autosar/Gpt/src/EcuM.o
+ .text.EcuM_SetWakeupEvent
+                0x00000000       0x1c ./Autosar/Gpt/src/EcuM.o
+ .text.EcuM_ValidateWakeupEvent
+                0x00000000       0x14 ./Autosar/Gpt/src/EcuM.o
+ .text.EcuM_CheckWakeup
+                0x00000000       0x14 ./Autosar/Gpt/src/EcuM.o
+ .debug_info    0x00000000      0x104 ./Autosar/Gpt/src/EcuM.o
+ .debug_abbrev  0x00000000       0x76 ./Autosar/Gpt/src/EcuM.o
+ .debug_aranges
+                0x00000000       0x30 ./Autosar/Gpt/src/EcuM.o
+ .debug_ranges  0x00000000       0x20 ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000       0x9b ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000      0x868 ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000       0x89 ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000      0x7d7 ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000       0x3b ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000       0xa4 ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000       0x6b ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000       0x46 ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/EcuM.o
+ .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/EcuM.o
+ .debug_line    0x00000000      0x15c ./Autosar/Gpt/src/EcuM.o
+ .debug_str     0x00000000     0x42d3 ./Autosar/Gpt/src/EcuM.o
+ .comment       0x00000000       0x71 ./Autosar/Gpt/src/EcuM.o
+ .debug_frame   0x00000000       0x88 ./Autosar/Gpt/src/EcuM.o
+ .ARM.attributes
+                0x00000000       0x33 ./Autosar/Gpt/src/EcuM.o
+ COMMON         0x00000000        0x4 ./Autosar/Gpt/src/EcuM.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt.o
@@ -180,12 +224,6 @@ Discarded input sections
                 0x00000000      0x1b0 ./Autosar/Gpt/src/Gpt.o
  .text.Gpt_GetTimeElapsed
                 0x00000000      0x100 ./Autosar/Gpt/src/Gpt.o
- .text.Gpt_GetTimeRemaining
-                0x00000000      0x10c ./Autosar/Gpt/src/Gpt.o
- .text.Gpt_StopTimer
-                0x00000000       0xfc ./Autosar/Gpt/src/Gpt.o
- .text.Gpt_DisableNotification
-                0x00000000      0x100 ./Autosar/Gpt/src/Gpt.o
  .text.Gpt_SetMode
                 0x00000000      0x238 ./Autosar/Gpt/src/Gpt.o
  .text.Gpt_DisableWakeup
@@ -198,7 +236,11 @@ Discarded input sections
  .debug_macro   0x00000000       0xa4 ./Autosar/Gpt/src/Gpt.o
  .debug_macro   0x00000000       0x89 ./Autosar/Gpt/src/Gpt.o
  .debug_macro   0x00000000       0x6b ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00000000       0x46 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt.o
  .debug_macro   0x00000000       0x10 ./Autosar/Gpt/src/Gpt.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Cfg.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Cfg.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Cfg.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Cfg.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Cfg.o
@@ -231,7 +273,7 @@ Discarded input sections
  .debug_abbrev  0x00000000       0x1e ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_aranges
                 0x00000000       0x18 ./Autosar/Gpt/src/Gpt_Cfg.o
- .debug_macro   0x00000000      0x175 ./Autosar/Gpt/src/Gpt_Cfg.o
+ .debug_macro   0x00000000      0x18d ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000      0x868 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000      0x7d7 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x3b ./Autosar/Gpt/src/Gpt_Cfg.o
@@ -239,7 +281,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x89 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x6b ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0xbd ./Autosar/Gpt/src/Gpt_Cfg.o
- .debug_macro   0x00000000      0x1b1 ./Autosar/Gpt/src/Gpt_Cfg.o
+ .debug_macro   0x00000000      0x1b8 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x64 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x66 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x3a ./Autosar/Gpt/src/Gpt_Cfg.o
@@ -252,13 +294,15 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x3b ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x2e ./Autosar/Gpt/src/Gpt_Cfg.o
+ .debug_macro   0x00000000       0x46 ./Autosar/Gpt/src/Gpt_Cfg.o
+ .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000      0x10d ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Cfg.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Cfg.o
- .debug_line    0x00000000      0x278 ./Autosar/Gpt/src/Gpt_Cfg.o
- .debug_str     0x00000000    0x1023e ./Autosar/Gpt/src/Gpt_Cfg.o
+ .debug_line    0x00000000      0x294 ./Autosar/Gpt/src/Gpt_Cfg.o
+ .debug_str     0x00000000    0x104ca ./Autosar/Gpt/src/Gpt_Cfg.o
  .comment       0x00000000       0x71 ./Autosar/Gpt/src/Gpt_Cfg.o
  .ARM.attributes
                 0x00000000       0x33 ./Autosar/Gpt/src/Gpt_Cfg.o
@@ -324,7 +368,7 @@ Discarded input sections
  .debug_macro   0x00000000     0x1241 ./Autosar/Gpt/src/Gpt_Ftm.o
  .debug_macro   0x00000000       0x64 ./Autosar/Gpt/src/Gpt_Ftm.o
  .debug_macro   0x00000000       0xbd ./Autosar/Gpt/src/Gpt_Ftm.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Gpt/src/Gpt_Ftm.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Gpt/src/Gpt_Ftm.o
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Ftm.o
  .debug_macro   0x00000000       0x3a ./Autosar/Gpt/src/Gpt_Ftm.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Ftm.o
@@ -338,7 +382,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Ftm.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Ftm.o
  .debug_line    0x00000000      0x351 ./Autosar/Gpt/src/Gpt_Ftm.o
- .debug_str     0x00000000    0x113ef ./Autosar/Gpt/src/Gpt_Ftm.o
+ .debug_str     0x00000000    0x11412 ./Autosar/Gpt/src/Gpt_Ftm.o
  .comment       0x00000000       0x71 ./Autosar/Gpt/src/Gpt_Ftm.o
  .debug_frame   0x00000000       0xd4 ./Autosar/Gpt/src/Gpt_Ftm.o
  .ARM.attributes
@@ -373,13 +417,11 @@ Discarded input sections
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Ipw.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Ipw.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Ipw.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Ipw.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_Ipw.o
  .text          0x00000000        0x0 ./Autosar/Gpt/src/Gpt_Ipw.o
  .data          0x00000000        0x0 ./Autosar/Gpt/src/Gpt_Ipw.o
  .bss           0x00000000        0x0 ./Autosar/Gpt/src/Gpt_Ipw.o
- .text.Gpt_Ipw_GetTimeElapsed
-                0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Ipw.o
- .text.Gpt_Ipw_DisableInterrupt
-                0x00000000       0x20 ./Autosar/Gpt/src/Gpt_Ipw.o
  .text.Gpt_Ipw_DeInit
                 0x00000000       0x20 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000      0x868 ./Autosar/Gpt/src/Gpt_Ipw.o
@@ -388,7 +430,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3b ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0xa4 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0xbd ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0x64 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0x66 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0x3a ./Autosar/Gpt/src/Gpt_Ipw.o
@@ -400,6 +442,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0x3b ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0x2e ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x00000000       0x46 ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000      0x10d ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Ipw.o
@@ -450,7 +494,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_LPit.o
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_LPit.o
  .debug_macro   0x00000000       0xbd ./Autosar/Gpt/src/Gpt_LPit.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Gpt/src/Gpt_LPit.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Gpt/src/Gpt_LPit.o
  .debug_macro   0x00000000       0x64 ./Autosar/Gpt/src/Gpt_LPit.o
  .debug_macro   0x00000000       0x66 ./Autosar/Gpt/src/Gpt_LPit.o
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_LPit.o
@@ -465,7 +509,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x11a ./Autosar/Gpt/src/Gpt_LPit.o
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_LPit.o
  .debug_line    0x00000000      0x2a3 ./Autosar/Gpt/src/Gpt_LPit.o
- .debug_str     0x00000000     0x8221 ./Autosar/Gpt/src/Gpt_LPit.o
+ .debug_str     0x00000000     0x8244 ./Autosar/Gpt/src/Gpt_LPit.o
  .comment       0x00000000       0x71 ./Autosar/Gpt/src/Gpt_LPit.o
  .ARM.attributes
                 0x00000000       0x33 ./Autosar/Gpt/src/Gpt_LPit.o
@@ -498,10 +542,6 @@ Discarded input sections
  .bss           0x00000000        0x0 ./Autosar/Gpt/src/Gpt_Lptmr.o
  .text.Gpt_Lptmr_DeInit
                 0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Lptmr.o
- .text.Gpt_Lptmr_GetTimeElapsed
-                0x00000000       0x54 ./Autosar/Gpt/src/Gpt_Lptmr.o
- .text.Gpt_Lptmr_DisableInterrupt
-                0x00000000       0x2c ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000      0x868 ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000       0x89 ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000      0x7d7 ./Autosar/Gpt/src/Gpt_Lptmr.o
@@ -514,7 +554,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000       0x3a ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000       0xbd ./Autosar/Gpt/src/Gpt_Lptmr.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Gpt/src/Gpt_Lptmr.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000       0x6f ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000      0x1fa ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_Lptmr.o
@@ -523,6 +563,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x1b9 ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000      0x11a ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_Lptmr.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_PBcfg.o
+ .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .group         0x00000000        0x8 ./Autosar/Gpt/src/Gpt_PBcfg.o
@@ -558,7 +600,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x89 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0x6b ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0xbd ./Autosar/Gpt/src/Gpt_PBcfg.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Gpt/src/Gpt_PBcfg.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0x64 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0x66 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0x3a ./Autosar/Gpt/src/Gpt_PBcfg.o
@@ -571,6 +613,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0x3b ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0x2e ./Autosar/Gpt/src/Gpt_PBcfg.o
+ .debug_macro   0x00000000       0x46 ./Autosar/Gpt/src/Gpt_PBcfg.o
+ .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000      0x10d ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_PBcfg.o
@@ -617,7 +661,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x50 ./Autosar/Gpt/src/Gpt_SRtc.o
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_SRtc.o
  .debug_macro   0x00000000       0xbd ./Autosar/Gpt/src/Gpt_SRtc.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Gpt/src/Gpt_SRtc.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Gpt/src/Gpt_SRtc.o
  .debug_macro   0x00000000       0x64 ./Autosar/Gpt/src/Gpt_SRtc.o
  .debug_macro   0x00000000       0x35 ./Autosar/Gpt/src/Gpt_SRtc.o
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_SRtc.o
@@ -629,7 +673,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x11a ./Autosar/Gpt/src/Gpt_SRtc.o
  .debug_macro   0x00000000       0x34 ./Autosar/Gpt/src/Gpt_SRtc.o
  .debug_line    0x00000000      0x267 ./Autosar/Gpt/src/Gpt_SRtc.o
- .debug_str     0x00000000     0x864a ./Autosar/Gpt/src/Gpt_SRtc.o
+ .debug_str     0x00000000     0x866d ./Autosar/Gpt/src/Gpt_SRtc.o
  .comment       0x00000000       0x71 ./Autosar/Gpt/src/Gpt_SRtc.o
  .ARM.attributes
                 0x00000000       0x33 ./Autosar/Gpt/src/Gpt_SRtc.o
@@ -647,7 +691,6 @@ Discarded input sections
  .bss.msr_03    0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.msr_04    0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.msr_05    0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
- .bss.msr_06    0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.msr_07    0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.msr_08    0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.msr_09    0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
@@ -710,8 +753,6 @@ Discarded input sections
  .bss.reentry_guard_04
                 0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.reentry_guard_05
-                0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
- .bss.reentry_guard_06
                 0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.reentry_guard_07
                 0x00000000        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
@@ -833,8 +874,6 @@ Discarded input sections
                 0x00000000       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
  .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_05
                 0x00000000       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
- .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_06
-                0x00000000       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
  .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_07
                 0x00000000       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
  .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_08
@@ -954,8 +993,6 @@ Discarded input sections
  .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_04
                 0x00000000       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
  .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_05
-                0x00000000       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
- .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_06
                 0x00000000       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
  .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_07
                 0x00000000       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
@@ -1465,7 +1502,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x50 ./Autosar/Mcl/src/Ftm_Common.o
  .debug_macro   0x00000000     0x1241 ./Autosar/Mcl/src/Ftm_Common.o
  .debug_macro   0x00000000       0x64 ./Autosar/Mcl/src/Ftm_Common.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Mcl/src/Ftm_Common.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Mcl/src/Ftm_Common.o
  .debug_macro   0x00000000       0x34 ./Autosar/Mcl/src/Ftm_Common.o
  .debug_macro   0x00000000       0x35 ./Autosar/Mcl/src/Ftm_Common.o
  .debug_macro   0x00000000       0x50 ./Autosar/Mcl/src/Ftm_Common.o
@@ -1475,7 +1512,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x11a ./Autosar/Mcl/src/Ftm_Common.o
  .debug_macro   0x00000000       0x34 ./Autosar/Mcl/src/Ftm_Common.o
  .debug_line    0x00000000      0x32e ./Autosar/Mcl/src/Ftm_Common.o
- .debug_str     0x00000000    0x1269b ./Autosar/Mcl/src/Ftm_Common.o
+ .debug_str     0x00000000    0x126be ./Autosar/Mcl/src/Ftm_Common.o
  .comment       0x00000000       0x71 ./Autosar/Mcl/src/Ftm_Common.o
  .ARM.attributes
                 0x00000000       0x33 ./Autosar/Mcl/src/Ftm_Common.o
@@ -1520,7 +1557,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x6b ./Autosar/Mcl/src/LPit_Common.o
  .debug_macro   0x00000000       0xd0 ./Autosar/Mcl/src/LPit_Common.o
  .debug_macro   0x00000000       0xc3 ./Autosar/Mcl/src/LPit_Common.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Mcl/src/LPit_Common.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Mcl/src/LPit_Common.o
  .debug_macro   0x00000000       0x64 ./Autosar/Mcl/src/LPit_Common.o
  .debug_macro   0x00000000       0x66 ./Autosar/Mcl/src/LPit_Common.o
  .debug_macro   0x00000000       0x34 ./Autosar/Mcl/src/LPit_Common.o
@@ -1536,7 +1573,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x50 ./Autosar/Mcl/src/LPit_Common.o
  .debug_macro   0x00000000       0x50 ./Autosar/Mcl/src/LPit_Common.o
  .debug_line    0x00000000      0x25f ./Autosar/Mcl/src/LPit_Common.o
- .debug_str     0x00000000     0x819d ./Autosar/Mcl/src/LPit_Common.o
+ .debug_str     0x00000000     0x81c0 ./Autosar/Mcl/src/LPit_Common.o
  .comment       0x00000000       0x71 ./Autosar/Mcl/src/LPit_Common.o
  .ARM.attributes
                 0x00000000       0x33 ./Autosar/Mcl/src/LPit_Common.o
@@ -1569,14 +1606,6 @@ Discarded input sections
  .bss           0x00000000        0x0 ./Autosar/Mcl/src/Lptmr_Common.o
  .rodata.LPTMR_BASE_ADDR32
                 0x00000000        0x4 ./Autosar/Mcl/src/Lptmr_Common.o
- .text.LPTMR_0_CH_0_ISR
-                0x00000000        0xc ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_info    0x00000000       0xbb ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_abbrev  0x00000000       0x71 ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_aranges
-                0x00000000       0x20 ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_ranges  0x00000000       0x10 ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_macro   0x00000000      0x1a2 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000      0x868 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000       0x89 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000      0x7d7 ./Autosar/Mcl/src/Lptmr_Common.o
@@ -1586,7 +1615,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xd0 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000       0x3a ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000       0xc3 ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_macro   0x00000000      0x1ab ./Autosar/Mcl/src/Lptmr_Common.o
+ .debug_macro   0x00000000      0x1b2 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000       0x35 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000       0x50 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000       0x50 ./Autosar/Mcl/src/Lptmr_Common.o
@@ -1601,12 +1630,6 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000       0x50 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_macro   0x00000000       0x50 ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_line    0x00000000      0x28d ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_str     0x00000000     0x7caa ./Autosar/Mcl/src/Lptmr_Common.o
- .comment       0x00000000       0x71 ./Autosar/Mcl/src/Lptmr_Common.o
- .debug_frame   0x00000000       0x2c ./Autosar/Mcl/src/Lptmr_Common.o
- .ARM.attributes
-                0x00000000       0x33 ./Autosar/Mcl/src/Lptmr_Common.o
  .group         0x00000000        0x8 ./Autosar/Mcl/src/SchM_Mcl.o
  .group         0x00000000        0x8 ./Autosar/Mcl/src/SchM_Mcl.o
  .group         0x00000000        0x8 ./Autosar/Mcl/src/SchM_Mcl.o
@@ -2450,6 +2473,7 @@ Discarded input sections
  .group         0x00000000        0x8 ./src/main.o
  .group         0x00000000        0x8 ./src/main.o
  .group         0x00000000        0x8 ./src/main.o
+ .group         0x00000000        0x8 ./src/main.o
  .text          0x00000000        0x0 ./src/main.o
  .data          0x00000000        0x0 ./src/main.o
  .bss           0x00000000        0x0 ./src/main.o
@@ -2475,7 +2499,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x2e1 ./src/main.o
  .debug_macro   0x00000000      0x5c6 ./src/main.o
  .debug_macro   0x00000000      0x237 ./src/main.o
- .debug_macro   0x00000000      0x1b1 ./src/main.o
+ .debug_macro   0x00000000      0x1b8 ./src/main.o
  .debug_macro   0x00000000       0x64 ./src/main.o
  .debug_macro   0x00000000       0x66 ./src/main.o
  .debug_macro   0x00000000       0x3a ./src/main.o
@@ -2486,13 +2510,33 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 ./src/main.o
  .debug_macro   0x00000000       0x3b ./src/main.o
  .debug_macro   0x00000000       0x2e ./src/main.o
+ .debug_macro   0x00000000       0x46 ./src/main.o
+ .debug_macro   0x00000000       0x34 ./src/main.o
  .debug_macro   0x00000000      0x10d ./src/main.o
  .debug_macro   0x00000000       0x50 ./src/main.o
  .debug_macro   0x00000000       0x50 ./src/main.o
  .debug_macro   0x00000000       0x50 ./src/main.o
  .debug_macro   0x00000000       0x50 ./src/main.o
  .debug_macro   0x00000000       0x10 ./src/main.o
- .debug_macro   0x00000000       0x3b ./src/main.o
+ .group         0x00000000        0x8 ./src/uart.o
+ .group         0x00000000        0x8 ./src/uart.o
+ .group         0x00000000        0x8 ./src/uart.o
+ .group         0x00000000        0x8 ./src/uart.o
+ .group         0x00000000        0x8 ./src/uart.o
+ .group         0x00000000        0x8 ./src/uart.o
+ .group         0x00000000        0x8 ./src/uart.o
+ .group         0x00000000        0x8 ./src/uart.o
+ .text          0x00000000        0x0 ./src/uart.o
+ .data          0x00000000        0x0 ./src/uart.o
+ .bss           0x00000000        0x0 ./src/uart.o
+ .debug_macro   0x00000000      0x868 ./src/uart.o
+ .debug_macro   0x00000000       0x19 ./src/uart.o
+ .debug_macro   0x00000000       0x22 ./src/uart.o
+ .debug_macro   0x00000000       0x44 ./src/uart.o
+ .debug_macro   0x00000000       0xe3 ./src/uart.o
+ .debug_macro   0x00000000       0x22 ./src/uart.o
+ .debug_macro   0x00000000      0x1df ./src/uart.o
+ .debug_macro   0x00000000     0xed1d ./src/uart.o
  .text          0x00000000        0x0 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-exit.o)
  .data          0x00000000        0x0 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-exit.o)
  .bss           0x00000000        0x0 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-exit.o)
@@ -2691,6 +2735,7 @@ LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/
 LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
 LOAD D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m/crt0.o
 LOAD ./Autosar/Det/src/Det.o
+LOAD ./Autosar/Gpt/src/EcuM.o
 LOAD ./Autosar/Gpt/src/Gpt.o
 LOAD ./Autosar/Gpt/src/Gpt_Cfg.o
 LOAD ./Autosar/Gpt/src/Gpt_Ftm.o
@@ -2720,6 +2765,7 @@ LOAD ./Project_Settings/Startup_Code/startup.o
 LOAD ./Project_Settings/Startup_Code/startup_S32K144.o
 LOAD ./Project_Settings/Startup_Code/system_S32K144.o
 LOAD ./src/main.o
+LOAD ./src/uart.o
 START GROUP
 LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a
 LOAD D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a
@@ -2746,7 +2792,7 @@ LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/
                 0x1fff8000                __VECTOR_RAM = __VECTOR_TABLE
                 0x00000000                __RAM_VECTOR_TABLE_SIZE = 0x0
 
-.text           0x1fff8400     0x6fe8
+.text           0x1fff8400     0x7668
                 0x1fff8400                . = ALIGN (0x4)
  *(.text)
  .text          0x1fff8400       0x5c d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
@@ -2869,7 +2915,6 @@ LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/
                 0x1fff849c                CAN0_ORed_0_15_MB_IRQHandler
                 0x1fff849c                PORTE_IRQHandler
                 0x1fff849c                LPUART0_RxTx_IRQHandler
-                0x1fff849c                LPTMR0_IRQHandler
                 0x1fff849c                BusFault_Handler
                 0x1fff849c                Reserved87_IRQHandler
                 0x1fff849c                FTM1_Ovf_Reload_IRQHandler
@@ -2949,491 +2994,531 @@ LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/
  .text.Gpt_Init
                 0x1fff95fc      0x10c ./Autosar/Gpt/src/Gpt.o
                 0x1fff95fc                Gpt_Init
+ .text.Gpt_GetTimeRemaining
+                0x1fff9708      0x10c ./Autosar/Gpt/src/Gpt.o
+                0x1fff9708                Gpt_GetTimeRemaining
  .text.Gpt_StartTimer
-                0x1fff9708      0x1c0 ./Autosar/Gpt/src/Gpt.o
-                0x1fff9708                Gpt_StartTimer
+                0x1fff9814      0x1c0 ./Autosar/Gpt/src/Gpt.o
+                0x1fff9814                Gpt_StartTimer
+ .text.Gpt_StopTimer
+                0x1fff99d4       0xfc ./Autosar/Gpt/src/Gpt.o
+                0x1fff99d4                Gpt_StopTimer
  .text.Gpt_EnableNotification
-                0x1fff98c8       0xd8 ./Autosar/Gpt/src/Gpt.o
-                0x1fff98c8                Gpt_EnableNotification
+                0x1fff9ad0       0xd8 ./Autosar/Gpt/src/Gpt.o
+                0x1fff9ad0                Gpt_EnableNotification
+ .text.Gpt_DisableNotification
+                0x1fff9ba8      0x100 ./Autosar/Gpt/src/Gpt.o
+                0x1fff9ba8                Gpt_DisableNotification
  .text.Gpt_ProcessCommonInterrupt
-                0x1fff99a0       0xc4 ./Autosar/Gpt/src/Gpt.o
-                0x1fff99a0                Gpt_ProcessCommonInterrupt
+                0x1fff9ca8       0xc4 ./Autosar/Gpt/src/Gpt.o
+                0x1fff9ca8                Gpt_ProcessCommonInterrupt
  .text.Gpt_Ipw_Init
-                0x1fff9a64       0x2c ./Autosar/Gpt/src/Gpt_Ipw.o
-                0x1fff9a64                Gpt_Ipw_Init
+                0x1fff9d6c       0x2c ./Autosar/Gpt/src/Gpt_Ipw.o
+                0x1fff9d6c                Gpt_Ipw_Init
+ .text.Gpt_Ipw_GetTimeElapsed
+                0x1fff9d98       0x34 ./Autosar/Gpt/src/Gpt_Ipw.o
+                0x1fff9d98                Gpt_Ipw_GetTimeElapsed
  .text.Gpt_Ipw_StartTimer
-                0x1fff9a90       0x28 ./Autosar/Gpt/src/Gpt_Ipw.o
-                0x1fff9a90                Gpt_Ipw_StartTimer
+                0x1fff9dcc       0x28 ./Autosar/Gpt/src/Gpt_Ipw.o
+                0x1fff9dcc                Gpt_Ipw_StartTimer
  .text.Gpt_Ipw_StopTimer
-                0x1fff9ab8       0x20 ./Autosar/Gpt/src/Gpt_Ipw.o
-                0x1fff9ab8                Gpt_Ipw_StopTimer
+                0x1fff9df4       0x20 ./Autosar/Gpt/src/Gpt_Ipw.o
+                0x1fff9df4                Gpt_Ipw_StopTimer
  .text.Gpt_Ipw_EnableInterrupt
-                0x1fff9ad8       0x20 ./Autosar/Gpt/src/Gpt_Ipw.o
-                0x1fff9ad8                Gpt_Ipw_EnableInterrupt
+                0x1fff9e14       0x20 ./Autosar/Gpt/src/Gpt_Ipw.o
+                0x1fff9e14                Gpt_Ipw_EnableInterrupt
+ .text.Gpt_Ipw_DisableInterrupt
+                0x1fff9e34       0x20 ./Autosar/Gpt/src/Gpt_Ipw.o
+                0x1fff9e34                Gpt_Ipw_DisableInterrupt
  .text.Gpt_Lptmr_Init
-                0x1fff9af8       0x80 ./Autosar/Gpt/src/Gpt_Lptmr.o
-                0x1fff9af8                Gpt_Lptmr_Init
+                0x1fff9e54       0x80 ./Autosar/Gpt/src/Gpt_Lptmr.o
+                0x1fff9e54                Gpt_Lptmr_Init
  .text.Gpt_Lptmr_StartTimer
-                0x1fff9b78       0x40 ./Autosar/Gpt/src/Gpt_Lptmr.o
-                0x1fff9b78                Gpt_Lptmr_StartTimer
+                0x1fff9ed4       0x40 ./Autosar/Gpt/src/Gpt_Lptmr.o
+                0x1fff9ed4                Gpt_Lptmr_StartTimer
  .text.Gpt_Lptmr_StopTimer
-                0x1fff9bb8       0x2c ./Autosar/Gpt/src/Gpt_Lptmr.o
-                0x1fff9bb8                Gpt_Lptmr_StopTimer
+                0x1fff9f14       0x2c ./Autosar/Gpt/src/Gpt_Lptmr.o
+                0x1fff9f14                Gpt_Lptmr_StopTimer
+ .text.Gpt_Lptmr_GetTimeElapsed
+                0x1fff9f40       0x54 ./Autosar/Gpt/src/Gpt_Lptmr.o
+                0x1fff9f40                Gpt_Lptmr_GetTimeElapsed
  .text.Gpt_Lptmr_EnableInterrupt
-                0x1fff9be4       0x38 ./Autosar/Gpt/src/Gpt_Lptmr.o
-                0x1fff9be4                Gpt_Lptmr_EnableInterrupt
+                0x1fff9f94       0x38 ./Autosar/Gpt/src/Gpt_Lptmr.o
+                0x1fff9f94                Gpt_Lptmr_EnableInterrupt
+ .text.Gpt_Lptmr_DisableInterrupt
+                0x1fff9fcc       0x2c ./Autosar/Gpt/src/Gpt_Lptmr.o
+                0x1fff9fcc                Gpt_Lptmr_DisableInterrupt
  .text.Gpt_Lptmr_ProcessCommonInterrupt
-                0x1fff9c1c       0x50 ./Autosar/Gpt/src/Gpt_Lptmr.o
-                0x1fff9c1c                Gpt_Lptmr_ProcessCommonInterrupt
+                0x1fff9ff8       0x50 ./Autosar/Gpt/src/Gpt_Lptmr.o
+                0x1fff9ff8                Gpt_Lptmr_ProcessCommonInterrupt
  .text.Gpt_schm_read_msr
-                0x1fff9c6c       0x14 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9c6c                Gpt_schm_read_msr
+                0x1fffa048       0x14 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa048                Gpt_schm_read_msr
  .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_00
-                0x1fff9c80       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9c80                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_00
+                0x1fffa05c       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa05c                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_00
  .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_01
-                0x1fff9cb8       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9cb8                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_01
+                0x1fffa094       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa094                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_01
  .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_02
-                0x1fff9cf0       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9cf0                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_02
+                0x1fffa0cc       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa0cc                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_02
+ .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_06
+                0x1fffa104       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa104                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_06
  .text.SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_29
-                0x1fff9d28       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9d28                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_29
+                0x1fffa13c       0x38 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa13c                SchM_Enter_Gpt_GPT_EXCLUSIVE_AREA_29
  .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_00
-                0x1fff9d60       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9d60                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_00
+                0x1fffa174       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa174                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_00
  .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_01
-                0x1fff9d94       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9d94                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_01
+                0x1fffa1a8       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa1a8                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_01
  .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_02
-                0x1fff9dc8       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9dc8                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_02
+                0x1fffa1dc       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa1dc                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_02
+ .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_06
+                0x1fffa210       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa210                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_06
  .text.SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_29
-                0x1fff9dfc       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
-                0x1fff9dfc                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_29
+                0x1fffa244       0x34 ./Autosar/Gpt/src/SchM_Gpt.o
+                0x1fffa244                SchM_Exit_Gpt_GPT_EXCLUSIVE_AREA_29
+ .text.LPTMR0_IRQHandler
+                0x1fffa278        0xc ./Autosar/Mcl/src/Lptmr_Common.o
+                0x1fffa278                LPTMR0_IRQHandler
  .text.Mcu_CheckEntry
-                0x1fff9e30       0x58 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa284       0x58 ./Autosar/Mcu/src/Mcu.o
  .text.Mcu_CheckNull
-                0x1fff9e88       0x2c ./Autosar/Mcu/src/Mcu.o
+                0x1fffa2dc       0x2c ./Autosar/Mcu/src/Mcu.o
  .text.Mcu_CheckExit
-                0x1fff9eb4       0x40 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa308       0x40 ./Autosar/Mcu/src/Mcu.o
  .text.Mcu_CheckInitClock
-                0x1fff9ef4       0x38 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa348       0x38 ./Autosar/Mcu/src/Mcu.o
  .text.Mcu_CheckDistributePllClock
-                0x1fff9f2c       0x30 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa380       0x30 ./Autosar/Mcu/src/Mcu.o
  .text.Mcu_CheckInitRamSection
-                0x1fff9f5c       0xb4 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa3b0       0xb4 ./Autosar/Mcu/src/Mcu.o
  .text.Mcu_Init
-                0x1fffa010       0x68 ./Autosar/Mcu/src/Mcu.o
-                0x1fffa010                Mcu_Init
+                0x1fffa464       0x68 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa464                Mcu_Init
  .text.Mcu_InitClock
-                0x1fffa078       0x58 ./Autosar/Mcu/src/Mcu.o
-                0x1fffa078                Mcu_InitClock
+                0x1fffa4cc       0x58 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa4cc                Mcu_InitClock
  .text.Mcu_InitRamSection
-                0x1fffa0d0      0x1d0 ./Autosar/Mcu/src/Mcu.o
-                0x1fffa0d0                Mcu_InitRamSection
+                0x1fffa524      0x1d0 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa524                Mcu_InitRamSection
  .text.Mcu_DistributePllClock
-                0x1fffa2a0       0x3c ./Autosar/Mcu/src/Mcu.o
-                0x1fffa2a0                Mcu_DistributePllClock
+                0x1fffa6f4       0x3c ./Autosar/Mcu/src/Mcu.o
+                0x1fffa6f4                Mcu_DistributePllClock
  .text.Mcu_GetPllStatus
-                0x1fffa2dc       0x30 ./Autosar/Mcu/src/Mcu.o
-                0x1fffa2dc                Mcu_GetPllStatus
+                0x1fffa730       0x30 ./Autosar/Mcu/src/Mcu.o
+                0x1fffa730                Mcu_GetPllStatus
  .text.Mcu_Exe_DepProsInit
-                0x1fffa30c       0x2c ./Autosar/Mcu/src/Mcu_Exe.o
-                0x1fffa30c                Mcu_Exe_DepProsInit
+                0x1fffa760       0x2c ./Autosar/Mcu/src/Mcu_Exe.o
+                0x1fffa760                Mcu_Exe_DepProsInit
  .text.Mcu_Exe_ResetConfigInit
-                0x1fffa338       0x18 ./Autosar/Mcu/src/Mcu_Exe.o
-                0x1fffa338                Mcu_Exe_ResetConfigInit
+                0x1fffa78c       0x18 ./Autosar/Mcu/src/Mcu_Exe.o
+                0x1fffa78c                Mcu_Exe_ResetConfigInit
  .text.Mcu_Exe_InitClock
-                0x1fffa350       0x90 ./Autosar/Mcu/src/Mcu_Exe.o
-                0x1fffa350                Mcu_Exe_InitClock
+                0x1fffa7a4       0x90 ./Autosar/Mcu/src/Mcu_Exe.o
+                0x1fffa7a4                Mcu_Exe_InitClock
  .text.Mcu_Exe_DistributePllClock
-                0x1fffa3e0       0x2c ./Autosar/Mcu/src/Mcu_Exe.o
-                0x1fffa3e0                Mcu_Exe_DistributePllClock
+                0x1fffa834       0x2c ./Autosar/Mcu/src/Mcu_Exe.o
+                0x1fffa834                Mcu_Exe_DistributePllClock
  .text.Mcu_Exe_GetPllStatus
-                0x1fffa40c       0x28 ./Autosar/Mcu/src/Mcu_Exe.o
-                0x1fffa40c                Mcu_Exe_GetPllStatus
+                0x1fffa860       0x28 ./Autosar/Mcu/src/Mcu_Exe.o
+                0x1fffa860                Mcu_Exe_GetPllStatus
  .text.Mcu_PCC_Init
-                0x1fffa434       0xac ./Autosar/Mcu/src/Mcu_PCC.o
-                0x1fffa434                Mcu_PCC_Init
+                0x1fffa888       0xac ./Autosar/Mcu/src/Mcu_PCC.o
+                0x1fffa888                Mcu_PCC_Init
  .text.Mcu_PMC_Init
-                0x1fffa4e0       0x4c ./Autosar/Mcu/src/Mcu_PMC.o
-                0x1fffa4e0                Mcu_PMC_Init
+                0x1fffa934       0x4c ./Autosar/Mcu/src/Mcu_PMC.o
+                0x1fffa934                Mcu_PMC_Init
  .text.Mcu_RCM_Init
-                0x1fffa52c       0x54 ./Autosar/Mcu/src/Mcu_RCM.o
-                0x1fffa52c                Mcu_RCM_Init
+                0x1fffa980       0x54 ./Autosar/Mcu/src/Mcu_RCM.o
+                0x1fffa980                Mcu_RCM_Init
  .text.Mcu_SCG_SOSCInit
-                0x1fffa580      0x13c ./Autosar/Mcu/src/Mcu_SCG.o
-                0x1fffa580                Mcu_SCG_SOSCInit
+                0x1fffa9d4      0x13c ./Autosar/Mcu/src/Mcu_SCG.o
+                0x1fffa9d4                Mcu_SCG_SOSCInit
  .text.Mcu_SCG_SPLLInit
-                0x1fffa6bc       0x94 ./Autosar/Mcu/src/Mcu_SCG.o
-                0x1fffa6bc                Mcu_SCG_SPLLInit
+                0x1fffab10       0x94 ./Autosar/Mcu/src/Mcu_SCG.o
+                0x1fffab10                Mcu_SCG_SPLLInit
  .text.Mcu_SCG_SIRCInit
-                0x1fffa750       0x8c ./Autosar/Mcu/src/Mcu_SCG.o
-                0x1fffa750                Mcu_SCG_SIRCInit
+                0x1fffaba4       0x8c ./Autosar/Mcu/src/Mcu_SCG.o
+                0x1fffaba4                Mcu_SCG_SIRCInit
  .text.Mcu_SCG_FIRCInit
-                0x1fffa7dc       0xa0 ./Autosar/Mcu/src/Mcu_SCG.o
-                0x1fffa7dc                Mcu_SCG_FIRCInit
+                0x1fffac30       0xa0 ./Autosar/Mcu/src/Mcu_SCG.o
+                0x1fffac30                Mcu_SCG_FIRCInit
  .text.Mcu_SCG_SrcClock
-                0x1fffa87c       0x9c ./Autosar/Mcu/src/Mcu_SCG.o
-                0x1fffa87c                Mcu_SCG_SrcClock
+                0x1fffacd0       0x9c ./Autosar/Mcu/src/Mcu_SCG.o
+                0x1fffacd0                Mcu_SCG_SrcClock
  .text.Mcu_SCG_SwitchToTrustedClock
-                0x1fffa918       0x68 ./Autosar/Mcu/src/Mcu_SCG.o
-                0x1fffa918                Mcu_SCG_SwitchToTrustedClock
+                0x1fffad6c       0x68 ./Autosar/Mcu/src/Mcu_SCG.o
+                0x1fffad6c                Mcu_SCG_SwitchToTrustedClock
  .text.Mcu_SCG_GetPLLStatus
-                0x1fffa980       0x34 ./Autosar/Mcu/src/Mcu_SCG.o
-                0x1fffa980                Mcu_SCG_GetPLLStatus
+                0x1fffadd4       0x34 ./Autosar/Mcu/src/Mcu_SCG.o
+                0x1fffadd4                Mcu_SCG_GetPLLStatus
  .text.Mcu_SIM_Init
-                0x1fffa9b4       0xd4 ./Autosar/Mcu/src/Mcu_SIM.o
-                0x1fffa9b4                Mcu_SIM_Init
+                0x1fffae08       0xd4 ./Autosar/Mcu/src/Mcu_SIM.o
+                0x1fffae08                Mcu_SIM_Init
  .text.Mcu_SIM_ClockInit
-                0x1fffaa88       0xb0 ./Autosar/Mcu/src/Mcu_SIM.o
-                0x1fffaa88                Mcu_SIM_ClockInit
+                0x1fffaedc       0xb0 ./Autosar/Mcu/src/Mcu_SIM.o
+                0x1fffaedc                Mcu_SIM_ClockInit
  .text.Mcu_SMC_Init
-                0x1fffab38       0x24 ./Autosar/Mcu/src/Mcu_SMC.o
-                0x1fffab38                Mcu_SMC_Init
+                0x1fffaf8c       0x24 ./Autosar/Mcu/src/Mcu_SMC.o
+                0x1fffaf8c                Mcu_SMC_Init
  .text.init_data_bss
-                0x1fffab5c      0x128 ./Project_Settings/Startup_Code/startup.o
-                0x1fffab5c                init_data_bss
+                0x1fffafb0      0x128 ./Project_Settings/Startup_Code/startup.o
+                0x1fffafb0                init_data_bss
  .text.SystemInit
-                0x1fffac84       0x30 ./Project_Settings/Startup_Code/system_S32K144.o
-                0x1fffac84                SystemInit
- .text.LPUART1_Init
-                0x1fffacb4       0xc4 ./src/main.o
-                0x1fffacb4                LPUART1_Init
- .text.LPUART1_TransmitChar
-                0x1fffad78       0x2c ./src/main.o
-                0x1fffad78                LPUART1_TransmitChar
- .text.LPUART1_TransmitString
-                0x1fffada4       0x34 ./src/main.o
-                0x1fffada4                LPUART1_TransmitString
- .text.ATF_McuReadError
-                0x1fffadd8      0x2b4 ./src/main.o
-                0x1fffadd8                ATF_McuReadError
- .text.main     0x1fffb08c       0x68 ./src/main.o
-                0x1fffb08c                main
+                0x1fffb0d8       0x30 ./Project_Settings/Startup_Code/system_S32K144.o
+                0x1fffb0d8                SystemInit
+ .text.ATF_McuTestAssert
+                0x1fffb108       0x14 ./src/main.o
+                0x1fffb108                ATF_McuTestAssert
+ .text.Det_CheckError
+                0x1fffb11c       0x2c ./src/main.o
+                0x1fffb11c                Det_CheckError
+ .text.ATF_McuResultsError
+                0x1fffb148      0x2b4 ./src/main.o
+                0x1fffb148                ATF_McuResultsError
+ .text.Enable_NVIC
+                0x1fffb3fc       0x60 ./src/main.o
+                0x1fffb3fc                Enable_NVIC
+ .text.main     0x1fffb45c      0x1c0 ./src/main.o
+                0x1fffb45c                main
  .text.Gpt_Notification
-                0x1fffb0f4       0x1c ./src/main.o
-                0x1fffb0f4                Gpt_Notification
- .text.memset   0x1fffb110       0x9c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memset.o)
-                0x1fffb110                memset
- .text.sprintf  0x1fffb1ac       0x4c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sprintf.o)
-                0x1fffb1ac                sprintf
+                0x1fffb61c       0x2c ./src/main.o
+                0x1fffb61c                Gpt_Notification
+ .text.LPUART1_Init
+                0x1fffb648       0xc4 ./src/uart.o
+                0x1fffb648                LPUART1_Init
+ .text.LPUART1_TransmitChar
+                0x1fffb70c       0x2c ./src/uart.o
+                0x1fffb70c                LPUART1_TransmitChar
+ .text.LPUART1_TransmitString
+                0x1fffb738       0x34 ./src/uart.o
+                0x1fffb738                LPUART1_TransmitString
+ .text.memset   0x1fffb76c       0x9c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memset.o)
+                0x1fffb76c                memset
+ .text.sprintf  0x1fffb808       0x4c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sprintf.o)
+                0x1fffb808                sprintf
  .text._svfprintf_r
-                0x1fffb1f8     0x1494 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
-                0x1fffb1f8                _svfprintf_r
+                0x1fffb854     0x1494 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
+                0x1fffb854                _svfprintf_r
  .text.startup.register_fini
-                0x1fffc68c       0x14 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__call_atexit.o)
- .text.atexit   0x1fffc6a0        0xc D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-atexit.o)
-                0x1fffc6a0                atexit
- .text.quorem   0x1fffc6ac      0x12c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
- .text._dtoa_r  0x1fffc7d8      0xe94 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
-                0x1fffc7d8                _dtoa_r
+                0x1fffcce8       0x14 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__call_atexit.o)
+ .text.atexit   0x1fffccfc        0xc D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-atexit.o)
+                0x1fffccfc                atexit
+ .text.quorem   0x1fffcd08      0x12c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
+ *fill*         0x1fffce34        0x4 
+ .text._dtoa_r  0x1fffce38      0xe94 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
+                0x1fffce38                _dtoa_r
  .text.__libc_fini_array
-                0x1fffd66c       0x2c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-fini.o)
-                0x1fffd66c                __libc_fini_array
+                0x1fffdccc       0x2c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-fini.o)
+                0x1fffdccc                __libc_fini_array
  .text._localeconv_r
-                0x1fffd698        0x8 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-locale.o)
-                0x1fffd698                _localeconv_r
+                0x1fffdcf8        0x8 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-locale.o)
+                0x1fffdcf8                _localeconv_r
  .text._malloc_r
-                0x1fffd6a0      0x524 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x1fffd6a0                _malloc_r
- .text.memchr   0x1fffdbc4       0x94 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memchr.o)
-                0x1fffdbc4                memchr
+                0x1fffdd00      0x524 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
+                0x1fffdd00                _malloc_r
+ .text.memchr   0x1fffe224       0x94 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memchr.o)
+                0x1fffe224                memchr
  .text.__malloc_lock
-                0x1fffdc58        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mlock.o)
-                0x1fffdc58                __malloc_lock
+                0x1fffe2b8        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mlock.o)
+                0x1fffe2b8                __malloc_lock
  .text.__malloc_unlock
-                0x1fffdc5c        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mlock.o)
-                0x1fffdc5c                __malloc_unlock
- .text._Balloc  0x1fffdc60       0x4c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffdc60                _Balloc
- .text._Bfree   0x1fffdcac       0x14 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffdcac                _Bfree
+                0x1fffe2bc        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mlock.o)
+                0x1fffe2bc                __malloc_unlock
+ .text._Balloc  0x1fffe2c0       0x4c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe2c0                _Balloc
+ .text._Bfree   0x1fffe30c       0x14 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe30c                _Bfree
  .text.__multadd
-                0x1fffdcc0       0x84 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffdcc0                __multadd
+                0x1fffe320       0x84 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe320                __multadd
  .text.__hi0bits
-                0x1fffdd44       0x40 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffdd44                __hi0bits
+                0x1fffe3a4       0x40 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe3a4                __hi0bits
  .text.__lo0bits
-                0x1fffdd84       0x5c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffdd84                __lo0bits
- .text.__i2b    0x1fffdde0       0x14 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffdde0                __i2b
+                0x1fffe3e4       0x5c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe3e4                __lo0bits
+ .text.__i2b    0x1fffe440       0x14 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe440                __i2b
  .text.__multiply
-                0x1fffddf4      0x134 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffddf4                __multiply
+                0x1fffe454      0x134 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe454                __multiply
  .text.__pow5mult
-                0x1fffdf28       0xa0 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffdf28                __pow5mult
+                0x1fffe588       0xa0 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe588                __pow5mult
  .text.__lshift
-                0x1fffdfc8       0xac D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffdfc8                __lshift
- .text.__mcmp   0x1fffe074       0x48 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffe074                __mcmp
- .text.__mdiff  0x1fffe0bc       0xd4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffe0bc                __mdiff
- .text.__d2b    0x1fffe190       0xb8 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1fffe190                __d2b
+                0x1fffe628       0xac D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe628                __lshift
+ .text.__mcmp   0x1fffe6d4       0x48 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe6d4                __mcmp
+ .text.__mdiff  0x1fffe71c       0xd4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe71c                __mdiff
+ .text.__d2b    0x1fffe7f0       0xb8 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1fffe7f0                __d2b
  .text.__fpclassifyd
-                0x1fffe248       0x58 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-s_fpclassify.o)
-                0x1fffe248                __fpclassifyd
- .text._sbrk_r  0x1fffe2a0       0x24 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sbrkr.o)
-                0x1fffe2a0                _sbrk_r
- .text.strlen   0x1fffe2c4       0x5c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-strlen.o)
-                0x1fffe2c4                strlen
+                0x1fffe8a8       0x58 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-s_fpclassify.o)
+                0x1fffe8a8                __fpclassifyd
+ .text._sbrk_r  0x1fffe900       0x24 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sbrkr.o)
+                0x1fffe900                _sbrk_r
+ .text.strlen   0x1fffe924       0x5c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-strlen.o)
+                0x1fffe924                strlen
  .text.__ssprint_r
-                0x1fffe320      0x104 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfiprintf.o)
-                0x1fffe320                __ssprint_r
+                0x1fffe980      0x104 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfiprintf.o)
+                0x1fffe980                __ssprint_r
  .text.__register_exitproc
-                0x1fffe424       0xa4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__atexit.o)
-                0x1fffe424                __register_exitproc
+                0x1fffea84       0xa4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__atexit.o)
+                0x1fffea84                __register_exitproc
  .text._calloc_r
-                0x1fffe4c8       0x60 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-callocr.o)
-                0x1fffe4c8                _calloc_r
+                0x1fffeb28       0x60 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-callocr.o)
+                0x1fffeb28                _calloc_r
  .text._malloc_trim_r
-                0x1fffe528       0x9c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-freer.o)
-                0x1fffe528                _malloc_trim_r
- .text._free_r  0x1fffe5c4      0x1b0 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-freer.o)
-                0x1fffe5c4                _free_r
- .text.memmove  0x1fffe774       0xc8 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memmove.o)
-                0x1fffe774                memmove
+                0x1fffeb88       0x9c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-freer.o)
+                0x1fffeb88                _malloc_trim_r
+ .text._free_r  0x1fffec24      0x1b0 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-freer.o)
+                0x1fffec24                _free_r
+ .text.memmove  0x1fffedd4       0xc8 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memmove.o)
+                0x1fffedd4                memmove
  .text._realloc_r
-                0x1fffe83c      0x3ec D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reallocr.o)
-                0x1fffe83c                _realloc_r
- .text._sbrk    0x1fffec28       0x1c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libnosys.a(sbrk.o)
-                0x1fffec28                _sbrk
+                0x1fffee9c      0x3ec D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reallocr.o)
+                0x1fffee9c                _realloc_r
+ .text._sbrk    0x1ffff288       0x1c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libnosys.a(sbrk.o)
+                0x1ffff288                _sbrk
  *(.rodata)
- .rodata        0x1fffec44      0x2c3 ./src/main.o
+ .rodata        0x1ffff2a4      0x2df ./src/main.o
  *(.rodata*)
- *fill*         0x1fffef07        0x1 
+ *fill*         0x1ffff583        0x1 
  .rodata.Gpt_InitChannelPB
-                0x1fffef08       0x18 ./Autosar/Gpt/src/Gpt_PBcfg.o
+                0x1ffff584       0x1c ./Autosar/Gpt/src/Gpt_PBcfg.o
  .rodata.Gpt_Config
-                0x1fffef20       0x30 ./Autosar/Gpt/src/Gpt_PBcfg.o
-                0x1fffef20                Gpt_Config
+                0x1ffff5a0       0x30 ./Autosar/Gpt/src/Gpt_PBcfg.o
+                0x1ffff5a0                Gpt_Config
  .rodata.Mcu_RamConfigPB0
-                0x1fffef50       0x40 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff5d0       0x40 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_Mode_ConfigPB0
-                0x1fffef90        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff610        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ChipSelectionRegisterConfigPB0
-                0x1fffef98        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff618        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ChipSelectionConfigPB0
-                0x1fffefa0        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff620        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_TraceClockRegisterConfigPB0
-                0x1fffefa4        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff624        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_TraceClockConfigPB0
-                0x1fffefac        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff62c        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ClockGatingRegisterConfigPB0
-                0x1fffefb0        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff630        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ClockGatingConfigPB0
-                0x1fffefb8        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff638        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ClockConfigPB0
-                0x1fffefbc        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff63c        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SOSCCSR_RegisterConfigPB0
-                0x1fffefc8        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff648        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SOSCDIV_RegisterConfigPB0
-                0x1fffefd0        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff650        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SOSCCFG_RegisterConfigPB0
-                0x1fffefd8        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff658        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.SOSC_ClockConfigPB0
-                0x1fffefe0        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff660        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SPLLCSR_RegisterConfigPB0
-                0x1fffefec        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff66c        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SPLLDIV_RegisterConfigPB0
-                0x1fffeff4        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff674        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SPLLCFG_RegisterConfigPB0
-                0x1fffeffc        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff67c        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.SPLL_ClockConfigPB0
-                0x1ffff004        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff684        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_FIRCCSR_RegisterConfigPB0
-                0x1ffff010        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff690        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_FIRCDIV_RegisterConfigPB0
-                0x1ffff018        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff698        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_FIRCCFG_RegisterConfigPB0
-                0x1ffff020        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff6a0        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.FIRC_ClockConfigPB0
-                0x1ffff028        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff6a8        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SCG_ConfigPB0
-                0x1ffff034       0x20 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff6b4       0x20 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.PCC_aRegistersConfigPB0
-                0x1ffff054      0x100 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff6d4      0x100 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_PCC_ConfigPB0
-                0x1ffff154        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff7d4        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_ClockConfigPB0
-                0x1ffff15c       0x14 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff7dc       0x14 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SMC_ConfigPB0
-                0x1ffff170       0x10 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff7f0       0x10 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_PMC_ConfigPB0
-                0x1ffff180        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff800        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ChipControlRegisterConfigPB0
-                0x1ffff184        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff804        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ChipControlConfigurationPB0
-                0x1ffff18c        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff80c        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_LPOCLKSRegisterConfigPB0
-                0x1ffff190        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff810        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_LPOClockConfigurationPB0
-                0x1ffff198        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff818        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ADCOPTRegisterConfigPB0
-                0x1ffff19c        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff81c        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_AdcOptionsConfigurationPB0
-                0x1ffff1a4        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff824        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_FTMOPT0RegisterConfigPB0
-                0x1ffff1a8        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff828        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_FTMOPT0ConfigurationPB0
-                0x1ffff1b0        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff830        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_FTMOPT1RegisterConfigPB0
-                0x1ffff1b4        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff834        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_FTMOPT1ConfigurationPB0
-                0x1ffff1bc        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff83c        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_MiscellaneousRegisterConfig0PB0
-                0x1ffff1c0        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff840        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_MiscellaneousConfiguration0PB0
-                0x1ffff1c8        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff848        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_MiscellaneousRegisterConfig1PB0
-                0x1ffff1cc        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff84c        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_MiscellaneousConfiguration1PB0
-                0x1ffff1d4        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff854        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_SIM_ConfigPB0
-                0x1ffff1d8       0x1c ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff858       0x1c ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_DepProsConfigPB0
-                0x1ffff1f4        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff874        0xc ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_RCM_ResetPinControlRegisterConfigPB0
-                0x1ffff200        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff880        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_RCM_ResetPinControlConfigPB0
-                0x1ffff208        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff888        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_RCM_ResetInterruptEnableRegisterConfigPB0
-                0x1ffff20c        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff88c        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_RCM_ResetInterruptEnableConfigPB0
-                0x1ffff214        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff894        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_RCM_ConfigPB0
-                0x1ffff218        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff898        0x8 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_ResetConfigPB0
-                0x1ffff220        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff8a0        0x4 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .rodata.Mcu_Config
-                0x1ffff224       0x20 ./Autosar/Mcu/src/Mcu_PBcfg.o
-                0x1ffff224                Mcu_Config
+                0x1ffff8a4       0x20 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x1ffff8a4                Mcu_Config
  .rodata.str1.4
-                0x1ffff244        0x2 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-impure.o)
- *fill*         0x1ffff246        0x2 
+                0x1ffff8c4        0x2 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-impure.o)
+ *fill*         0x1ffff8c6        0x2 
  .rodata._global_impure_ptr
-                0x1ffff248        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-impure.o)
-                0x1ffff248                _global_impure_ptr
+                0x1ffff8c8        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-impure.o)
+                0x1ffff8c8                _global_impure_ptr
  .rodata.zeroes.6911
-                0x1ffff24c       0x10 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
+                0x1ffff8cc       0x10 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
  .rodata.blanks.6910
-                0x1ffff25c       0x10 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
+                0x1ffff8dc       0x10 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
  .rodata.str1.4
-                0x1ffff26c       0x42 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
- *fill*         0x1ffff2ae        0x2 
+                0x1ffff8ec       0x42 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
+ *fill*         0x1ffff92e        0x2 
  .rodata.str1.4
-                0x1ffff2b0       0x10 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
+                0x1ffff930       0x10 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
                                  0x12 (size before relaxing)
  .rodata.str1.4
-                0x1ffff2c0        0xc D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-locale.o)
+                0x1ffff940        0xc D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-locale.o)
                                  0x12 (size before relaxing)
- *fill*         0x1ffff2cc        0x4 
+ *fill*         0x1ffff94c        0x4 
  .rodata.__mprec_tens
-                0x1ffff2d0       0xc8 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1ffff2d0                __mprec_tens
+                0x1ffff950       0xc8 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1ffff950                __mprec_tens
  .rodata.p05.5302
-                0x1ffff398        0xc D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
- *fill*         0x1ffff3a4        0x4 
+                0x1ffffa18        0xc D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+ *fill*         0x1ffffa24        0x4 
  .rodata.__mprec_bigtens
-                0x1ffff3a8       0x28 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
-                0x1ffff3a8                __mprec_bigtens
+                0x1ffffa28       0x28 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x1ffffa28                __mprec_bigtens
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x1ffff3d0        0x0 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
+ .eh_frame      0x1ffffa50        0x0 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
  *(.init)
- .init          0x1ffff3d0        0x4 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crti.o
-                0x1ffff3d0                _init
- .init          0x1ffff3d4        0x8 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtn.o
+ .init          0x1ffffa50        0x4 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crti.o
+                0x1ffffa50                _init
+ .init          0x1ffffa54        0x8 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtn.o
  *(.fini)
- .fini          0x1ffff3dc        0x4 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crti.o
-                0x1ffff3dc                _fini
- .fini          0x1ffff3e0        0x8 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtn.o
-                0x1ffff3e8                . = ALIGN (0x4)
+ .fini          0x1ffffa5c        0x4 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crti.o
+                0x1ffffa5c                _fini
+ .fini          0x1ffffa60        0x8 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtn.o
+                0x1ffffa68                . = ALIGN (0x4)
 
-.vfp11_veneer   0x1ffff3e8        0x0
+.vfp11_veneer   0x1ffffa68        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x1ffff3e8        0x0
+.v4_bx          0x1ffffa68        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x1ffff3e8        0x0
+.iplt           0x1ffffa68        0x0
  .iplt          0x00000000        0x0 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
 
-.code_ram       0x1ffff3e8        0x0
-                0x1ffff3e8                . = ALIGN (0x4)
-                0x1ffff3e8                __CODE_RAM = .
-                0x1ffff3e8                __code_ram_start__ = .
+.code_ram       0x1ffffa68        0x0
+                0x1ffffa68                . = ALIGN (0x4)
+                0x1ffffa68                __CODE_RAM = .
+                0x1ffffa68                __code_ram_start__ = .
  *(.code_ram)
-                0x1ffff3e8                __CODE_ROM = .
-                0x1ffff3e8                __CODE_END = .
-                0x1ffff3e8                __code_ram_end__ = .
-                0x1ffff3e8                . = ALIGN (0x4)
+                0x1ffffa68                __CODE_ROM = .
+                0x1ffffa68                __CODE_END = .
+                0x1ffffa68                __code_ram_end__ = .
+                0x1ffffa68                . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x1ffff3e8        0x8
-                0x1ffff3e8                __exidx_start = .
+.ARM            0x1ffffa68        0x8
+                0x1ffffa68                __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x1ffff3e8        0x8 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_divdi3.o)
- .ARM.exidx     0x1ffff3f0        0x0 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_udivdi3.o)
+ .ARM.exidx     0x1ffffa68        0x8 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_divdi3.o)
+ .ARM.exidx     0x1ffffa70        0x0 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_udivdi3.o)
                                   0x8 (size before relaxing)
-                0x1ffff3f0                __exidx_end = .
+                0x1ffffa70                __exidx_end = .
 
-.rel.dyn        0x1ffff3f0        0x0
+.rel.dyn        0x1ffffa70        0x0
  .rel.iplt      0x00000000        0x0 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
 
-.ctors          0x1ffff3f0        0x0
-                0x1ffff3f0                __CTOR_LIST__ = .
+.ctors          0x1ffffa70        0x0
+                0x1ffffa70                __CTOR_LIST__ = .
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x1ffff3f0                __CTOR_END__ = .
+                0x1ffffa70                __CTOR_END__ = .
 
-.dtors          0x1ffff3f0        0x0
-                0x1ffff3f0                __DTOR_LIST__ = .
+.dtors          0x1ffffa70        0x0
+                0x1ffffa70                __DTOR_LIST__ = .
  *crtbegin.o(.dtors)
  *crtbegin?.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x1ffff3f0                __DTOR_END__ = .
+                0x1ffffa70                __DTOR_END__ = .
 
-.preinit_array  0x1ffff3f0        0x0
-                0x1ffff3f0                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x1ffffa70        0x0
+                0x1ffffa70                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x1ffff3f0                PROVIDE (__preinit_array_end, .)
+                0x1ffffa70                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x1ffff3f0        0x8
-                0x1ffff3f0                PROVIDE (__init_array_start, .)
+.init_array     0x1ffffa70        0x8
+                0x1ffffa70                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  .init_array.00000
-                0x1ffff3f0        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__call_atexit.o)
+                0x1ffffa70        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__call_atexit.o)
  *(.init_array*)
- .init_array    0x1ffff3f4        0x4 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
-                0x1ffff3f8                PROVIDE (__init_array_end, .)
+ .init_array    0x1ffffa74        0x4 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
+                0x1ffffa78                PROVIDE (__init_array_end, .)
 
-.fini_array     0x1ffff3f8        0x4
-                0x1ffff3f8                PROVIDE (__fini_array_start, .)
+.fini_array     0x1ffffa78        0x4
+                0x1ffffa78                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x1ffff3f8        0x4 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
-                0x1ffff3fc                PROVIDE (__fini_array_end, .)
-                0x1ffff3fc                __etext = .
-                0x1ffff3fc                __DATA_ROM = .
-                0x1ffff3fc                __DATA_END = __DATA_ROM
+ .fini_array    0x1ffffa78        0x4 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
+                0x1ffffa7c                PROVIDE (__fini_array_end, .)
+                0x1ffffa7c                __etext = .
+                0x1ffffa7c                __DATA_ROM = .
+                0x1ffffa7c                __DATA_END = __DATA_ROM
 
 .customSectionBlock
                 0x20000000        0x0
@@ -3473,7 +3558,7 @@ LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/
 .igot.plt       0x20000878        0x0
  .igot.plt      0x00000000        0x0 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtbegin.o
 
-.bss            0x20000878      0x130
+.bss            0x20000878      0x138
                 0x20000878                . = ALIGN (0x4)
                 0x20000878                __BSS_START = .
                 0x20000878                __bss_start__ = .
@@ -3492,84 +3577,87 @@ LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/
  .bss.msr_00    0x200008a4        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.msr_01    0x200008a8        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.msr_02    0x200008ac        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
- .bss.msr_29    0x200008b0        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
+ .bss.msr_06    0x200008b0        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
+ .bss.msr_29    0x200008b4        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.reentry_guard_00
-                0x200008b4        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
- .bss.reentry_guard_01
                 0x200008b8        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
- .bss.reentry_guard_02
+ .bss.reentry_guard_01
                 0x200008bc        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
- .bss.reentry_guard_29
+ .bss.reentry_guard_02
                 0x200008c0        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
+ .bss.reentry_guard_06
+                0x200008c4        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
+ .bss.reentry_guard_29
+                0x200008c8        0x4 ./Autosar/Gpt/src/SchM_Gpt.o
  .bss.Mcu_pConfigPtr
-                0x200008c4        0x4 ./Autosar/Mcu/src/Mcu.o
-                0x200008c4                Mcu_pConfigPtr
+                0x200008cc        0x4 ./Autosar/Mcu/src/Mcu.o
+                0x200008cc                Mcu_pConfigPtr
  .bss.gu8Mcu_Status
-                0x200008c8        0x1 ./Autosar/Mcu/src/Mcu.o
- *fill*         0x200008c9        0x3 
- .bss.Mcu_pClockConfig
-                0x200008cc        0x4 ./Autosar/Mcu/src/Mcu_Exe.o
- .bss.u8SpllSourceClock
-                0x200008d0        0x1 ./Autosar/Mcu/src/Mcu_Exe.o
+                0x200008d0        0x1 ./Autosar/Mcu/src/Mcu.o
  *fill*         0x200008d1        0x3 
- .bss.g_count   0x200008d4        0x4 ./src/main.o
-                0x200008d4                g_count
+ .bss.Mcu_pClockConfig
+                0x200008d4        0x4 ./Autosar/Mcu/src/Mcu_Exe.o
+ .bss.u8SpllSourceClock
+                0x200008d8        0x1 ./Autosar/Mcu/src/Mcu_Exe.o
+ *fill*         0x200008d9        0x3 
+ .bss.g_count   0x200008dc        0x4 ./src/main.o
+                0x200008dc                g_count
  .bss.__malloc_max_total_mem
-                0x200008d8        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x200008d8                __malloc_max_total_mem
- .bss.__malloc_max_sbrked_mem
-                0x200008dc        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x200008dc                __malloc_max_sbrked_mem
- .bss.__malloc_top_pad
                 0x200008e0        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x200008e0                __malloc_top_pad
+                0x200008e0                __malloc_max_total_mem
+ .bss.__malloc_max_sbrked_mem
+                0x200008e4        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
+                0x200008e4                __malloc_max_sbrked_mem
+ .bss.__malloc_top_pad
+                0x200008e8        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
+                0x200008e8                __malloc_top_pad
  .bss.__malloc_current_mallinfo
-                0x200008e4       0x28 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x200008e4                __malloc_current_mallinfo
+                0x200008ec       0x28 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
+                0x200008ec                __malloc_current_mallinfo
  .bss.heap_end.4079
-                0x2000090c        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libnosys.a(sbrk.o)
+                0x20000914        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libnosys.a(sbrk.o)
  *(COMMON)
- COMMON         0x20000910       0x90 ./Autosar/Det/src/Det.o
-                0x20000910                Det_ErrorId
-                0x20000918                Det_RuntimeErrorId
-                0x20000920                Det_RuntimeModuleId
-                0x20000930                Det_TransientFaultId
-                0x20000938                Det_InstanceId
-                0x20000940                Det_TransientApiId
-                0x20000948                Det_numEventErrors
-                0x2000094c                Det_numRuntimeEventErrors
-                0x20000950                Det_ApiId
-                0x20000958                Det_numTransientEventErrors
-                0x2000095c                Det_TransientModuleId
-                0x2000096c                Det_OverflowEvent
-                0x20000970                Det_RuntimeApiId
-                0x20000978                Det_TransientOverflowEvent
-                0x2000097c                Det_ModuleId
-                0x2000098c                Det_RuntimeOverflowEvent
-                0x20000990                Det_TransientInstanceId
-                0x20000998                Det_RuntimeInstanceId
- COMMON         0x200009a0        0x1 ./src/main.o
-                0x200009a0                ePllStatus
- *fill*         0x200009a1        0x3 
- COMMON         0x200009a4        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reent.o)
-                0x200009a4                errno
-                0x200009a8                . = ALIGN (0x4)
-                0x200009a8                __bss_end__ = .
-                0x200009a8                __BSS_END = .
+ COMMON         0x20000918       0x90 ./Autosar/Det/src/Det.o
+                0x20000918                Det_ErrorId
+                0x20000920                Det_RuntimeErrorId
+                0x20000928                Det_RuntimeModuleId
+                0x20000938                Det_TransientFaultId
+                0x20000940                Det_InstanceId
+                0x20000948                Det_TransientApiId
+                0x20000950                Det_numEventErrors
+                0x20000954                Det_numRuntimeEventErrors
+                0x20000958                Det_ApiId
+                0x20000960                Det_numTransientEventErrors
+                0x20000964                Det_TransientModuleId
+                0x20000974                Det_OverflowEvent
+                0x20000978                Det_RuntimeApiId
+                0x20000980                Det_TransientOverflowEvent
+                0x20000984                Det_ModuleId
+                0x20000994                Det_RuntimeOverflowEvent
+                0x20000998                Det_TransientInstanceId
+                0x200009a0                Det_RuntimeInstanceId
+ COMMON         0x200009a8        0x1 ./src/main.o
+                0x200009a8                ePllStatus
+ *fill*         0x200009a9        0x3 
+ COMMON         0x200009ac        0x4 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reent.o)
+                0x200009ac                errno
+                0x200009b0                . = ALIGN (0x4)
+                0x200009b0                __bss_end__ = .
+                0x200009b0                __BSS_END = .
 
-.heap           0x200009a8      0x400
-                0x200009a8                . = ALIGN (0x8)
-                0x200009a8                __end__ = .
-                0x200009a8                __heap_start__ = .
-                0x200009a8                PROVIDE (end, .)
-                0x200009a8                PROVIDE (_end, .)
-                0x200009a8                PROVIDE (__end, .)
-                0x200009a8                __HeapBase = .
-                0x20000da8                . = (. + HEAP_SIZE)
- *fill*         0x200009a8      0x400 
-                0x20000da8                __HeapLimit = .
-                0x20000da8                __heap_limit = .
-                0x20000da8                __heap_end__ = .
+.heap           0x200009b0      0x400
+                0x200009b0                . = ALIGN (0x8)
+                0x200009b0                __end__ = .
+                0x200009b0                __heap_start__ = .
+                0x200009b0                PROVIDE (end, .)
+                0x200009b0                PROVIDE (_end, .)
+                0x200009b0                PROVIDE (__end, .)
+                0x200009b0                __HeapBase = .
+                0x20000db0                . = (. + HEAP_SIZE)
+ *fill*         0x200009b0      0x400 
+                0x20000db0                __HeapLimit = .
+                0x20000db0                __heap_limit = .
+                0x20000db0                __heap_end__ = .
                 0x20007000                __StackTop = (ORIGIN (m_data) + 0x7000)
                 0x20006c00                __StackLimit = (__StackTop - STACK_SIZE)
                 0x20007000                PROVIDE (__stack, __StackTop)
@@ -3581,7 +3669,7 @@ LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/
  *fill*         0x20006c00      0x400 
                 0x20007000                __stack_end__ = .
                 0x20000878                __START_BSS = __BSS_START
-                0x200009a8                __END_BSS = __BSS_END
+                0x200009b0                __END_BSS = __BSS_END
                 0x20007000                __SP_INIT = __StackTop
 
 .ARM.attributes
@@ -3604,152 +3692,160 @@ LOAD d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/
  .ARM.attributes
                 0x0000014b       0x33 ./Autosar/Gpt/src/SchM_Gpt.o
  .ARM.attributes
-                0x0000017e       0x33 ./Autosar/Mcu/src/Mcu.o
+                0x0000017e       0x33 ./Autosar/Mcl/src/Lptmr_Common.o
  .ARM.attributes
-                0x000001b1       0x33 ./Autosar/Mcu/src/Mcu_Exe.o
+                0x000001b1       0x33 ./Autosar/Mcu/src/Mcu.o
  .ARM.attributes
-                0x000001e4       0x33 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x000001e4       0x33 ./Autosar/Mcu/src/Mcu_Exe.o
  .ARM.attributes
-                0x00000217       0x33 ./Autosar/Mcu/src/Mcu_PCC.o
+                0x00000217       0x33 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .ARM.attributes
-                0x0000024a       0x33 ./Autosar/Mcu/src/Mcu_PMC.o
+                0x0000024a       0x33 ./Autosar/Mcu/src/Mcu_PCC.o
  .ARM.attributes
-                0x0000027d       0x33 ./Autosar/Mcu/src/Mcu_RCM.o
+                0x0000027d       0x33 ./Autosar/Mcu/src/Mcu_PMC.o
  .ARM.attributes
-                0x000002b0       0x33 ./Autosar/Mcu/src/Mcu_SCG.o
+                0x000002b0       0x33 ./Autosar/Mcu/src/Mcu_RCM.o
  .ARM.attributes
-                0x000002e3       0x33 ./Autosar/Mcu/src/Mcu_SIM.o
+                0x000002e3       0x33 ./Autosar/Mcu/src/Mcu_SCG.o
  .ARM.attributes
-                0x00000316       0x33 ./Autosar/Mcu/src/Mcu_SMC.o
+                0x00000316       0x33 ./Autosar/Mcu/src/Mcu_SIM.o
  .ARM.attributes
-                0x00000349       0x33 ./Project_Settings/Startup_Code/startup.o
+                0x00000349       0x33 ./Autosar/Mcu/src/Mcu_SMC.o
  .ARM.attributes
-                0x0000037c       0x1b ./Project_Settings/Startup_Code/startup_S32K144.o
+                0x0000037c       0x33 ./Project_Settings/Startup_Code/startup.o
  .ARM.attributes
-                0x00000397       0x33 ./Project_Settings/Startup_Code/system_S32K144.o
+                0x000003af       0x1b ./Project_Settings/Startup_Code/startup_S32K144.o
  .ARM.attributes
-                0x000003ca       0x33 ./src/main.o
+                0x000003ca       0x33 ./Project_Settings/Startup_Code/system_S32K144.o
  .ARM.attributes
-                0x000003fd       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-impure.o)
+                0x000003fd       0x33 ./src/main.o
  .ARM.attributes
-                0x0000042b       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memset.o)
+                0x00000430       0x33 ./src/uart.o
  .ARM.attributes
-                0x00000459       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sprintf.o)
+                0x00000463       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000487       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
+                0x00000491       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memset.o)
  .ARM.attributes
-                0x000004b5       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__call_atexit.o)
+                0x000004bf       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sprintf.o)
  .ARM.attributes
-                0x000004e3       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-atexit.o)
+                0x000004ed       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
  .ARM.attributes
-                0x00000511       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
+                0x0000051b       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__call_atexit.o)
  .ARM.attributes
-                0x0000053f       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-fini.o)
+                0x00000549       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-atexit.o)
  .ARM.attributes
-                0x0000056d       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-locale.o)
+                0x00000577       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
  .ARM.attributes
-                0x0000059b       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
+                0x000005a5       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-fini.o)
  .ARM.attributes
-                0x000005c9       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memchr.o)
+                0x000005d3       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-locale.o)
  .ARM.attributes
-                0x000005f7       0x1c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memcpy.o)
+                0x00000601       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
  .ARM.attributes
-                0x00000613       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mlock.o)
+                0x0000062f       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memchr.o)
  .ARM.attributes
-                0x00000641       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+                0x0000065d       0x1c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memcpy.o)
  .ARM.attributes
-                0x0000066f       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-s_fpclassify.o)
+                0x00000679       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mlock.o)
  .ARM.attributes
-                0x0000069d       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sbrkr.o)
+                0x000006a7       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
  .ARM.attributes
-                0x000006cb       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-strlen.o)
+                0x000006d5       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-s_fpclassify.o)
  .ARM.attributes
-                0x000006f9       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfiprintf.o)
+                0x00000703       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sbrkr.o)
  .ARM.attributes
-                0x00000727       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__atexit.o)
+                0x00000731       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-strlen.o)
  .ARM.attributes
-                0x00000755       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-callocr.o)
+                0x0000075f       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfiprintf.o)
  .ARM.attributes
-                0x00000783       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-freer.o)
+                0x0000078d       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__atexit.o)
  .ARM.attributes
-                0x000007b1       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memmove.o)
+                0x000007bb       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-callocr.o)
  .ARM.attributes
-                0x000007df       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reallocr.o)
+                0x000007e9       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-freer.o)
  .ARM.attributes
-                0x0000080d       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reent.o)
+                0x00000817       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memmove.o)
  .ARM.attributes
-                0x0000083b       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_arm_addsubdf3.o)
+                0x00000845       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reallocr.o)
  .ARM.attributes
-                0x00000859       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_arm_muldivdf3.o)
+                0x00000873       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reent.o)
  .ARM.attributes
-                0x00000877       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_arm_cmpdf2.o)
+                0x000008a1       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_arm_addsubdf3.o)
  .ARM.attributes
-                0x00000895       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_arm_fixdfsi.o)
+                0x000008bf       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_arm_muldivdf3.o)
  .ARM.attributes
-                0x000008b3       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_aeabi_uldivmod.o)
+                0x000008dd       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_arm_cmpdf2.o)
  .ARM.attributes
-                0x000008d1       0x2e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(bpabi.o)
+                0x000008fb       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_arm_fixdfsi.o)
  .ARM.attributes
-                0x000008ff       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_dvmd_tls.o)
+                0x00000919       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_aeabi_uldivmod.o)
  .ARM.attributes
-                0x0000091d       0x2e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_divdi3.o)
+                0x00000937       0x2e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(bpabi.o)
  .ARM.attributes
-                0x0000094b       0x2e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_udivdi3.o)
+                0x00000965       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x00000979       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libnosys.a(sbrk.o)
+                0x00000983       0x2e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_divdi3.o)
  .ARM.attributes
-                0x000009a7       0x2e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtend.o
+                0x000009b1       0x2e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_udivdi3.o)
  .ARM.attributes
-                0x000009d5       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtn.o
+                0x000009df       0x2e D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libnosys.a(sbrk.o)
+ .ARM.attributes
+                0x00000a0d       0x2e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtend.o
+ .ARM.attributes
+                0x00000a3b       0x1e d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtn.o
                 0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region m_data overflowed with stack and heap)
 
 /DISCARD/
  *(.FlashConfig)
 OUTPUT(AutosarMcu.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x7195
+.debug_info     0x00000000     0x77be
  .debug_info    0x00000000      0x310 ./Autosar/Det/src/Det.o
- .debug_info    0x00000310      0xc4a ./Autosar/Gpt/src/Gpt.o
- .debug_info    0x00000f5a      0x2af ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_info    0x00001209      0x1c5 ./Autosar/Gpt/src/Gpt_Lptmr.o
- .debug_info    0x000013ce      0x265 ./Autosar/Gpt/src/Gpt_PBcfg.o
- .debug_info    0x00001633     0x1270 ./Autosar/Gpt/src/SchM_Gpt.o
- .debug_info    0x000028a3      0xc4f ./Autosar/Mcu/src/Mcu.o
- .debug_info    0x000034f2      0x88f ./Autosar/Mcu/src/Mcu_Exe.o
- .debug_info    0x00003d81      0xcd8 ./Autosar/Mcu/src/Mcu_PBcfg.o
- .debug_info    0x00004a59      0x13c ./Autosar/Mcu/src/Mcu_PCC.o
- .debug_info    0x00004b95      0x109 ./Autosar/Mcu/src/Mcu_PMC.o
- .debug_info    0x00004c9e      0x180 ./Autosar/Mcu/src/Mcu_RCM.o
- .debug_info    0x00004e1e      0x43b ./Autosar/Mcu/src/Mcu_SCG.o
- .debug_info    0x00005259      0x35f ./Autosar/Mcu/src/Mcu_SIM.o
- .debug_info    0x000055b8       0xf4 ./Autosar/Mcu/src/Mcu_SMC.o
- .debug_info    0x000056ac      0x49c ./Project_Settings/Startup_Code/startup.o
- .debug_info    0x00005b48       0x8a ./Project_Settings/Startup_Code/startup_S32K144.o
- .debug_info    0x00005bd2      0x516 ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_info    0x000060e8     0x10ad ./src/main.o
+ .debug_info    0x00000310      0xc62 ./Autosar/Gpt/src/Gpt.o
+ .debug_info    0x00000f72      0x2af ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_info    0x00001221      0x1c5 ./Autosar/Gpt/src/Gpt_Lptmr.o
+ .debug_info    0x000013e6      0x27d ./Autosar/Gpt/src/Gpt_PBcfg.o
+ .debug_info    0x00001663     0x1270 ./Autosar/Gpt/src/SchM_Gpt.o
+ .debug_info    0x000028d3       0xbb ./Autosar/Mcl/src/Lptmr_Common.o
+ .debug_info    0x0000298e      0xc4f ./Autosar/Mcu/src/Mcu.o
+ .debug_info    0x000035dd      0x88f ./Autosar/Mcu/src/Mcu_Exe.o
+ .debug_info    0x00003e6c      0xcd8 ./Autosar/Mcu/src/Mcu_PBcfg.o
+ .debug_info    0x00004b44      0x13c ./Autosar/Mcu/src/Mcu_PCC.o
+ .debug_info    0x00004c80      0x109 ./Autosar/Mcu/src/Mcu_PMC.o
+ .debug_info    0x00004d89      0x180 ./Autosar/Mcu/src/Mcu_RCM.o
+ .debug_info    0x00004f09      0x43b ./Autosar/Mcu/src/Mcu_SCG.o
+ .debug_info    0x00005344      0x35f ./Autosar/Mcu/src/Mcu_SIM.o
+ .debug_info    0x000056a3       0xf4 ./Autosar/Mcu/src/Mcu_SMC.o
+ .debug_info    0x00005797      0x49c ./Project_Settings/Startup_Code/startup.o
+ .debug_info    0x00005c33       0x8a ./Project_Settings/Startup_Code/startup_S32K144.o
+ .debug_info    0x00005cbd      0x516 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_info    0x000061d3     0x1168 ./src/main.o
+ .debug_info    0x0000733b      0x483 ./src/uart.o
 
-.debug_abbrev   0x00000000     0x10bd
+.debug_abbrev   0x00000000     0x1285
  .debug_abbrev  0x00000000       0xa2 ./Autosar/Det/src/Det.o
  .debug_abbrev  0x000000a2      0x197 ./Autosar/Gpt/src/Gpt.o
  .debug_abbrev  0x00000239       0xfd ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_abbrev  0x00000336       0xfd ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_abbrev  0x00000433       0xd4 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .debug_abbrev  0x00000507       0xa0 ./Autosar/Gpt/src/SchM_Gpt.o
- .debug_abbrev  0x000005a7      0x145 ./Autosar/Mcu/src/Mcu.o
- .debug_abbrev  0x000006ec       0xfc ./Autosar/Mcu/src/Mcu_Exe.o
- .debug_abbrev  0x000007e8       0xbb ./Autosar/Mcu/src/Mcu_PBcfg.o
- .debug_abbrev  0x000008a3       0xb2 ./Autosar/Mcu/src/Mcu_PCC.o
- .debug_abbrev  0x00000955       0xa0 ./Autosar/Mcu/src/Mcu_PMC.o
- .debug_abbrev  0x000009f5       0xa0 ./Autosar/Mcu/src/Mcu_RCM.o
- .debug_abbrev  0x00000a95      0x108 ./Autosar/Mcu/src/Mcu_SCG.o
- .debug_abbrev  0x00000b9d       0x91 ./Autosar/Mcu/src/Mcu_SIM.o
- .debug_abbrev  0x00000c2e       0x91 ./Autosar/Mcu/src/Mcu_SMC.o
- .debug_abbrev  0x00000cbf      0x101 ./Project_Settings/Startup_Code/startup.o
- .debug_abbrev  0x00000dc0       0x14 ./Project_Settings/Startup_Code/startup_S32K144.o
- .debug_abbrev  0x00000dd4      0x118 ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_abbrev  0x00000eec      0x1d1 ./src/main.o
+ .debug_abbrev  0x000005a7       0x71 ./Autosar/Mcl/src/Lptmr_Common.o
+ .debug_abbrev  0x00000618      0x145 ./Autosar/Mcu/src/Mcu.o
+ .debug_abbrev  0x0000075d       0xfc ./Autosar/Mcu/src/Mcu_Exe.o
+ .debug_abbrev  0x00000859       0xbb ./Autosar/Mcu/src/Mcu_PBcfg.o
+ .debug_abbrev  0x00000914       0xb2 ./Autosar/Mcu/src/Mcu_PCC.o
+ .debug_abbrev  0x000009c6       0xa0 ./Autosar/Mcu/src/Mcu_PMC.o
+ .debug_abbrev  0x00000a66       0xa0 ./Autosar/Mcu/src/Mcu_RCM.o
+ .debug_abbrev  0x00000b06      0x108 ./Autosar/Mcu/src/Mcu_SCG.o
+ .debug_abbrev  0x00000c0e       0x91 ./Autosar/Mcu/src/Mcu_SIM.o
+ .debug_abbrev  0x00000c9f       0x91 ./Autosar/Mcu/src/Mcu_SMC.o
+ .debug_abbrev  0x00000d30      0x101 ./Project_Settings/Startup_Code/startup.o
+ .debug_abbrev  0x00000e31       0x14 ./Project_Settings/Startup_Code/startup_S32K144.o
+ .debug_abbrev  0x00000e45      0x118 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_abbrev  0x00000f5d      0x1fe ./src/main.o
+ .debug_abbrev  0x0000115b      0x12a ./src/uart.o
 
-.debug_aranges  0x00000000      0x828
+.debug_aranges  0x00000000      0x878
  .debug_aranges
                 0x00000000       0x40 ./Autosar/Det/src/Det.o
  .debug_aranges
@@ -3763,51 +3859,57 @@ OUTPUT(AutosarMcu.elf elf32-littlearm)
  .debug_aranges
                 0x00000180      0x430 ./Autosar/Gpt/src/SchM_Gpt.o
  .debug_aranges
-                0x000005b0       0x70 ./Autosar/Mcu/src/Mcu.o
+                0x000005b0       0x20 ./Autosar/Mcl/src/Lptmr_Common.o
  .debug_aranges
-                0x00000620       0x40 ./Autosar/Mcu/src/Mcu_Exe.o
+                0x000005d0       0x70 ./Autosar/Mcu/src/Mcu.o
  .debug_aranges
-                0x00000660       0x18 ./Autosar/Mcu/src/Mcu_PBcfg.o
+                0x00000640       0x40 ./Autosar/Mcu/src/Mcu_Exe.o
  .debug_aranges
-                0x00000678       0x20 ./Autosar/Mcu/src/Mcu_PCC.o
+                0x00000680       0x18 ./Autosar/Mcu/src/Mcu_PBcfg.o
  .debug_aranges
-                0x00000698       0x20 ./Autosar/Mcu/src/Mcu_PMC.o
+                0x00000698       0x20 ./Autosar/Mcu/src/Mcu_PCC.o
  .debug_aranges
-                0x000006b8       0x20 ./Autosar/Mcu/src/Mcu_RCM.o
+                0x000006b8       0x20 ./Autosar/Mcu/src/Mcu_PMC.o
  .debug_aranges
-                0x000006d8       0x50 ./Autosar/Mcu/src/Mcu_SCG.o
+                0x000006d8       0x20 ./Autosar/Mcu/src/Mcu_RCM.o
  .debug_aranges
-                0x00000728       0x28 ./Autosar/Mcu/src/Mcu_SIM.o
+                0x000006f8       0x50 ./Autosar/Mcu/src/Mcu_SCG.o
  .debug_aranges
-                0x00000750       0x20 ./Autosar/Mcu/src/Mcu_SMC.o
+                0x00000748       0x28 ./Autosar/Mcu/src/Mcu_SIM.o
  .debug_aranges
-                0x00000770       0x20 ./Project_Settings/Startup_Code/startup.o
+                0x00000770       0x20 ./Autosar/Mcu/src/Mcu_SMC.o
  .debug_aranges
-                0x00000790       0x20 ./Project_Settings/Startup_Code/startup_S32K144.o
+                0x00000790       0x20 ./Project_Settings/Startup_Code/startup.o
  .debug_aranges
-                0x000007b0       0x30 ./Project_Settings/Startup_Code/system_S32K144.o
+                0x000007b0       0x20 ./Project_Settings/Startup_Code/startup_S32K144.o
  .debug_aranges
-                0x000007e0       0x48 ./src/main.o
+                0x000007d0       0x30 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_aranges
+                0x00000800       0x48 ./src/main.o
+ .debug_aranges
+                0x00000848       0x30 ./src/uart.o
 
-.debug_ranges   0x00000000      0x6d8
+.debug_ranges   0x00000000      0x708
  .debug_ranges  0x00000000       0x30 ./Autosar/Det/src/Det.o
  .debug_ranges  0x00000030       0x70 ./Autosar/Gpt/src/Gpt.o
  .debug_ranges  0x000000a0       0x40 ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_ranges  0x000000e0       0x48 ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_ranges  0x00000128      0x420 ./Autosar/Gpt/src/SchM_Gpt.o
- .debug_ranges  0x00000548       0x60 ./Autosar/Mcu/src/Mcu.o
- .debug_ranges  0x000005a8       0x30 ./Autosar/Mcu/src/Mcu_Exe.o
- .debug_ranges  0x000005d8       0x10 ./Autosar/Mcu/src/Mcu_PCC.o
- .debug_ranges  0x000005e8       0x10 ./Autosar/Mcu/src/Mcu_PMC.o
- .debug_ranges  0x000005f8       0x10 ./Autosar/Mcu/src/Mcu_RCM.o
- .debug_ranges  0x00000608       0x40 ./Autosar/Mcu/src/Mcu_SCG.o
- .debug_ranges  0x00000648       0x18 ./Autosar/Mcu/src/Mcu_SIM.o
- .debug_ranges  0x00000660       0x10 ./Autosar/Mcu/src/Mcu_SMC.o
- .debug_ranges  0x00000670       0x10 ./Project_Settings/Startup_Code/startup.o
- .debug_ranges  0x00000680       0x20 ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_ranges  0x000006a0       0x38 ./src/main.o
+ .debug_ranges  0x00000548       0x10 ./Autosar/Mcl/src/Lptmr_Common.o
+ .debug_ranges  0x00000558       0x60 ./Autosar/Mcu/src/Mcu.o
+ .debug_ranges  0x000005b8       0x30 ./Autosar/Mcu/src/Mcu_Exe.o
+ .debug_ranges  0x000005e8       0x10 ./Autosar/Mcu/src/Mcu_PCC.o
+ .debug_ranges  0x000005f8       0x10 ./Autosar/Mcu/src/Mcu_PMC.o
+ .debug_ranges  0x00000608       0x10 ./Autosar/Mcu/src/Mcu_RCM.o
+ .debug_ranges  0x00000618       0x40 ./Autosar/Mcu/src/Mcu_SCG.o
+ .debug_ranges  0x00000658       0x18 ./Autosar/Mcu/src/Mcu_SIM.o
+ .debug_ranges  0x00000670       0x10 ./Autosar/Mcu/src/Mcu_SMC.o
+ .debug_ranges  0x00000680       0x10 ./Project_Settings/Startup_Code/startup.o
+ .debug_ranges  0x00000690       0x20 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_ranges  0x000006b0       0x38 ./src/main.o
+ .debug_ranges  0x000006e8       0x20 ./src/uart.o
 
-.debug_macro    0x00000000    0x277dd
+.debug_macro    0x00000000    0x27a37
  .debug_macro   0x00000000       0x53 ./Autosar/Det/src/Det.o
  .debug_macro   0x00000053      0x868 ./Autosar/Det/src/Det.o
  .debug_macro   0x000008bb       0x89 ./Autosar/Det/src/Det.o
@@ -3816,161 +3918,169 @@ OUTPUT(AutosarMcu.elf elf32-littlearm)
  .debug_macro   0x00001156       0xa4 ./Autosar/Det/src/Det.o
  .debug_macro   0x000011fa       0x6b ./Autosar/Det/src/Det.o
  .debug_macro   0x00001265       0x10 ./Autosar/Det/src/Det.o
- .debug_macro   0x00001275      0x24a ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x000014bf       0xbd ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x0000157c      0x1b1 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x0000172d       0x64 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00001791       0x66 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x000017f7       0x3a ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00001831      0x359 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00001b8a      0x1f6 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00001d80       0x3a ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00001dba       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00001e0a       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00001e5a     0x1241 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x0000309b       0x34 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x000030cf       0x3b ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x0000310a       0x2e ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00003138      0x10d ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00003245       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00003295       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x000032e5       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00003335       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00003385       0x3a ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x000033bf       0x3a ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x000033f9       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00003449       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00003499       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x000034e9       0x50 ./Autosar/Gpt/src/Gpt.o
- .debug_macro   0x00003539      0x214 ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_macro   0x0000374d       0x6b ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_macro   0x000037b8      0x1fc ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_macro   0x000039b4       0x3b ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_macro   0x000039ef       0x3a ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_macro   0x00003a29       0x3b ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_macro   0x00003a64       0x3a ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_macro   0x00003a9e      0x1af ./Autosar/Gpt/src/Gpt_Lptmr.o
- .debug_macro   0x00003c4d       0x35 ./Autosar/Gpt/src/Gpt_Lptmr.o
- .debug_macro   0x00003c82       0x34 ./Autosar/Gpt/src/Gpt_Lptmr.o
- .debug_macro   0x00003cb6       0xd1 ./Autosar/Gpt/src/Gpt_Lptmr.o
- .debug_macro   0x00003d87      0x1c3 ./Autosar/Gpt/src/Gpt_PBcfg.o
- .debug_macro   0x00003f4a       0x96 ./Autosar/Gpt/src/SchM_Gpt.o
- .debug_macro   0x00003fe0      0x114 ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x000040f4       0xe9 ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x000041dd      0x1fc ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x000043d9       0xc4 ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x0000449d       0xd0 ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x0000456d      0x796 ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x00004d03      0x2e1 ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x00004fe4      0x5c6 ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x000055aa      0x237 ./Autosar/Mcu/src/Mcu.o
- .debug_macro   0x000057e1      0x125 ./Autosar/Mcu/src/Mcu_Exe.o
- .debug_macro   0x00005906      0x101 ./Autosar/Mcu/src/Mcu_PBcfg.o
- .debug_macro   0x00005a07       0x97 ./Autosar/Mcu/src/Mcu_PCC.o
- .debug_macro   0x00005a9e      0x2db ./Autosar/Mcu/src/Mcu_PCC.o
- .debug_macro   0x00005d79       0x97 ./Autosar/Mcu/src/Mcu_PMC.o
- .debug_macro   0x00005e10       0x97 ./Autosar/Mcu/src/Mcu_RCM.o
- .debug_macro   0x00005ea7      0x231 ./Autosar/Mcu/src/Mcu_RCM.o
- .debug_macro   0x000060d8       0xb3 ./Autosar/Mcu/src/Mcu_SCG.o
- .debug_macro   0x0000618b      0x5c0 ./Autosar/Mcu/src/Mcu_SCG.o
- .debug_macro   0x0000674b       0x97 ./Autosar/Mcu/src/Mcu_SIM.o
- .debug_macro   0x000067e2      0x790 ./Autosar/Mcu/src/Mcu_SIM.o
- .debug_macro   0x00006f72       0x97 ./Autosar/Mcu/src/Mcu_SMC.o
- .debug_macro   0x00007009       0xca ./Autosar/Mcu/src/Mcu_SMC.o
- .debug_macro   0x000070d3       0xa6 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x00007179       0x22 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x0000719b       0x44 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x000071df       0xe3 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x000072c2       0x22 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x000072e4      0x1df ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x000074c3       0x10 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x000074d3       0x7a ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x0000754d     0xed32 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x0001627f      0xb86 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x00016e05       0x22 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x00016e27       0x40 ./Project_Settings/Startup_Code/startup.o
- .debug_macro   0x00016e67       0xa6 ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_macro   0x00016f0d       0x19 ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_macro   0x00016f26     0xed1d ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_macro   0x00025c43       0x28 ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_macro   0x00025c6b      0x350 ./src/main.o
- .debug_macro   0x00025fbb      0xde8 ./src/main.o
- .debug_macro   0x00026da3       0x58 ./src/main.o
- .debug_macro   0x00026dfb       0x35 ./src/main.o
- .debug_macro   0x00026e30       0x9c ./src/main.o
- .debug_macro   0x00026ecc       0x16 ./src/main.o
- .debug_macro   0x00026ee2       0x97 ./src/main.o
- .debug_macro   0x00026f79      0x29d ./src/main.o
- .debug_macro   0x00027216       0xef ./src/main.o
- .debug_macro   0x00027305       0x10 ./src/main.o
- .debug_macro   0x00027315       0x52 ./src/main.o
- .debug_macro   0x00027367       0x16 ./src/main.o
- .debug_macro   0x0002737d       0x43 ./src/main.o
- .debug_macro   0x000273c0      0x180 ./src/main.o
- .debug_macro   0x00027540       0x10 ./src/main.o
- .debug_macro   0x00027550       0x22 ./src/main.o
- .debug_macro   0x00027572       0xbe ./src/main.o
- .debug_macro   0x00027630       0x16 ./src/main.o
- .debug_macro   0x00027646      0x197 ./src/main.o
+ .debug_macro   0x00001275      0x262 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x000014d7       0xbd ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00001594      0x1b8 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x0000174c       0x64 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x000017b0       0x66 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00001816       0x3a ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00001850      0x359 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00001ba9      0x1f6 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00001d9f       0x3a ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00001dd9       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00001e29       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00001e79     0x1241 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x000030ba       0x34 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x000030ee       0x3b ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003129       0x2e ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003157      0x10d ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003264       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x000032b4       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003304       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003354       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x000033a4       0x3a ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x000033de       0x3a ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003418       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003468       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x000034b8       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003508       0x50 ./Autosar/Gpt/src/Gpt.o
+ .debug_macro   0x00003558      0x22c ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x00003784       0x6b ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x000037ef      0x1fc ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x000039eb       0x3b ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x00003a26       0x3a ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x00003a60       0x3b ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x00003a9b       0x3a ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_macro   0x00003ad5      0x1af ./Autosar/Gpt/src/Gpt_Lptmr.o
+ .debug_macro   0x00003c84       0x35 ./Autosar/Gpt/src/Gpt_Lptmr.o
+ .debug_macro   0x00003cb9       0x34 ./Autosar/Gpt/src/Gpt_Lptmr.o
+ .debug_macro   0x00003ced       0xd1 ./Autosar/Gpt/src/Gpt_Lptmr.o
+ .debug_macro   0x00003dbe      0x1db ./Autosar/Gpt/src/Gpt_PBcfg.o
+ .debug_macro   0x00003f99       0x96 ./Autosar/Gpt/src/SchM_Gpt.o
+ .debug_macro   0x0000402f      0x1a2 ./Autosar/Mcl/src/Lptmr_Common.o
+ .debug_macro   0x000041d1      0x114 ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x000042e5       0xe9 ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x000043ce      0x1fc ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x000045ca       0xc4 ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x0000468e       0xd0 ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x0000475e      0x796 ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x00004ef4      0x2e1 ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x000051d5      0x5c6 ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x0000579b      0x237 ./Autosar/Mcu/src/Mcu.o
+ .debug_macro   0x000059d2      0x125 ./Autosar/Mcu/src/Mcu_Exe.o
+ .debug_macro   0x00005af7      0x101 ./Autosar/Mcu/src/Mcu_PBcfg.o
+ .debug_macro   0x00005bf8       0x97 ./Autosar/Mcu/src/Mcu_PCC.o
+ .debug_macro   0x00005c8f      0x2db ./Autosar/Mcu/src/Mcu_PCC.o
+ .debug_macro   0x00005f6a       0x97 ./Autosar/Mcu/src/Mcu_PMC.o
+ .debug_macro   0x00006001       0x97 ./Autosar/Mcu/src/Mcu_RCM.o
+ .debug_macro   0x00006098      0x231 ./Autosar/Mcu/src/Mcu_RCM.o
+ .debug_macro   0x000062c9       0xb3 ./Autosar/Mcu/src/Mcu_SCG.o
+ .debug_macro   0x0000637c      0x5c0 ./Autosar/Mcu/src/Mcu_SCG.o
+ .debug_macro   0x0000693c       0x97 ./Autosar/Mcu/src/Mcu_SIM.o
+ .debug_macro   0x000069d3      0x790 ./Autosar/Mcu/src/Mcu_SIM.o
+ .debug_macro   0x00007163       0x97 ./Autosar/Mcu/src/Mcu_SMC.o
+ .debug_macro   0x000071fa       0xca ./Autosar/Mcu/src/Mcu_SMC.o
+ .debug_macro   0x000072c4       0xa6 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x0000736a       0x22 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x0000738c       0x44 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x000073d0       0xe3 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x000074b3       0x22 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x000074d5      0x1df ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x000076b4       0x10 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x000076c4       0x7a ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x0000773e     0xed32 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x00016470      0xb86 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x00016ff6       0x22 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x00017018       0x40 ./Project_Settings/Startup_Code/startup.o
+ .debug_macro   0x00017058       0xa6 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_macro   0x000170fe       0x19 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_macro   0x00017117     0xed1d ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_macro   0x00025e34       0x28 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_macro   0x00025e5c      0x34c ./src/main.o
+ .debug_macro   0x000261a8      0xde8 ./src/main.o
+ .debug_macro   0x00026f90       0x58 ./src/main.o
+ .debug_macro   0x00026fe8       0x35 ./src/main.o
+ .debug_macro   0x0002701d       0x9c ./src/main.o
+ .debug_macro   0x000270b9       0x16 ./src/main.o
+ .debug_macro   0x000270cf       0x97 ./src/main.o
+ .debug_macro   0x00027166      0x29d ./src/main.o
+ .debug_macro   0x00027403       0xef ./src/main.o
+ .debug_macro   0x000274f2       0x10 ./src/main.o
+ .debug_macro   0x00027502       0x52 ./src/main.o
+ .debug_macro   0x00027554       0x16 ./src/main.o
+ .debug_macro   0x0002756a       0x43 ./src/main.o
+ .debug_macro   0x000275ad      0x180 ./src/main.o
+ .debug_macro   0x0002772d       0x10 ./src/main.o
+ .debug_macro   0x0002773d       0x22 ./src/main.o
+ .debug_macro   0x0002775f       0xbe ./src/main.o
+ .debug_macro   0x0002781d       0x16 ./src/main.o
+ .debug_macro   0x00027833      0x197 ./src/main.o
+ .debug_macro   0x000279ca       0x6d ./src/uart.o
 
-.debug_line     0x00000000     0x4009
+.debug_line     0x00000000     0x4595
  .debug_line    0x00000000      0x189 ./Autosar/Det/src/Det.o
- .debug_line    0x00000189      0x6a5 ./Autosar/Gpt/src/Gpt.o
- .debug_line    0x0000082e      0x3ac ./Autosar/Gpt/src/Gpt_Ipw.o
- .debug_line    0x00000bda      0x355 ./Autosar/Gpt/src/Gpt_Lptmr.o
- .debug_line    0x00000f2f      0x27a ./Autosar/Gpt/src/Gpt_PBcfg.o
- .debug_line    0x000011a9      0xda2 ./Autosar/Gpt/src/SchM_Gpt.o
- .debug_line    0x00001f4b      0x39d ./Autosar/Mcu/src/Mcu.o
- .debug_line    0x000022e8      0x26b ./Autosar/Mcu/src/Mcu_Exe.o
- .debug_line    0x00002553      0x1fc ./Autosar/Mcu/src/Mcu_PBcfg.o
- .debug_line    0x0000274f      0x183 ./Autosar/Mcu/src/Mcu_PCC.o
- .debug_line    0x000028d2      0x16e ./Autosar/Mcu/src/Mcu_PMC.o
- .debug_line    0x00002a40      0x170 ./Autosar/Mcu/src/Mcu_RCM.o
- .debug_line    0x00002bb0      0x31a ./Autosar/Mcu/src/Mcu_SCG.o
- .debug_line    0x00002eca      0x18a ./Autosar/Mcu/src/Mcu_SIM.o
- .debug_line    0x00003054      0x16b ./Autosar/Mcu/src/Mcu_SMC.o
- .debug_line    0x000031bf      0x318 ./Project_Settings/Startup_Code/startup.o
- .debug_line    0x000034d7       0x85 ./Project_Settings/Startup_Code/startup_S32K144.o
- .debug_line    0x0000355c      0x333 ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_line    0x0000388f      0x77a ./src/main.o
+ .debug_line    0x00000189      0x6c1 ./Autosar/Gpt/src/Gpt.o
+ .debug_line    0x0000084a      0x3c8 ./Autosar/Gpt/src/Gpt_Ipw.o
+ .debug_line    0x00000c12      0x355 ./Autosar/Gpt/src/Gpt_Lptmr.o
+ .debug_line    0x00000f67      0x296 ./Autosar/Gpt/src/Gpt_PBcfg.o
+ .debug_line    0x000011fd      0xda2 ./Autosar/Gpt/src/SchM_Gpt.o
+ .debug_line    0x00001f9f      0x28d ./Autosar/Mcl/src/Lptmr_Common.o
+ .debug_line    0x0000222c      0x39d ./Autosar/Mcu/src/Mcu.o
+ .debug_line    0x000025c9      0x26b ./Autosar/Mcu/src/Mcu_Exe.o
+ .debug_line    0x00002834      0x1fc ./Autosar/Mcu/src/Mcu_PBcfg.o
+ .debug_line    0x00002a30      0x183 ./Autosar/Mcu/src/Mcu_PCC.o
+ .debug_line    0x00002bb3      0x16e ./Autosar/Mcu/src/Mcu_PMC.o
+ .debug_line    0x00002d21      0x170 ./Autosar/Mcu/src/Mcu_RCM.o
+ .debug_line    0x00002e91      0x31a ./Autosar/Mcu/src/Mcu_SCG.o
+ .debug_line    0x000031ab      0x18a ./Autosar/Mcu/src/Mcu_SIM.o
+ .debug_line    0x00003335      0x16b ./Autosar/Mcu/src/Mcu_SMC.o
+ .debug_line    0x000034a0      0x318 ./Project_Settings/Startup_Code/startup.o
+ .debug_line    0x000037b8       0x85 ./Project_Settings/Startup_Code/startup_S32K144.o
+ .debug_line    0x0000383d      0x333 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_line    0x00003b70      0x77f ./src/main.o
+ .debug_line    0x000042ef      0x2a6 ./src/uart.o
 
-.debug_str      0x00000000    0x89a31
+.debug_str      0x00000000    0x8a801
  .debug_str     0x00000000     0x3fd5 ./Autosar/Det/src/Det.o
                                0x407d (size before relaxing)
- .debug_str     0x00003fd5     0xcad2 ./Autosar/Gpt/src/Gpt.o
-                              0x10bfd (size before relaxing)
- .debug_str     0x00010aa7      0x575 ./Autosar/Gpt/src/Gpt_Ipw.o
-                              0x108bc (size before relaxing)
- .debug_str     0x0001101c     0x225f ./Autosar/Gpt/src/Gpt_Lptmr.o
-                               0x7d08 (size before relaxing)
- .debug_str     0x0001327b      0x132 ./Autosar/Gpt/src/Gpt_PBcfg.o
-                              0x1047f (size before relaxing)
- .debug_str     0x000133ad     0x1a1c ./Autosar/Gpt/src/SchM_Gpt.o
+ .debug_str     0x00003fd5     0xcd86 ./Autosar/Gpt/src/Gpt.o
+                              0x10eb1 (size before relaxing)
+ .debug_str     0x00010d5b      0x575 ./Autosar/Gpt/src/Gpt_Ipw.o
+                              0x10b48 (size before relaxing)
+ .debug_str     0x000112d0     0x225f ./Autosar/Gpt/src/Gpt_Lptmr.o
+                               0x7d2b (size before relaxing)
+ .debug_str     0x0001352f      0x132 ./Autosar/Gpt/src/Gpt_PBcfg.o
+                              0x10733 (size before relaxing)
+ .debug_str     0x00013661     0x1a1c ./Autosar/Gpt/src/SchM_Gpt.o
                                0x5c93 (size before relaxing)
- .debug_str     0x00014dc9     0xafbb ./Autosar/Mcu/src/Mcu.o
+ .debug_str     0x0001507d      0x4f8 ./Autosar/Mcl/src/Lptmr_Common.o
+                               0x7cce (size before relaxing)
+ .debug_str     0x00015575     0xafbb ./Autosar/Mcu/src/Mcu.o
                                0xfc2b (size before relaxing)
- .debug_str     0x0001fd84      0x12b ./Autosar/Mcu/src/Mcu_Exe.o
+ .debug_str     0x00020530      0x12b ./Autosar/Mcu/src/Mcu_Exe.o
                                0xf943 (size before relaxing)
- .debug_str     0x0001feaf      0x5c2 ./Autosar/Mcu/src/Mcu_PBcfg.o
+ .debug_str     0x0002065b      0x5c2 ./Autosar/Mcu/src/Mcu_PBcfg.o
                                0xff68 (size before relaxing)
- .debug_str     0x00020471       0x4b ./Autosar/Mcu/src/Mcu_PCC.o
+ .debug_str     0x00020c1d       0x4b ./Autosar/Mcu/src/Mcu_PCC.o
                                0x7354 (size before relaxing)
- .debug_str     0x000204bc       0x40 ./Autosar/Mcu/src/Mcu_PMC.o
+ .debug_str     0x00020c68       0x40 ./Autosar/Mcu/src/Mcu_PMC.o
                                0x6244 (size before relaxing)
- .debug_str     0x000204fc       0x55 ./Autosar/Mcu/src/Mcu_RCM.o
+ .debug_str     0x00020ca8       0x55 ./Autosar/Mcu/src/Mcu_RCM.o
                                0x6e02 (size before relaxing)
- .debug_str     0x00020551       0xd4 ./Autosar/Mcu/src/Mcu_SCG.o
+ .debug_str     0x00020cfd       0xd4 ./Autosar/Mcu/src/Mcu_SCG.o
                                0xa403 (size before relaxing)
- .debug_str     0x00020625       0x5d ./Autosar/Mcu/src/Mcu_SIM.o
+ .debug_str     0x00020dd1       0x5d ./Autosar/Mcu/src/Mcu_SIM.o
                                0x9d40 (size before relaxing)
- .debug_str     0x00020682       0x38 ./Autosar/Mcu/src/Mcu_SMC.o
+ .debug_str     0x00020e2e       0x38 ./Autosar/Mcu/src/Mcu_SMC.o
                                0x62ff (size before relaxing)
- .debug_str     0x000206ba    0x65fc2 ./Project_Settings/Startup_Code/startup.o
+ .debug_str     0x00020e66    0x65fc2 ./Project_Settings/Startup_Code/startup.o
                               0x685a7 (size before relaxing)
- .debug_str     0x0008667c      0x1f3 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_str     0x00086e28      0x1f3 ./Project_Settings/Startup_Code/system_S32K144.o
                               0x68418 (size before relaxing)
- .debug_str     0x0008686f     0x31c2 ./src/main.o
-                              0x7d0f2 (size before relaxing)
+ .debug_str     0x0008701b     0x3713 ./src/main.o
+                              0x7d791 (size before relaxing)
+ .debug_str     0x0008a72e       0xd3 ./src/uart.o
+                              0x62a08 (size before relaxing)
 
 .comment        0x00000000       0x70
  .comment       0x00000000       0x70 ./Autosar/Det/src/Det.o
@@ -3980,6 +4090,7 @@ OUTPUT(AutosarMcu.elf elf32-littlearm)
  .comment       0x00000000       0x71 ./Autosar/Gpt/src/Gpt_Lptmr.o
  .comment       0x00000000       0x71 ./Autosar/Gpt/src/Gpt_PBcfg.o
  .comment       0x00000000       0x71 ./Autosar/Gpt/src/SchM_Gpt.o
+ .comment       0x00000000       0x71 ./Autosar/Mcl/src/Lptmr_Common.o
  .comment       0x00000000       0x71 ./Autosar/Mcu/src/Mcu.o
  .comment       0x00000000       0x71 ./Autosar/Mcu/src/Mcu_Exe.o
  .comment       0x00000000       0x71 ./Autosar/Mcu/src/Mcu_PBcfg.o
@@ -3992,48 +4103,51 @@ OUTPUT(AutosarMcu.elf elf32-littlearm)
  .comment       0x00000000       0x71 ./Project_Settings/Startup_Code/startup.o
  .comment       0x00000000       0x71 ./Project_Settings/Startup_Code/system_S32K144.o
  .comment       0x00000000       0x71 ./src/main.o
+ .comment       0x00000000       0x71 ./src/uart.o
 
-.debug_frame    0x00000000     0x2448
+.debug_frame    0x00000000     0x2500
  .debug_frame   0x00000000       0xd4 ./Autosar/Det/src/Det.o
  .debug_frame   0x000000d4      0x1e8 ./Autosar/Gpt/src/Gpt.o
  .debug_frame   0x000002bc      0x10c ./Autosar/Gpt/src/Gpt_Ipw.o
  .debug_frame   0x000003c8      0x11c ./Autosar/Gpt/src/Gpt_Lptmr.o
  .debug_frame   0x000004e4      0xf70 ./Autosar/Gpt/src/SchM_Gpt.o
- .debug_frame   0x00001454      0x1a0 ./Autosar/Mcu/src/Mcu.o
- .debug_frame   0x000015f4       0xbc ./Autosar/Mcu/src/Mcu_Exe.o
- .debug_frame   0x000016b0       0x38 ./Autosar/Mcu/src/Mcu_PCC.o
- .debug_frame   0x000016e8       0x38 ./Autosar/Mcu/src/Mcu_PMC.o
- .debug_frame   0x00001720       0x38 ./Autosar/Mcu/src/Mcu_RCM.o
- .debug_frame   0x00001758      0x128 ./Autosar/Mcu/src/Mcu_SCG.o
- .debug_frame   0x00001880       0x60 ./Autosar/Mcu/src/Mcu_SIM.o
- .debug_frame   0x000018e0       0x38 ./Autosar/Mcu/src/Mcu_SMC.o
- .debug_frame   0x00001918       0x38 ./Project_Settings/Startup_Code/startup.o
- .debug_frame   0x00001950       0x80 ./Project_Settings/Startup_Code/system_S32K144.o
- .debug_frame   0x000019d0       0xe0 ./src/main.o
- .debug_frame   0x00001ab0       0x34 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memset.o)
- .debug_frame   0x00001ae4       0x84 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sprintf.o)
- .debug_frame   0x00001b68       0x40 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
- .debug_frame   0x00001ba8       0x50 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x00001bf8       0x20 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-atexit.o)
- .debug_frame   0x00001c18       0x88 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
- .debug_frame   0x00001ca0       0x34 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-fini.o)
- .debug_frame   0x00001cd4       0x9c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-locale.o)
- .debug_frame   0x00001d70       0x58 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
- .debug_frame   0x00001dc8       0x3c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memchr.o)
- .debug_frame   0x00001e04       0x30 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mlock.o)
- .debug_frame   0x00001e34      0x268 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
- .debug_frame   0x0000209c       0x34 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-s_fpclassify.o)
- .debug_frame   0x000020d0       0x2c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sbrkr.o)
- .debug_frame   0x000020fc       0x20 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-strlen.o)
- .debug_frame   0x0000211c       0x78 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfiprintf.o)
- .debug_frame   0x00002194       0x34 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__atexit.o)
- .debug_frame   0x000021c8       0x28 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-callocr.o)
- .debug_frame   0x000021f0       0x74 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-freer.o)
- .debug_frame   0x00002264       0x30 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memmove.o)
- .debug_frame   0x00002294       0x60 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reallocr.o)
- .debug_frame   0x000022f4       0x58 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reent.o)
- .debug_frame   0x0000234c       0x28 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x00002374       0x50 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(bpabi.o)
- .debug_frame   0x000023c4       0x34 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_divdi3.o)
- .debug_frame   0x000023f8       0x30 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_udivdi3.o)
- .debug_frame   0x00002428       0x20 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libnosys.a(sbrk.o)
+ .debug_frame   0x00001454       0x2c ./Autosar/Mcl/src/Lptmr_Common.o
+ .debug_frame   0x00001480      0x1a0 ./Autosar/Mcu/src/Mcu.o
+ .debug_frame   0x00001620       0xbc ./Autosar/Mcu/src/Mcu_Exe.o
+ .debug_frame   0x000016dc       0x38 ./Autosar/Mcu/src/Mcu_PCC.o
+ .debug_frame   0x00001714       0x38 ./Autosar/Mcu/src/Mcu_PMC.o
+ .debug_frame   0x0000174c       0x38 ./Autosar/Mcu/src/Mcu_RCM.o
+ .debug_frame   0x00001784      0x128 ./Autosar/Mcu/src/Mcu_SCG.o
+ .debug_frame   0x000018ac       0x60 ./Autosar/Mcu/src/Mcu_SIM.o
+ .debug_frame   0x0000190c       0x38 ./Autosar/Mcu/src/Mcu_SMC.o
+ .debug_frame   0x00001944       0x38 ./Project_Settings/Startup_Code/startup.o
+ .debug_frame   0x0000197c       0x80 ./Project_Settings/Startup_Code/system_S32K144.o
+ .debug_frame   0x000019fc       0xf0 ./src/main.o
+ .debug_frame   0x00001aec       0x7c ./src/uart.o
+ .debug_frame   0x00001b68       0x34 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memset.o)
+ .debug_frame   0x00001b9c       0x84 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sprintf.o)
+ .debug_frame   0x00001c20       0x40 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfprintf.o)
+ .debug_frame   0x00001c60       0x50 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00001cb0       0x20 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-atexit.o)
+ .debug_frame   0x00001cd0       0x88 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-dtoa.o)
+ .debug_frame   0x00001d58       0x34 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-fini.o)
+ .debug_frame   0x00001d8c       0x9c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-locale.o)
+ .debug_frame   0x00001e28       0x58 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mallocr.o)
+ .debug_frame   0x00001e80       0x3c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memchr.o)
+ .debug_frame   0x00001ebc       0x30 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mlock.o)
+ .debug_frame   0x00001eec      0x268 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-mprec.o)
+ .debug_frame   0x00002154       0x34 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-s_fpclassify.o)
+ .debug_frame   0x00002188       0x2c D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x000021b4       0x20 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-strlen.o)
+ .debug_frame   0x000021d4       0x78 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-svfiprintf.o)
+ .debug_frame   0x0000224c       0x34 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-__atexit.o)
+ .debug_frame   0x00002280       0x28 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-callocr.o)
+ .debug_frame   0x000022a8       0x74 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-freer.o)
+ .debug_frame   0x0000231c       0x30 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-memmove.o)
+ .debug_frame   0x0000234c       0x60 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reallocr.o)
+ .debug_frame   0x000023ac       0x58 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libc.a(lib_a-reent.o)
+ .debug_frame   0x00002404       0x28 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x0000242c       0x50 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(bpabi.o)
+ .debug_frame   0x0000247c       0x34 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_divdi3.o)
+ .debug_frame   0x000024b0       0x30 d:/nxp/s32ds_arm_v2.2/s32ds/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m\libgcc.a(_udivdi3.o)
+ .debug_frame   0x000024e0       0x20 D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib/lib/armv7e-m\libnosys.a(sbrk.o)

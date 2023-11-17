@@ -20,6 +20,8 @@ Autosar/Gpt/src/Gpt_Ipw.o: ../Autosar/Gpt/src/Gpt_Ipw.c \
  d:\workspaces32ds.arm.2.2\autosarmcu\autosar\mcl\include\Mcl_MemMap.h \
  d:\workspaces32ds.arm.2.2\autosarmcu\autosar\mcl\include\CompilerDefinition.h \
  D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_SRtc_Types.h \
+ D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/EcuM_Cbk.h \
+ D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/EcuM_Cfg.h \
  D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_MemMap.h \
  D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/CompilerDefinition.h \
  D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_Ipw.h \
@@ -70,6 +72,10 @@ d:\workspaces32ds.arm.2.2\autosarmcu\autosar\mcl\include\Mcl_MemMap.h:
 d:\workspaces32ds.arm.2.2\autosarmcu\autosar\mcl\include\CompilerDefinition.h:
 
 D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_SRtc_Types.h:
+
+D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/EcuM_Cbk.h:
+
+D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/EcuM_Cfg.h:
 
 D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_MemMap.h:
 

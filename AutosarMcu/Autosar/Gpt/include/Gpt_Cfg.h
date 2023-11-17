@@ -272,7 +272,7 @@ extern "C"{
 
 
 #define GPT_LPTMR_0_CH_0_ISR_USED
-        
+#define LPTMR_0_CH_0_ISR    LPTMR0_IRQHandler
 
 
 

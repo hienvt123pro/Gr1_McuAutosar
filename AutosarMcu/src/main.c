@@ -1,19 +1,18 @@
-
 /*==================================================================================================
-*                                        INCLUDE FILES
+                                        INCLUDE FILES
 ==================================================================================================*/
 #include "S32K144.h"
 #include "Mcu.h"
 #include "Gpt.h"
 #include "Det.h"
 #include "stdio.h"
-#include "Gpt_Lptmr.h"
+#include "uart.h"
 
 /*==================================================================================================
-*                                       LOCAL MACROS
+                                        LOCAL MACROS
 ==================================================================================================*/
-#define SWITCH_LED(x)          (x == 0 ? 15 : ( x == 1 ? 16 : 0 ))
-#define SetModeBypass_LPTMR0   (LPTMR0->PSR |= LPTMR_PSR_PBYP_MASK)
+
+#define SetModeBypassLPTMR0   (LPTMR0->PSR |= LPTMR_PSR_PBYP_MASK)
 
 /*==================================================================================================
                                        LOCAL CONSTANTS
@@ -41,52 +40,25 @@ volatile int g_count = 0;
                                    LOCAL FUNCTION PROTOTYPES
 ==================================================================================================*/
 
-void LPUART1_Init(void);
-void LPUART1_TransmitChar(char TransmitData);
-void LPUART1_TransmitString(char TransmitString[]);
-void ATF_McuReadError(void);
+FUNC(void, AUTOMATIC)  ATF_McuResultsError(void);
+FUNC(void, AUTOMATIC)  ATF_McuTestAssert(uint8 statusTest);
+FUNC(uint8, AUTOMATIC) Det_CheckError(uint16 ModuleId, uint8 InstanceId, uint8 ServiceId, uint8 ErrorId);
+FUNC(void, AUTOMATIC)  Enable_NVIC(uint8 vector_number, uint8 priority);
 
 /*==================================================================================================
                                        LOCAL FUNCTIONS
 ==================================================================================================*/
 
-void LPUART1_Init(void){
-	/* Init PCC for LPUART1, PORTC */
-	PCC->PCCn[PCC_LPUART1_INDEX] |= (3u << 24u);
-	PCC->PCCn[PCC_LPUART1_INDEX] |= (1u << 30u);
-	PCC->PCCn[PCC_PORTC_INDEX ] |= PCC_PCCn_CGC_MASK;
-
-	/*Enable FIRC clock for LPUART1*/
-	SCG->FIRCDIV = ((1u << 8) | (1u << 0));		/*Clock divider distribute 1 and 2*/
-	SCG->FIRCCSR |= (1u << 0u);				    /*Clock Enable*/
-	while(!(SCG->FIRCCSR & (1U << 24)));		/*Wait to confirm status*/
-
-	/*Config ALT function for LPUART1 module*/
-	PORTC->PCR[6]|=PORT_PCR_MUX(2);	       /* Port C6: MUX = ALT2, UART1 TX */
-	PORTC->PCR[7]|=PORT_PCR_MUX(2);        /* Port C7: MUX = ALT2, UART1 RX */
-
-	/*Config baudrate for LPUART1*/
-	LPUART1->BAUD = (312u << 0);           /*Baud rate = baud clock / ((OSR+1) * SBR)*/
-	LPUART1->BAUD |= ((16u - 1u) << 24);   /*Oversampling ratio*/
-	LPUART1->BAUD |= (0U << 13);	       /*Setting one stop bit - config 1U if want 2 stop bit*/
-	LPUART1->CTRL |= ( 1u << 18);	       /*Enable Receiver*/
-	LPUART1->CTRL |= ( 1u << 19);	       /*Enable Transmiter*/
+FUNC(void, AUTOMATIC) ATF_McuTestAssert(uint8 statusTest){
+	/* Assume this function works */
 }
 
-void LPUART1_TransmitChar(char TransmitData) {
-	while (!(LPUART1->STAT & (1U << 23)));	/*Wait until the buffer is empty*/
-	LPUART1->DATA = TransmitData;				/*Send data*/
+FUNC(uint8, AUTOMATIC) Det_CheckError(uint16 ModuleId, uint8 InstanceId, uint8 ServiceId, uint8 ErrorId){
+	/* Assume this function works */
+	return 0;
 }
 
-void LPUART1_TransmitString(char TransmitString[]){
-	int i = 0;
-	while (TransmitString[i] != '\0'){
-		LPUART1_TransmitChar(TransmitString[i]);
-		i++;
-	}
-}
-
-void ATF_McuReadError(void)
+FUNC(void, AUTOMATIC) ATF_McuResultsError(void)
 {
 	uint8_t Error_Counter[5] = {0,0,0,0,0};
 	uint32_t Counter;
@@ -165,7 +137,7 @@ void ATF_McuReadError(void)
 	/* Print Number of MCU_INIT_ID errors */
 	if (Error_Counter[MCU_INIT_ID] > 0)
 	{
-		sprintf(data, "Mcu_init() Error: %d\r\n", Error_Counter[MCU_INIT_ID]);
+		sprintf(data, "Mcu_Init() Error: %d\r\n", Error_Counter[MCU_INIT_ID]);
 		LPUART1_TransmitString(data);
 	}
 
@@ -198,34 +170,92 @@ void ATF_McuReadError(void)
 	}
 }
 
+FUNC(void, AUTOMATIC) Enable_NVIC(uint8 vector_number, uint8 priority)
+{
+  S32_NVIC->ISER[(uint32)(vector_number) >> 5U] = (uint32_t)(1U << ((uint32)(vector_number) & (uint32)0x1FU));
+  S32_NVIC->ICPR[(uint32)(vector_number) >> 5U] = (uint32_t)(1U << ((uint32)(vector_number) & (uint32)0x1FU));
+  S32_NVIC->IP[vector_number] = priority;
+}
+
 int main(void) {
 	/*------------MCU AUTOSAR----------------*/
+	/* Api: Mcu_Init */
 	Mcu_Init(&Mcu_Config);
+	/* Check whether a error MCU_E_ALLREADY_INITIALIZED was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INIT_ID, MCU_E_ALLREADY_INITIALIZED));
+	/* Check whether a error MCU_E_INIT_FAILED was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INIT_ID, MCU_E_INIT_FAILED));
+
+	/* Api: Mcu_InitRamSection */
 	Mcu_InitRamSection(McuRamSection_0);
 	Mcu_InitRamSection(McuRamSection_1);
+	/* Check whether a error MCU_E_PARAM_RAMSECTION was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INITRAMSECTION_ID, MCU_E_PARAM_RAMSECTION));
+	/* Check whether a error MCU_E_UNINIT was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INITRAMSECTION_ID, MCU_E_UNINIT));
+
+	/* Api: Mcu_InitClock */
 	Mcu_InitClock(McuClockSettingConfig_0);
+	/* Check whether a error MCU_E_PARAM_CLOCK was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INITCLOCK_ID, MCU_E_PARAM_CLOCK));
+	/* Check whether a error MCU_E_UNINIT was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_INITCLOCK_ID, MCU_E_UNINIT));
+
+	/* Api: Mcu_GetPllStatus */
 	ePllStatus = Mcu_GetPllStatus();
+	/* Check whether a error MCU_E_UNINIT was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_GETPLLSTATUS_ID, MCU_E_UNINIT));
+
+	/* Api: Mcu_DistributePllClock */
 	Mcu_DistributePllClock();
+	/* Check whether a error MCU_E_PLL_NOT_LOCKED was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_DISTRIBUTEPLLCLOCK_ID, MCU_E_PLL_NOT_LOCKED));
+	/* Check whether a error MCU_E_UNINIT was reported to Det or not */
+	ATF_McuTestAssert(E_OK == Det_CheckError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_DISTRIBUTEPLLCLOCK_ID, MCU_E_UNINIT));
 
-	/*Auto test mechanism for Mcu module*/
-	ATF_McuReadError();
-
+	/*Report auto test mechanism for Mcu module*/
+	ATF_McuResultsError();
 	/*---------------------------------------*/
+
 
 	/*---------GPT test for MCU API----------*/
 	Gpt_Init(&Gpt_Config);
-	SetModeBypass_LPTMR0;
-	Gpt_StartTimer(LPTMR_0_CH_0, 99);
-	Gpt_EnableNotification(LPTMR_0_CH_0);
+	SetModeBypassLPTMR0;
+	Gpt_StartTimer(GptConf_GptChannelConfiguration_GptChannelConfiguration_0, 99);
+	Gpt_EnableNotification(GptConf_GptChannelConfiguration_GptChannelConfiguration_0);
 	/*---------------------------------------*/
 
+	Enable_NVIC(LPTMR0_IRQn, 0);
+
     for (;;) {
-    	Gpt_Lptmr_ProcessCommonInterrupt();
+    	/* If time remaining equal to zero, the counter will increase 1 tick */
+    	if (Gpt_GetTimeRemaining(GptConf_GptChannelConfiguration_GptChannelConfiguration_0) == 0) {
+    		g_count++;
+
+    		/* After the 5th tick, we disable the notification function call-back
+    		 * and re-enale it once it reaches the target 10th time.
+    		 * Stop counting after 20th time.
+    		 */
+    		if (g_count < 5) {
+				/* do nothing here */
+			}
+			else if (g_count < 10) {
+				Gpt_DisableNotification(GptConf_GptChannelConfiguration_GptChannelConfiguration_0);
+			}
+			else if (g_count < 20) {
+				Gpt_EnableNotification(GptConf_GptChannelConfiguration_GptChannelConfiguration_0);
+			}
+			else {
+				Gpt_StopTimer(GptConf_GptChannelConfiguration_GptChannelConfiguration_0);
+			}
+    	}
     }
 
     return 0;
 }
 
 void Gpt_Notification(void) {
-	g_count++;
+	char data[50];
+	sprintf(data, "LPUART1 running %d tick \r\n", g_count);
+	LPUART1_TransmitString(data);
 }

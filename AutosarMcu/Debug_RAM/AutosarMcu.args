@@ -9,6 +9,7 @@
 -specs=nosys.specs
 --sysroot="D:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v4.9/gcc-arm-none-eabi-4_9/arm-none-eabi/newlib"
 "./Autosar/Det/src/Det.o"
+"./Autosar/Gpt/src/EcuM.o"
 "./Autosar/Gpt/src/Gpt.o"
 "./Autosar/Gpt/src/Gpt_Cfg.o"
 "./Autosar/Gpt/src/Gpt_Ftm.o"
@@ -38,3 +39,4 @@
 "./Project_Settings/Startup_Code/startup_S32K144.o"
 "./Project_Settings/Startup_Code/system_S32K144.o"
 "./src/main.o"
+"./src/uart.o"

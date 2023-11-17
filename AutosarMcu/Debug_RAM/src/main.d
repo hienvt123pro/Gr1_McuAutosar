@@ -37,10 +37,13 @@ src/main.o: ../src/main.c \
  d:\workspaces32ds.arm.2.2\autosarmcu\autosar\mcl\include\Mcl_MemMap.h \
  d:\workspaces32ds.arm.2.2\autosarmcu\autosar\mcl\include\CompilerDefinition.h \
  D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_SRtc_Types.h \
+ D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/EcuM_Cbk.h \
+ D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/EcuM_Cfg.h \
  D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_MemMap.h \
  D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/CompilerDefinition.h \
  D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Det/include/Det.h \
- D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_Lptmr.h
+ D:/workspaceS32DS.ARM.2.2/AutosarMcu/include/uart.h \
+ D:/workspaceS32DS.ARM.2.2/AutosarMcu/include/S32K144.h
 
 D:/workspaceS32DS.ARM.2.2/AutosarMcu/include/S32K144.h:
 
@@ -118,10 +121,16 @@ d:\workspaces32ds.arm.2.2\autosarmcu\autosar\mcl\include\CompilerDefinition.h:
 
 D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_SRtc_Types.h:
 
+D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/EcuM_Cbk.h:
+
+D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/EcuM_Cfg.h:
+
 D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_MemMap.h:
 
 D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/CompilerDefinition.h:
 
 D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Det/include/Det.h:
 
-D:/workspaceS32DS.ARM.2.2/AutosarMcu/Autosar/Gpt/include/Gpt_Lptmr.h:
+D:/workspaceS32DS.ARM.2.2/AutosarMcu/include/uart.h:
+
+D:/workspaceS32DS.ARM.2.2/AutosarMcu/include/S32K144.h:

@@ -65,6 +65,9 @@ extern "C"{
 #include "Gpt_Ipw_Types.h"
 #include "Gpt_Cfg.h"
 
+#if (GPT_WAKEUP_FUNCTIONALITY_API == STD_ON)
+    #include "EcuM_Cbk.h"
+#endif
 
 /*==================================================================================================
 *                               SOURCE FILE VERSION INFORMATION
@@ -92,7 +95,16 @@ extern "C"{
     #error "AutoSar Version Numbers of Gpt.h and Std_Types.h are different"
     #endif
 #endif
-
+/* Check if header file and EcuM_Cbk.h file are of the same Autosar version */
+#ifndef DISABLE_MCAL_INTERMODULE_ASR_CHECK
+    #if (GPT_WAKEUP_FUNCTIONALITY_API == STD_ON)
+        #if ((GPT_AR_RELEASE_MAJOR_VERSION != ECUM_CBK_AR_RELEASE_MAJOR_VERSION) || \
+             (GPT_AR_RELEASE_MINOR_VERSION != ECUM_CBK_AR_RELEASE_MINOR_VERSION) \
+            )
+            #error "AutoSar Version Numbers of Gpt.h and EcuM_Cbk.h are different"
+        #endif
+    #endif
+#endif
 
 #if (GPT_VENDOR_ID != GPT_IPW_TYPES_VENDOR_ID)
     #error "Gpt.h and Gpt_Ipw_Types.h have different vendor ids"
@@ -433,7 +445,7 @@ typedef struct
     VAR(Gpt_NotificationType, GPT_VAR) Gpt_pfNotification;
     /**<@brief EcuM wake up source Id */
 #if ((GPT_WAKEUP_FUNCTIONALITY_API == STD_ON) && (GPT_REPORT_WAKEUP_SOURCE == STD_ON))
-
+    VAR(EcuM_WakeupSourceType, GPT_VAR) Gpt_uWakeupSource;
 #endif
     /**<@brief Channel max tick value */
     VAR(Gpt_ValueType, GPT_VAR) Gpt_uChannelTickValueMax;
@@ -534,7 +546,7 @@ FUNC(void, GPT_CODE) Gpt_DisableWakeup(VAR(Gpt_ChannelType, AUTOMATIC) channel);
 
 FUNC(void, GPT_CODE) Gpt_EnableWakeup(VAR(Gpt_ChannelType, AUTOMATIC) channel);
 
-
+FUNC(void, GPT_CODE) Gpt_CheckWakeup(VAR(EcuM_WakeupSourceType, AUTOMATIC) wakeupSource);
 #endif
 
 #if (GPT_CHAIN_MODE == STD_ON)

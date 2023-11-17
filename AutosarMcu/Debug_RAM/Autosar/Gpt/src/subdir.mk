@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Autosar/Gpt/src/EcuM.c \
 ../Autosar/Gpt/src/Gpt.c \
 ../Autosar/Gpt/src/Gpt_Cfg.c \
 ../Autosar/Gpt/src/Gpt_Ftm.c \
@@ -15,6 +16,7 @@ C_SRCS += \
 ../Autosar/Gpt/src/SchM_Gpt.c 
 
 OBJS += \
+./Autosar/Gpt/src/EcuM.o \
 ./Autosar/Gpt/src/Gpt.o \
 ./Autosar/Gpt/src/Gpt_Cfg.o \
 ./Autosar/Gpt/src/Gpt_Ftm.o \
@@ -26,6 +28,7 @@ OBJS += \
 ./Autosar/Gpt/src/SchM_Gpt.o 
 
 C_DEPS += \
+./Autosar/Gpt/src/EcuM.d \
 ./Autosar/Gpt/src/Gpt.d \
 ./Autosar/Gpt/src/Gpt_Cfg.d \
 ./Autosar/Gpt/src/Gpt_Ftm.d \
@@ -41,7 +44,7 @@ C_DEPS += \
 Autosar/Gpt/src/%.o: ../Autosar/Gpt/src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Standard S32DS C Compiler'
-	arm-none-eabi-gcc "@Autosar/Gpt/src/Gpt.args" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	arm-none-eabi-gcc "@Autosar/Gpt/src/EcuM.args" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

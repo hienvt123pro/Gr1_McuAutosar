@@ -205,7 +205,7 @@ static CONST(Gpt_ChannelConfigType, GPT_CONST) Gpt_InitChannelPB[1] =
         (boolean)FALSE, /* Wakeup capability */
         &Gpt_Notification, /* Channel notification */
 #if ((GPT_WAKEUP_FUNCTIONALITY_API == STD_ON) && (GPT_REPORT_WAKEUP_SOURCE == STD_ON))
-        //(EcuM_WakeupSourceType)0U, /* Wakeup information */
+		(EcuM_WakeupSourceType)0U, /* Wakeup information */
 #endif
         (Gpt_ValueType)(65535U), /* Maximum ticks value*/
         (Gpt_ChannelModeType)(GPT_CH_MODE_CONTINUOUS), /* Timer mode:continous/one-shot */
